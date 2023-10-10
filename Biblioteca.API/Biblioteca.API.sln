@@ -3,13 +3,18 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.5.33424.131
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Biblioteca.API", "Biblioteca.API.csproj", "{1A9D8224-22B5-4E98-B204-641DCCF054F2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Biblioteca.API", "Biblioteca.API.csproj", "{1A9D8224-22B5-4E98-B204-641DCCF054F2}"
+	ProjectSection(ProjectDependencies) = postProject
+		{12D94659-3CE2-4A69-BA3C-7BA4DEEB8C75} = {12D94659-3CE2-4A69-BA3C-7BA4DEEB8C75}
+	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Biblioteca.UIWeb.MVC", "..\Biblioteca.UIWeb.MVC\Biblioteca.UIWeb.MVC.csproj", "{FA292E6B-5E5E-4FAE-AC83-C2C770F47077}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Biblioteca.UIWeb.MVC", "..\Biblioteca.UIWeb.MVC\Biblioteca.UIWeb.MVC.csproj", "{FA292E6B-5E5E-4FAE-AC83-C2C770F47077}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Biblioteca.Infraestrutura", "..\Biblioteca.Infraestrutura\Biblioteca.Infraestrutura.csproj", "{12D94659-3CE2-4A69-BA3C-7BA4DEEB8C75}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Biblioteca.Infraestrutura", "..\Biblioteca.Infraestrutura\Biblioteca.Infraestrutura.csproj", "{12D94659-3CE2-4A69-BA3C-7BA4DEEB8C75}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Biblioteca.Modelos", "..\Biblioteca.Modelos\Biblioteca.Modelos.csproj", "{0D82409F-FBBC-4146-9857-5CA4CFB5EB3E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Biblioteca.Negocio", "..\Biblioteca.Modelos\Biblioteca.Negocio.csproj", "{0D82409F-FBBC-4146-9857-5CA4CFB5EB3E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Biblioteca.Servicos", "..\Biblioteca.Servicos\Biblioteca.Servicos.csproj", "{D3A8040B-5C4F-4CFE-9356-1F9AF9AD0C5B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +38,10 @@ Global
 		{0D82409F-FBBC-4146-9857-5CA4CFB5EB3E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0D82409F-FBBC-4146-9857-5CA4CFB5EB3E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0D82409F-FBBC-4146-9857-5CA4CFB5EB3E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D3A8040B-5C4F-4CFE-9356-1F9AF9AD0C5B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D3A8040B-5C4F-4CFE-9356-1F9AF9AD0C5B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D3A8040B-5C4F-4CFE-9356-1F9AF9AD0C5B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D3A8040B-5C4F-4CFE-9356-1F9AF9AD0C5B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

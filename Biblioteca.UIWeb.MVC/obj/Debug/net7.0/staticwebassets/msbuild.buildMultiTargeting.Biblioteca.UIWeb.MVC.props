@@ -1,0 +1,3 @@
+﻿<Project>
+  <Import Project="..\build\Biblioteca.UIWeb.MVC.props" />
+</Project>
