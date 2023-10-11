@@ -1,0 +1,84 @@
+Information: 0 - Application started. Press Ctrl+C to shut down.
+Information: 0 - Hosting environment: Development
+Information: 0 - Content root path: C:\Users\tiago\OneDrive\Área de Trabalho\POS GRADUAÇÂO FIAP\FASE 1\TechChallenge\FiapTechChallenge1\Biblioteca.API
+Information: 0 - Iniciando Validação do Usuário
+Information: 0 - Iniciando Cadastro do Usuário
+Information: 0 - Criptografando a Senha do Cadastro do Usuário
+Information: 0 - Criando Código Guid do Cadastro do Usuário
+Information: 0 - Gravando Cadastro do Usuário
+Error: Microsoft.EntityFrameworkCore.Update.SaveChangesFailed - An exception occurred in the database while saving changes for context type 'Biblioteca.Infraestrutura.Dados.Contextos.ApplicationDbContext'.
+System.PlatformNotSupportedException: Microsoft.Data.SqlClient is not supported on this platform.
+   at Microsoft.Data.SqlClient.SqlConnection..ctor(String connectionString)
+   at Microsoft.EntityFrameworkCore.SqlServer.Storage.Internal.SqlServerConnection.CreateDbConnection()
+   at Microsoft.EntityFrameworkCore.Storage.RelationalConnection.get_DbConnection()
+   at Microsoft.EntityFrameworkCore.Storage.RelationalConnection.Open(Boolean errorsExpected)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.Execute(IEnumerable`1 commandBatches, IRelationalConnection connection)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalDatabase.SaveChanges(IList`1 entries)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChanges(IList`1 entriesToSave)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChanges(StateManager stateManager, Boolean acceptAllChangesOnSuccess)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.<>c.<SaveChanges>b__107_0(DbContext _, ValueTuple`2 t)
+   at Microsoft.EntityFrameworkCore.SqlServer.Storage.Internal.SqlServerExecutionStrategy.Execute[TState,TResult](TState state, Func`3 operation, Func`3 verifySucceeded)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChanges(Boolean acceptAllChangesOnSuccess)
+   at Microsoft.EntityFrameworkCore.DbContext.SaveChanges(Boolean acceptAllChangesOnSuccess)
+Error: 0 - Iniciando Validação do Usuário
+Information: Microsoft.EntityFrameworkCore.Database.Command.CommandExecuted - Executed DbCommand (19ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+SELECT 1
+Information: Microsoft.EntityFrameworkCore.Database.Command.CommandExecuted - Executed DbCommand (12ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+SELECT OBJECT_ID(N'[__EFMigrationsHistory]');
+Information: Microsoft.EntityFrameworkCore.Database.Command.CommandExecuted - Executed DbCommand (7ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+SELECT [MigrationId], [ProductVersion]
+FROM [__EFMigrationsHistory]
+ORDER BY [MigrationId];
+Information: 0 - Application started. Press Ctrl+C to shut down.
+Information: 0 - Hosting environment: Development
+Information: 0 - Content root path: C:\Users\tiago\OneDrive\Área de Trabalho\POS GRADUAÇÂO FIAP\FASE 1\TechChallenge\FiapTechChallenge1\Biblioteca.API
+Information: 0 - Iniciando Validação do Usuário
+Information: 0 - Iniciando Cadastro do Usuário
+Information: 0 - Criptografando a Senha do Cadastro do Usuário
+Information: 0 - Criando Código Guid do Cadastro do Usuário
+Information: 0 - Gravando Cadastro do Usuário
+Information: Microsoft.EntityFrameworkCore.Database.Command.CommandExecuted - Executed DbCommand (47ms) [Parameters=[@p0='?' (Size = 100) (DbType = AnsiString), @p1='?' (Size = 100) (DbType = AnsiString), @p2='?' (Size = 100) (DbType = AnsiString), @p3='?' (DbType = Int32), @p4='?' (Size = 100) (DbType = AnsiString)], CommandType='Text', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+INSERT INTO [Usuarios] ([Codigo], [Email], [Nome], [Permissao], [Senha])
+OUTPUT INSERTED.[Id]
+VALUES (@p0, @p1, @p2, @p3, @p4);
+Information: 0 - Retornando Cadastro do Usuário
+Information: 0 - Criando o Mapeador de Objetos
+Information: 0 - Mapeador de Objetos Criado
+Information: 0 - Iniciando Validação do Usuário
+Information: 0 - Iniciando Cadastro do Usuário
+Information: 0 - Criptografando a Senha do Cadastro do Usuário
+Information: 0 - Criando Código Guid do Cadastro do Usuário
+Information: 0 - Gravando Cadastro do Usuário
+Information: Microsoft.EntityFrameworkCore.Database.Command.CommandExecuted - Executed DbCommand (5ms) [Parameters=[@p0='?' (Size = 100) (DbType = AnsiString), @p1='?' (Size = 100) (DbType = AnsiString), @p2='?' (Size = 100) (DbType = AnsiString), @p3='?' (DbType = Int32), @p4='?' (Size = 100) (DbType = AnsiString)], CommandType='Text', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+INSERT INTO [Usuarios] ([Codigo], [Email], [Nome], [Permissao], [Senha])
+OUTPUT INSERTED.[Id]
+VALUES (@p0, @p1, @p2, @p3, @p4);
+Information: 0 - Retornando Cadastro do Usuário
+Information: 0 - Criando o Mapeador de Objetos
+Information: 0 - Mapeador de Objetos Criado
+Information: 0 - Iniciando Validação do Usuário
+Information: 0 - Iniciando Autenticação do Usuário
+Error: 0 - Erro ao logar Usuario
+Information: 0 - Iniciando Validação do Usuário
+Information: 0 - Iniciando Autenticação do Usuário
+Error: 0 - Erro ao logar Usuario
+Information: 0 - Application started. Press Ctrl+C to shut down.
+Information: 0 - Hosting environment: Development
+Information: 0 - Content root path: C:\Users\tiago\OneDrive\Área de Trabalho\POS GRADUAÇÂO FIAP\FASE 1\TechChallenge\FiapTechChallenge1\Biblioteca.API
+Information: 0 - Iniciando Validação do Usuário
+Information: 0 - Iniciando Autenticação do Usuário
+Information: Microsoft.EntityFrameworkCore.Database.Command.CommandExecuted - Executed DbCommand (23ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+SELECT [u].[Id], [u].[Codigo], [u].[Email], [u].[Nome], [u].[Permissao], [u].[Senha]
+FROM [Usuarios] AS [u]
+Information: Microsoft.EntityFrameworkCore.Database.Command.CommandExecuted - Executed DbCommand (2ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+SELECT [u].[Id], [u].[Codigo], [u].[Email], [u].[Nome], [u].[Permissao], [u].[Senha]
+FROM [Usuarios] AS [u]
+Information: 0 - Autenticação do Usuário Executada - Gerando Token
+Information: 0 - Token Gerado = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJOb21lIjoiVGlhZ28iLCJQZXJtaXNzYW8iOiIyIiwiSWQiOiIyIiwibmJmIjoxNjk3MDQ0ODI3LCJleHAiOjE2OTcwNzM2MjcsImlhdCI6MTY5NzA0NDgyN30.uJaEV_epf7mwrewxqrRaEM6WErJAbuJMbr7YUcnzNVw
+Information: 0 - Usuario logado com sucesso
+Information: 0 - Criando o Mapeador de Objetos
+Information: 0 - Mapeador de Objetos Criado

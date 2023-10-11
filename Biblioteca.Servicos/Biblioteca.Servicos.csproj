@@ -1,18 +1,26 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>net7.0</TargetFramework>
+    <TargetFramework>net7.0-windows10.0.22621.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <!--<Nullable>enable</Nullable>-->
   </PropertyGroup>
 
-  <ItemGroup>
-    <Folder Include="Contratos\ContratosDeServicosImplementados\" />
-    <Folder Include="Contratos\Servicos\" />
-  </ItemGroup>
-
   <Target Name="PostBuild" AfterTargets="PostBuildEvent">
     <Exec Command="copy /Y &quot;$(TargetDir)$(ProjectName).dll&quot; &quot;$(ProjectDir)..\Output\Binarios\&quot;;" />
   </Target>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="7.0.12" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="Biblioteca.Infraestrutura">
+      <HintPath>..\Output\Binarios\Biblioteca.Infraestrutura.dll</HintPath>
+    </Reference>
+    <Reference Include="Biblioteca.Negocio">
+      <HintPath>..\Output\Binarios\Biblioteca.Negocio.dll</HintPath>
+    </Reference>
+  </ItemGroup>
 
 </Project>

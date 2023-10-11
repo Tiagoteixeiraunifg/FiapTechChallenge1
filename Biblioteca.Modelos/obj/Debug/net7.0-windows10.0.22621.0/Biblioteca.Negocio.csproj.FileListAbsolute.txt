@@ -1,0 +1,15 @@
+C:\Users\tiago\OneDrive\Área de Trabalho\POS GRADUAÇÂO FIAP\FASE 1\TechChallenge\FiapTechChallenge1\Biblioteca.Modelos\bin\Debug\net7.0-windows10.0.22621.0\Biblioteca.Negocio.dll
+C:\Users\tiago\OneDrive\Área de Trabalho\POS GRADUAÇÂO FIAP\FASE 1\TechChallenge\FiapTechChallenge1\Biblioteca.Modelos\bin\Debug\net7.0-windows10.0.22621.0\Biblioteca.Negocio.pdb
+C:\Users\tiago\OneDrive\Área de Trabalho\POS GRADUAÇÂO FIAP\FASE 1\TechChallenge\FiapTechChallenge1\Biblioteca.Modelos\bin\Debug\net7.0-windows10.0.22621.0\Biblioteca.Infraestrutura.dll
+C:\Users\tiago\OneDrive\Área de Trabalho\POS GRADUAÇÂO FIAP\FASE 1\TechChallenge\FiapTechChallenge1\Biblioteca.Modelos\bin\Debug\net7.0-windows10.0.22621.0\Biblioteca.Servicos.dll
+C:\Users\tiago\OneDrive\Área de Trabalho\POS GRADUAÇÂO FIAP\FASE 1\TechChallenge\FiapTechChallenge1\Biblioteca.Modelos\obj\Debug\net7.0-windows10.0.22621.0\Biblioteca.Negocio.csproj.AssemblyReference.cache
+C:\Users\tiago\OneDrive\Área de Trabalho\POS GRADUAÇÂO FIAP\FASE 1\TechChallenge\FiapTechChallenge1\Biblioteca.Modelos\obj\Debug\net7.0-windows10.0.22621.0\Biblioteca.Negocio.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\tiago\OneDrive\Área de Trabalho\POS GRADUAÇÂO FIAP\FASE 1\TechChallenge\FiapTechChallenge1\Biblioteca.Modelos\obj\Debug\net7.0-windows10.0.22621.0\Biblioteca.Negocio.AssemblyInfoInputs.cache
+C:\Users\tiago\OneDrive\Área de Trabalho\POS GRADUAÇÂO FIAP\FASE 1\TechChallenge\FiapTechChallenge1\Biblioteca.Modelos\obj\Debug\net7.0-windows10.0.22621.0\Biblioteca.Negocio.AssemblyInfo.cs
+C:\Users\tiago\OneDrive\Área de Trabalho\POS GRADUAÇÂO FIAP\FASE 1\TechChallenge\FiapTechChallenge1\Biblioteca.Modelos\obj\Debug\net7.0-windows10.0.22621.0\Biblioteca.Negocio.csproj.CoreCompileInputs.cache
+C:\Users\tiago\OneDrive\Área de Trabalho\POS GRADUAÇÂO FIAP\FASE 1\TechChallenge\FiapTechChallenge1\Biblioteca.Modelos\obj\Debug\net7.0-windows10.0.22621.0\Biblioteca.Negocio.csproj.CopyComplete
+C:\Users\tiago\OneDrive\Área de Trabalho\POS GRADUAÇÂO FIAP\FASE 1\TechChallenge\FiapTechChallenge1\Biblioteca.Modelos\obj\Debug\net7.0-windows10.0.22621.0\Biblioteca.Negocio.dll
+C:\Users\tiago\OneDrive\Área de Trabalho\POS GRADUAÇÂO FIAP\FASE 1\TechChallenge\FiapTechChallenge1\Biblioteca.Modelos\obj\Debug\net7.0-windows10.0.22621.0\refint\Biblioteca.Negocio.dll
+C:\Users\tiago\OneDrive\Área de Trabalho\POS GRADUAÇÂO FIAP\FASE 1\TechChallenge\FiapTechChallenge1\Biblioteca.Modelos\obj\Debug\net7.0-windows10.0.22621.0\Biblioteca.Negocio.pdb
+C:\Users\tiago\OneDrive\Área de Trabalho\POS GRADUAÇÂO FIAP\FASE 1\TechChallenge\FiapTechChallenge1\Biblioteca.Modelos\obj\Debug\net7.0-windows10.0.22621.0\ref\Biblioteca.Negocio.dll
+C:\Users\tiago\OneDrive\Área de Trabalho\POS GRADUAÇÂO FIAP\FASE 1\TechChallenge\FiapTechChallenge1\Biblioteca.Modelos\bin\Debug\net7.0-windows10.0.22621.0\Biblioteca.Negocio.deps.json

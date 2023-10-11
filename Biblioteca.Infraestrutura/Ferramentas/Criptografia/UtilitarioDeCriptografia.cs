@@ -12,7 +12,7 @@ namespace Biblioteca.Infraestrutura.Ferramentas.Criptografia
         /// <summary>
         /// Representação de valor em base 64 (Chave Interna).
         /// </summary>
-        private const string CRYPTOKEY = "jesuseosenhordossenhores";
+        private const string CRYPTOKEY = "Q3JpcHRvZ3JhZmlhcyBjb20gUmluamRhZWwgLyBBRVM=";
 
         /// <summary>
         /// Vetor de bytes utilizados para a criptografia (Chave Externa).

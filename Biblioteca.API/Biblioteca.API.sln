@@ -14,7 +14,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Biblioteca.Infraestrutura",
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Biblioteca.Negocio", "..\Biblioteca.Modelos\Biblioteca.Negocio.csproj", "{0D82409F-FBBC-4146-9857-5CA4CFB5EB3E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Biblioteca.Servicos", "..\Biblioteca.Servicos\Biblioteca.Servicos.csproj", "{D3A8040B-5C4F-4CFE-9356-1F9AF9AD0C5B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Biblioteca.Servicos", "..\Biblioteca.Servicos\Biblioteca.Servicos.csproj", "{D3A8040B-5C4F-4CFE-9356-1F9AF9AD0C5B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
