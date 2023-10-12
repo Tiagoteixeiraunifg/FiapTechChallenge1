@@ -2,6 +2,7 @@
 using Biblioteca.Infraestrutura.Seguranca.JWT.Interfaces;
 using Biblioteca.Negocio.Entidades.Usuarios;
 using Biblioteca.Negocio.Enumeradores.Usuarios;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using Microsoft.IdentityModel.Tokens;
@@ -68,9 +69,11 @@ namespace Biblioteca.Infraestrutura.Seguranca.JWT.Servico
             var Secretkey = Encoding.ASCII.GetBytes(_configuracao.GetSection("Secret").Value);            
             var tokenvalidationparameters = new TokenValidationParameters()
             {
-                IssuerSigningKey = new SigningCredentials(
-                    new SymmetricSecurityKey(Secretkey),
-                    SecurityAlgorithms.HmacSha256Signature).Key,
+                ValidateIssuerSigningKey = true,
+                IssuerSigningKey = new SymmetricSecurityKey(Secretkey),
+                ValidateIssuer = false,
+                ValidateAudience = false
+                
             };
             
             var ret = TokenHandler.ValidateToken(token, tokenvalidationparameters, out var tokenValidado);

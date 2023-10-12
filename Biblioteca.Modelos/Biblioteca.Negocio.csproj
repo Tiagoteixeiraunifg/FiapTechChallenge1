@@ -7,13 +7,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Entidades\Alunos\" />
-    <Folder Include="Entidades\Livros\" />
-    <Folder Include="Entidades\Autores\" />
-    <Folder Include="Entidades\Editoras\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <PackageReference Include="FluentValidation" Version="11.7.1" />
     <PackageReference Include="NPOI" Version="2.6.2" />
   </ItemGroup>

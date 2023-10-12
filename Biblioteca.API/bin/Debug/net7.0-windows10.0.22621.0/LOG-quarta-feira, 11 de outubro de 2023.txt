@@ -82,3 +82,93 @@ Information: 0 - Token Gerado = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJOb21lIjo
 Information: 0 - Usuario logado com sucesso
 Information: 0 - Criando o Mapeador de Objetos
 Information: 0 - Mapeador de Objetos Criado
+Information: 0 - Application started. Press Ctrl+C to shut down.
+Information: 0 - Hosting environment: Development
+Information: 0 - Content root path: C:\Users\tiago\OneDrive\Área de Trabalho\POS GRADUAÇÂO FIAP\FASE 1\TechChallenge\FiapTechChallenge1\Biblioteca.API
+Information: 0 - Iniciando Validação do Usuário
+Information: 0 - Iniciando Autenticação do Usuário
+Information: Microsoft.EntityFrameworkCore.Database.Command.CommandExecuted - Executed DbCommand (29ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+SELECT [u].[Id], [u].[Codigo], [u].[Email], [u].[Nome], [u].[Permissao], [u].[Senha]
+FROM [Usuarios] AS [u]
+Information: Microsoft.EntityFrameworkCore.Database.Command.CommandExecuted - Executed DbCommand (2ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+SELECT [u].[Id], [u].[Codigo], [u].[Email], [u].[Nome], [u].[Permissao], [u].[Senha]
+FROM [Usuarios] AS [u]
+Information: 0 - Autenticação do Usuário Executada - Gerando Token
+Information: 0 - Token Gerado = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJOb21lIjoiVGlhZ28iLCJQZXJtaXNzYW8iOiIyIiwiSWQiOiIyIiwibmJmIjoxNjk3MDc1MDc5LCJleHAiOjE2OTcxMDM4NzksImlhdCI6MTY5NzA3NTA3OX0.vBnjFR0UttDYsB7NjuDr8Y-t_agh1-uC2csfeBIYJRs
+Information: 0 - Usuario logado com sucesso
+Information: 0 - Criando o Mapeador de Objetos
+Information: 0 - Mapeador de Objetos Criado
+Information: 0 - Iniciando Validação do Usuário
+Information: 0 - Iniciando Autenticação do Usuário
+Information: Microsoft.EntityFrameworkCore.Database.Command.CommandExecuted - Executed DbCommand (0ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+SELECT [u].[Id], [u].[Codigo], [u].[Email], [u].[Nome], [u].[Permissao], [u].[Senha]
+FROM [Usuarios] AS [u]
+Information: Microsoft.EntityFrameworkCore.Database.Command.CommandExecuted - Executed DbCommand (0ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+SELECT [u].[Id], [u].[Codigo], [u].[Email], [u].[Nome], [u].[Permissao], [u].[Senha]
+FROM [Usuarios] AS [u]
+Information: 0 - Autenticação do Usuário Executada - Gerando Token
+Information: 0 - Token Gerado = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJOb21lIjoiVGlhZ28iLCJQZXJtaXNzYW8iOiIyIiwiSWQiOiIyIiwibmJmIjoxNjk3MDc1MDg1LCJleHAiOjE2OTcxMDM4ODUsImlhdCI6MTY5NzA3NTA4NX0.O9NOYwsOKNQJDAm333Wz6In_T00YiUUIb_Vvg1dBY7w
+Information: 0 - Usuario logado com sucesso
+Information: 0 - Criando o Mapeador de Objetos
+Information: 0 - Mapeador de Objetos Criado
+Information: 0 - Iniciando validação de token
+Information: 0 - Retornando erro no processo de renovação de token
+Information: 0 - Iniciando validação de token
+Information: 0 - Retornando erro no processo de renovação de token
+Information: 0 - Iniciando validação de token
+Information: 0 - Retornando erro no processo de renovação de token
+Information: 0 - Iniciando validação de token
+Information: 0 - Application started. Press Ctrl+C to shut down.
+Information: 0 - Hosting environment: Development
+Information: 0 - Content root path: C:\Users\tiago\OneDrive\Área de Trabalho\POS GRADUAÇÂO FIAP\FASE 1\TechChallenge\FiapTechChallenge1\Biblioteca.API
+Information: 0 - Iniciando Validação do Usuário
+Information: 0 - Iniciando Autenticação do Usuário
+Information: Microsoft.EntityFrameworkCore.Database.Command.CommandExecuted - Executed DbCommand (21ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+SELECT [u].[Id], [u].[Codigo], [u].[Email], [u].[Nome], [u].[Permissao], [u].[Senha]
+FROM [Usuarios] AS [u]
+Information: Microsoft.EntityFrameworkCore.Database.Command.CommandExecuted - Executed DbCommand (1ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+SELECT [u].[Id], [u].[Codigo], [u].[Email], [u].[Nome], [u].[Permissao], [u].[Senha]
+FROM [Usuarios] AS [u]
+Information: 0 - Autenticação do Usuário Executada - Gerando Token
+Information: 0 - Token Gerado = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJOb21lIjoiVGlhZ28iLCJQZXJtaXNzYW8iOiIyIiwiSWQiOiIyIiwibmJmIjoxNjk3MDc1NTY5LCJleHAiOjE2OTcxMDQzNjksImlhdCI6MTY5NzA3NTU2OX0.6RDcijj8yX4yE4tKkSgGr09FbqebwKEKMGPFhaO7FLM
+Information: 0 - Usuario logado com sucesso
+Information: 0 - Criando o Mapeador de Objetos
+Information: 0 - Mapeador de Objetos Criado
+Information: 0 - Iniciando validação de token
+Information: 0 - Retornando token valído.
+Information: 0 - Application started. Press Ctrl+C to shut down.
+Information: 0 - Hosting environment: Development
+Information: 0 - Content root path: C:\Users\tiago\OneDrive\Área de Trabalho\POS GRADUAÇÂO FIAP\FASE 1\TechChallenge\FiapTechChallenge1\Biblioteca.API
+Information: 0 - Iniciando Validação do Usuário
+Information: 0 - Iniciando Autenticação do Usuário
+Information: Microsoft.EntityFrameworkCore.Database.Command.CommandExecuted - Executed DbCommand (20ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+SELECT [u].[Id], [u].[Codigo], [u].[Email], [u].[Nome], [u].[Permissao], [u].[Senha]
+FROM [Usuarios] AS [u]
+Information: Microsoft.EntityFrameworkCore.Database.Command.CommandExecuted - Executed DbCommand (2ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+SELECT [u].[Id], [u].[Codigo], [u].[Email], [u].[Nome], [u].[Permissao], [u].[Senha]
+FROM [Usuarios] AS [u]
+Information: 0 - Autenticação do Usuário Executada - Gerando Token
+Information: 0 - Token Gerado = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJOb21lIjoiVGlhZ28iLCJQZXJtaXNzYW8iOiIyIiwiSWQiOiIyIiwibmJmIjoxNjk3MDc1NzY4LCJleHAiOjE2OTcxMDQ1NjgsImlhdCI6MTY5NzA3NTc2OH0.SjRop_DjzF3I_P49BG3j7LRQ1mjKwMWy16-bCNjLM8c
+Information: 0 - Usuario logado com sucesso
+Information: 0 - Criando o Mapeador de Objetos
+Information: 0 - Mapeador de Objetos Criado
+Information: 0 - Iniciando validação de token
+Information: 0 - Retornando token valído.
+Information: 0 - Application started. Press Ctrl+C to shut down.
+Information: 0 - Hosting environment: Development
+Information: 0 - Content root path: C:\Users\tiago\OneDrive\Área de Trabalho\POS GRADUAÇÂO FIAP\FASE 1\TechChallenge\FiapTechChallenge1\Biblioteca.API
+Information: 0 - Iniciando Validação do Usuário
+Information: 0 - Iniciando Autenticação do Usuário
+Information: Microsoft.EntityFrameworkCore.Database.Command.CommandExecuted - Executed DbCommand (30ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+SELECT [u].[Id], [u].[Codigo], [u].[Email], [u].[Nome], [u].[Permissao], [u].[Senha]
+FROM [Usuarios] AS [u]
+Information: Microsoft.EntityFrameworkCore.Database.Command.CommandExecuted - Executed DbCommand (2ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+SELECT [u].[Id], [u].[Codigo], [u].[Email], [u].[Nome], [u].[Permissao], [u].[Senha]
+FROM [Usuarios] AS [u]
+Information: 0 - Autenticação do Usuário Executada - Gerando Token
+Information: 0 - Token Gerado = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJOb21lIjoiVGlhZ28iLCJQZXJtaXNzYW8iOiIyIiwiSWQiOiIyIiwibmJmIjoxNjk3MDc3MTg1LCJleHAiOjE2OTcxMDU5ODUsImlhdCI6MTY5NzA3NzE4NX0.mOffT7WcE-QR9-vg0tqBBkt3-TIBNn6rBHpsqQVE3Q8
+Information: 0 - Usuario logado com sucesso
+Information: 0 - Criando o Mapeador de Objetos
+Information: 0 - Mapeador de Objetos Criado
+Information: 0 - Iniciando validação de token
+Information: 0 - Retornando token valído.

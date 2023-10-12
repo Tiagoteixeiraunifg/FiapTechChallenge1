@@ -23,7 +23,6 @@ builder.Services.AddControllers();
 
 //Adicionando Contexto de Conexão e Banco de Dados
 builder.Services.AdicioneInfraestrutura(configuracao);
-//builder.Services.AddDbContext<ApplicationDbContext>(ServiceLifetime.Scoped);
 
 
 //Parametrização do Swagger

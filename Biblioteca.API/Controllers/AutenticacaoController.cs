@@ -10,6 +10,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
 using Org.BouncyCastle.Ocsp;
+using System.Linq.Expressions;
 
 namespace Biblioteca.API.Controllers
 {
@@ -19,19 +20,16 @@ namespace Biblioteca.API.Controllers
     /// </summary>
     [ApiController]
     [Route("Autenticacao")]
-    public class AutenticacaoController : Controller
+    public class AutenticacaoController : ControladorAbstratoComContexto<AutenticacaoController>
     {
 
         private readonly IServicoDeToken _servicoDeToken;
-        private readonly ILogger<AutenticacaoController> _logger;
         private readonly IServicoUsuario _servicoUsuario;
         
-        public AutenticacaoController(IServicoDeToken servicoDeToken, 
-                                        ILogger<AutenticacaoController> logger, 
-                                        IServicoUsuario servicoUsuario)
+        public AutenticacaoController(ILogger<AutenticacaoController> logger, IServicoDeToken servicoDeToken, IServicoUsuario servicoUsuario)
         {
-            _servicoDeToken = servicoDeToken;
             _logger = logger;
+            _servicoDeToken = servicoDeToken;
             _servicoUsuario = servicoUsuario;
         }
 
@@ -130,6 +128,30 @@ namespace Biblioteca.API.Controllers
             }
 
 
+        }
+
+        [AllowAnonymous]
+        [HttpPost("RenovarToken")]
+        public IActionResult RenovarToken(string token) 
+        {
+            try
+            {
+                _logger.LogInformation("Iniciando validação de token");
+                var tokenRenovado = _servicoDeToken.RenoveToken(token);
+                if (tokenRenovado.IsNullOrEmpty()) 
+                {
+                    _logger.LogInformation("Retornando validação de token invalido.");
+                    return StatusCode(403, new { Retorno = "O Token é invalido."});
+                }
+
+                _logger.LogInformation("Retornando token valído.");
+                return Ok(new {Token = $"{tokenRenovado}" });
+            }
+            catch (Exception ex)
+            {
+                _logger.LogInformation("Retornando erro no processo de renovação de token");
+                return StatusCode(500, new { Erro = ex.Message });
+            }
         }
 
     }
