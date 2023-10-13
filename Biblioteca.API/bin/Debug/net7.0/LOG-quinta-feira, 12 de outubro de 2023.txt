@@ -1193,3 +1193,25 @@ SELECT [u].[Id], [u].[Codigo], [u].[Email], [u].[Nome], [u].[Permissao], [u].[Se
 FROM [Usuarios] AS [u]
 Information: 0 - Convertendo Lista de Usuarios em Lista de DtoUsuarios
 Information: 0 - Devolvendo Lista de Dto
+Information: 0 - Application started. Press Ctrl+C to shut down.
+Information: 0 - Hosting environment: Development
+Information: 0 - Content root path: C:\Users\tiago\OneDrive\Área de Trabalho\POS GRADUAÇÂO FIAP\FASE 1\TechChallenge\FiapTechChallenge1\Biblioteca.API
+Information: 0 - Iniciando Validação do Usuário
+Information: 0 - Iniciando Autenticação do Usuário
+Information: Microsoft.EntityFrameworkCore.Database.Command.CommandExecuted - Executed DbCommand (29ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+SELECT [u].[Id], [u].[Codigo], [u].[Email], [u].[Nome], [u].[Permissao], [u].[Senha]
+FROM [Usuarios] AS [u]
+Information: Microsoft.EntityFrameworkCore.Database.Command.CommandExecuted - Executed DbCommand (2ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+SELECT [u].[Id], [u].[Codigo], [u].[Email], [u].[Nome], [u].[Permissao], [u].[Senha]
+FROM [Usuarios] AS [u]
+Information: 0 - Autenticação do Usuário Executada - Gerando Token
+Information: 0 - Token Gerado = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJOb21lIjoidGlhZ28iLCJyb2xlIjoiQURNSU5JU1RSQURPUiIsIklkIjoiMSIsIm5iZiI6MTY5NzE1ODI1OSwiZXhwIjoxNjk3MTg3MDU5LCJpYXQiOjE2OTcxNTgyNTl9.5RVaVbx4NMslYgYY3KaMlqE68VI5G1eyccWpmes2tGw
+Information: 0 - Usuario logado com sucesso
+Information: 0 - Iniciando a busca das informações
+Information: Microsoft.EntityFrameworkCore.Database.Command.CommandExecuted - Executed DbCommand (2ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+SELECT [u].[Id], [u].[Codigo], [u].[Email], [u].[Nome], [u].[Permissao], [u].[Senha]
+FROM [Usuarios] AS [u]
+Information: 0 - Convertendo Lista de Usuarios em Lista de DtoUsuarios
+Information: 0 - Devolvendo Lista de Dto
+Information: 0 - Iniciando validação de token
+Information: 0 - Retornando token valído.

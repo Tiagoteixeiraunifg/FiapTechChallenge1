@@ -20,7 +20,7 @@ namespace Biblioteca.API.Controllers
         }
 
         [Authorize]
-        [HttpPost]
+        [HttpPost("/Cadastrar")]
         public IActionResult Cadastrar(AlunoDto dto) 
         {
             try

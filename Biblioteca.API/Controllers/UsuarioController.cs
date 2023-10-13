@@ -78,7 +78,7 @@ namespace Biblioteca.API.Controllers
                     && resultado.PossuiLinhas()
                     && resultado.Any(x => x.Id == Id))
                 {
-
+                  
                     _logger.LogInformation("Deletando o usuario");
 
                     var res = _servicoUsuario.DeleteUsuario(Id);
