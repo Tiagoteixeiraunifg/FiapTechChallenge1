@@ -4,6 +4,8 @@ using Biblioteca.Infraestrutura.Logs.Fabricas;
 using Biblioteca.Infraestrutura.Logs.Provedor;
 using Biblioteca.Infraestrutura.Seguranca.JWT.Interfaces;
 using Biblioteca.Infraestrutura.Seguranca.JWT.Servico;
+using Biblioteca.Servicos.Contratos.ContratosDeServicosImplementados;
+using Biblioteca.Servicos.Contratos.Servicos;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
@@ -23,7 +25,8 @@ builder.Services.AddControllers();
 
 //Adicionando Contexto de Conexão e Banco de Dados
 builder.Services.AdicioneInfraestrutura(configuracao);
-
+builder.Services.AddScoped<IServicoUsuario, ServicoUsuarioImpl>();
+builder.Services.AddScoped<IServicoAluno, ServicoAlunoImpl>();
 
 //Parametrização do Swagger
 builder.Services.AddEndpointsApiExplorer();

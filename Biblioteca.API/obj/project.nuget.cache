@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "b+v3DJvslWEzHK/sPaTbHZ4+r9NK2Q54tLjOvrJA3rABdFyba1lpA7bFbM8lluEj0fswHBratOpTMhuNhPb5WQ==",
+  "dgSpecHash": "RV5sANEx7sjoLzMgl6QZxyKdTeyOTsWE2X1ww2+KDq5b6lpgEbKaOnyk+vZ36kfPaAzZNuSHwhjBQHIpKCoxQw==",
   "success": true,
   "projectFilePath": "C:\\Users\\tiago\\OneDrive\\Área de Trabalho\\POS GRADUAÇÂO FIAP\\FASE 1\\TechChallenge\\FiapTechChallenge1\\Biblioteca.API\\Biblioteca.API.csproj",
   "expectedPackageFiles": [
@@ -49,7 +49,6 @@
     "C:\\Users\\tiago\\.nuget\\packages\\microsoft.netcore.targets\\1.1.0\\microsoft.netcore.targets.1.1.0.nupkg.sha512",
     "C:\\Users\\tiago\\.nuget\\packages\\microsoft.openapi\\1.4.3\\microsoft.openapi.1.4.3.nupkg.sha512",
     "C:\\Users\\tiago\\.nuget\\packages\\microsoft.sqlserver.server\\1.0.0\\microsoft.sqlserver.server.1.0.0.nupkg.sha512",
-    "C:\\Users\\tiago\\.nuget\\packages\\microsoft.web.webview2\\1.0.864.35\\microsoft.web.webview2.1.0.864.35.nupkg.sha512",
     "C:\\Users\\tiago\\.nuget\\packages\\microsoft.win32.registry\\4.7.0\\microsoft.win32.registry.4.7.0.nupkg.sha512",
     "C:\\Users\\tiago\\.nuget\\packages\\microsoft.win32.systemevents\\6.0.0\\microsoft.win32.systemevents.6.0.0.nupkg.sha512",
     "C:\\Users\\tiago\\.nuget\\packages\\mono.texttemplating\\2.2.1\\mono.texttemplating.2.2.1.nupkg.sha512",
@@ -90,8 +89,7 @@
     "C:\\Users\\tiago\\.nuget\\packages\\system.text.encodings.web\\7.0.0\\system.text.encodings.web.7.0.0.nupkg.sha512",
     "C:\\Users\\tiago\\.nuget\\packages\\system.text.json\\7.0.0\\system.text.json.7.0.0.nupkg.sha512",
     "C:\\Users\\tiago\\.nuget\\packages\\system.threading.tasks.extensions\\4.5.4\\system.threading.tasks.extensions.4.5.4.nupkg.sha512",
-    "C:\\Users\\tiago\\.nuget\\packages\\system.windows.extensions\\6.0.0\\system.windows.extensions.6.0.0.nupkg.sha512",
-    "C:\\Users\\tiago\\.nuget\\packages\\microsoft.windows.sdk.net.ref\\10.0.22621.29\\microsoft.windows.sdk.net.ref.10.0.22621.29.nupkg.sha512"
+    "C:\\Users\\tiago\\.nuget\\packages\\system.windows.extensions\\6.0.0\\system.windows.extensions.6.0.0.nupkg.sha512"
   ],
   "logs": []
 }

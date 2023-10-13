@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>net7.0-windows10.0.22621.0</TargetFramework>
+    <TargetFramework>net7.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <!--<Nullable>enable</Nullable>-->
   </PropertyGroup>
@@ -15,12 +15,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Reference Include="Biblioteca.Infraestrutura">
-      <HintPath>..\Output\Binarios\Biblioteca.Infraestrutura.dll</HintPath>
-    </Reference>
-    <Reference Include="Biblioteca.Negocio">
-      <HintPath>..\Output\Binarios\Biblioteca.Negocio.dll</HintPath>
-    </Reference>
+    <ProjectReference Include="..\Biblioteca.Infraestrutura\Biblioteca.Infraestrutura.csproj" />
+    <ProjectReference Include="..\Biblioteca.Modelos\Biblioteca.Negocio.csproj" />
   </ItemGroup>
 
 </Project>

@@ -8,8 +8,16 @@ namespace Biblioteca.Negocio.Enumeradores.Usuarios
 {
     public enum UsuarioPermissaoEnum
     {
-        ADMINISTRADOR,
+        ADMINISTRADOR = 1,
 
-        OPERADOR
+        OPERADOR = 2
+
+    
+    }
+
+    public static class Permissoes
+    {
+        public const string ADMINISTRADOR = "ADMINISTRADOR";
+        public const string OPERADOR = "OPERADOR";
     }
 }

@@ -12,3 +12,6 @@ C:\Users\tiago\OneDrive\Área de Trabalho\POS GRADUAÇÂO FIAP\FASE 1\TechChalle
 C:\Users\tiago\OneDrive\Área de Trabalho\POS GRADUAÇÂO FIAP\FASE 1\TechChallenge\FiapTechChallenge1\Biblioteca.Servicos\obj\Debug\net7.0\refint\Biblioteca.Servicos.dll
 C:\Users\tiago\OneDrive\Área de Trabalho\POS GRADUAÇÂO FIAP\FASE 1\TechChallenge\FiapTechChallenge1\Biblioteca.Servicos\obj\Debug\net7.0\Biblioteca.Servicos.pdb
 C:\Users\tiago\OneDrive\Área de Trabalho\POS GRADUAÇÂO FIAP\FASE 1\TechChallenge\FiapTechChallenge1\Biblioteca.Servicos\obj\Debug\net7.0\ref\Biblioteca.Servicos.dll
+C:\Users\tiago\OneDrive\Área de Trabalho\POS GRADUAÇÂO FIAP\FASE 1\TechChallenge\FiapTechChallenge1\Biblioteca.Servicos\bin\Debug\net7.0\Biblioteca.Servicos.deps.json
+C:\Users\tiago\OneDrive\Área de Trabalho\POS GRADUAÇÂO FIAP\FASE 1\TechChallenge\FiapTechChallenge1\Biblioteca.Servicos\bin\Debug\net7.0\Biblioteca.Infraestrutura.pdb
+C:\Users\tiago\OneDrive\Área de Trabalho\POS GRADUAÇÂO FIAP\FASE 1\TechChallenge\FiapTechChallenge1\Biblioteca.Servicos\bin\Debug\net7.0\Biblioteca.Negocio.pdb

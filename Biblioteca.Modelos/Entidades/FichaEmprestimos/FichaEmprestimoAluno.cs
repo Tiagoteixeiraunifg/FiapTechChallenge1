@@ -14,7 +14,11 @@ namespace Biblioteca.Negocio.Entidades.FichaEmprestimos
     {
         public Guid Codigo { get; set; }
 
+        public int UsuarioId { get; set; }
+
         public Usuario Usuario { get; set; }
+
+        public int AlunoId { get; set; }
 
         public Aluno Aluno { get; set; }
 
@@ -22,7 +26,7 @@ namespace Biblioteca.Negocio.Entidades.FichaEmprestimos
 
         public FichaEmprestimoAlunoStatusEnum  StatusEmprestimo { get; set; }
 
-        public IList<Livro> Livros { get; set; }
+        public IList<FichaEmprestimoItem> FichaEmprestimoItens { get; set; }
 
         public DateTime DataEmprestimo { get; set; }
 

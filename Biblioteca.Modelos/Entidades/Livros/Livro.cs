@@ -1,5 +1,6 @@
 ﻿using Biblioteca.Negocio.Entidades.Autores;
 using Biblioteca.Negocio.Entidades.Editoras;
+using Biblioteca.Negocio.Entidades.FichaEmprestimos;
 using Biblioteca.Negocio.Enumeradores.Livros;
 using System;
 using System.Collections.Generic;
@@ -21,7 +22,9 @@ namespace Biblioteca.Negocio.Entidades.Livros
 
         public StatusLivroEnum Status { get; set; }
 
-        public IList<Autor> Autores { get; set; }
+        public IList<LivroAutores> Autores { get; set; }
+
+        public int EditoraId { get; set; }
 
         public Editora  Editora { get; set; }
 

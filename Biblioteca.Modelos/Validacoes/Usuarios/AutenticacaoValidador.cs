@@ -39,11 +39,13 @@ namespace Biblioteca.Negocio.Validacoes.Usuarios
             RuleFor(x => x.Nome)
                 .NotEmpty()
                 .NotNull()
+                .WithSeverity(Severity.Error)
                 .WithMessage("Necessário Informar o Nome do Usuário");
 
             RuleFor(x => x.Senha)
                 .NotEmpty()
                 .NotNull()
+                .WithSeverity(Severity.Error)
                 .WithMessage("Necessaário Informar a Senha do Usuário");
 
         }
@@ -53,6 +55,7 @@ namespace Biblioteca.Negocio.Validacoes.Usuarios
             RuleFor(x => x.Email)
                 .NotEmpty()
                 .NotNull()
+                .WithSeverity(Severity.Error)
                 .WithMessage("Email do Usuário Não Informado.");
         }
 

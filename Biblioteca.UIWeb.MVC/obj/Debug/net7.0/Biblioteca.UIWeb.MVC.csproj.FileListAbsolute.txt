@@ -2,6 +2,7 @@ C:\Users\tiago\OneDrive\Área de Trabalho\POS GRADUAÇÂO FIAP\FASE 1\TechChalle
 C:\Users\tiago\OneDrive\Área de Trabalho\POS GRADUAÇÂO FIAP\FASE 1\TechChallenge\FiapTechChallenge1\Biblioteca.UIWeb.MVC\bin\Debug\net7.0\appsettings.json
 C:\Users\tiago\OneDrive\Área de Trabalho\POS GRADUAÇÂO FIAP\FASE 1\TechChallenge\FiapTechChallenge1\Biblioteca.UIWeb.MVC\bin\Debug\net7.0\Biblioteca.UIWeb.MVC.staticwebassets.runtime.json
 C:\Users\tiago\OneDrive\Área de Trabalho\POS GRADUAÇÂO FIAP\FASE 1\TechChallenge\FiapTechChallenge1\Biblioteca.UIWeb.MVC\bin\Debug\net7.0\Biblioteca.UIWeb.MVC.exe
+C:\Users\tiago\OneDrive\Área de Trabalho\POS GRADUAÇÂO FIAP\FASE 1\TechChallenge\FiapTechChallenge1\Biblioteca.UIWeb.MVC\bin\Debug\net7.0\Biblioteca.UIWeb.MVC.deps.json
 C:\Users\tiago\OneDrive\Área de Trabalho\POS GRADUAÇÂO FIAP\FASE 1\TechChallenge\FiapTechChallenge1\Biblioteca.UIWeb.MVC\bin\Debug\net7.0\Biblioteca.UIWeb.MVC.runtimeconfig.json
 C:\Users\tiago\OneDrive\Área de Trabalho\POS GRADUAÇÂO FIAP\FASE 1\TechChallenge\FiapTechChallenge1\Biblioteca.UIWeb.MVC\bin\Debug\net7.0\Biblioteca.UIWeb.MVC.dll
 C:\Users\tiago\OneDrive\Área de Trabalho\POS GRADUAÇÂO FIAP\FASE 1\TechChallenge\FiapTechChallenge1\Biblioteca.UIWeb.MVC\bin\Debug\net7.0\Biblioteca.UIWeb.MVC.pdb
@@ -27,4 +28,3 @@ C:\Users\tiago\OneDrive\Área de Trabalho\POS GRADUAÇÂO FIAP\FASE 1\TechChalle
 C:\Users\tiago\OneDrive\Área de Trabalho\POS GRADUAÇÂO FIAP\FASE 1\TechChallenge\FiapTechChallenge1\Biblioteca.UIWeb.MVC\obj\Debug\net7.0\Biblioteca.UIWeb.MVC.pdb
 C:\Users\tiago\OneDrive\Área de Trabalho\POS GRADUAÇÂO FIAP\FASE 1\TechChallenge\FiapTechChallenge1\Biblioteca.UIWeb.MVC\obj\Debug\net7.0\Biblioteca.UIWeb.MVC.genruntimeconfig.cache
 C:\Users\tiago\OneDrive\Área de Trabalho\POS GRADUAÇÂO FIAP\FASE 1\TechChallenge\FiapTechChallenge1\Biblioteca.UIWeb.MVC\obj\Debug\net7.0\ref\Biblioteca.UIWeb.MVC.dll
-C:\Users\tiago\OneDrive\Área de Trabalho\POS GRADUAÇÂO FIAP\FASE 1\TechChallenge\FiapTechChallenge1\Biblioteca.UIWeb.MVC\bin\Debug\net7.0\Biblioteca.UIWeb.MVC.deps.json

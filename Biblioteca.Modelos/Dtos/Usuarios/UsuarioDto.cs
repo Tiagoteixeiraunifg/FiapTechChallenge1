@@ -1,6 +1,7 @@
-﻿using Biblioteca.Infraestrutura.Ferramentas.Conversores;
+﻿
 using Biblioteca.Negocio.Entidades.Usuarios;
 using Biblioteca.Negocio.Enumeradores.Usuarios;
+using Biblioteca.Negocio.Utilidades.Conversores;
 using System;
 using System.Collections.Generic;
 using System.Linq;

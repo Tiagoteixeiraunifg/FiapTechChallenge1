@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Biblioteca.Negocio.Entidades.FichaEmprestimos;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -19,7 +20,6 @@ namespace Biblioteca.Negocio.Entidades.Alunos
         public DateTime DataCriacao { get; set; }
 
         public DateTime DataAtualizacao { get; set; }
-
-
+        
     }
 }

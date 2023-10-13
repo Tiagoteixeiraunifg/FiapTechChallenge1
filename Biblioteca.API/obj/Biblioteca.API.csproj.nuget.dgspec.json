@@ -18,15 +18,15 @@
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
-          "net7.0-windows10.0.22621.0"
+          "net7.0"
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
-          "net7.0-windows10.0.22621": {
-            "targetAlias": "net7.0-windows10.0.22621.0",
+          "net7.0": {
+            "targetAlias": "net7.0",
             "projectReferences": {
               "C:\\Users\\tiago\\OneDrive\\Área de Trabalho\\POS GRADUAÇÂO FIAP\\FASE 1\\TechChallenge\\FiapTechChallenge1\\Biblioteca.Infraestrutura\\Biblioteca.Infraestrutura.csproj": {
                 "projectPath": "C:\\Users\\tiago\\OneDrive\\Área de Trabalho\\POS GRADUAÇÂO FIAP\\FASE 1\\TechChallenge\\FiapTechChallenge1\\Biblioteca.Infraestrutura\\Biblioteca.Infraestrutura.csproj"
@@ -47,9 +47,13 @@
         }
       },
       "frameworks": {
-        "net7.0-windows10.0.22621": {
-          "targetAlias": "net7.0-windows10.0.22621.0",
+        "net7.0": {
+          "targetAlias": "net7.0",
           "dependencies": {
+            "FluentValidation": {
+              "target": "Package",
+              "version": "[11.7.1, )"
+            },
             "Microsoft.AspNetCore.Authentication.JwtBearer": {
               "target": "Package",
               "version": "[7.0.12, )"
@@ -90,20 +94,11 @@
           ],
           "assetTargetFallback": true,
           "warn": true,
-          "downloadDependencies": [
-            {
-              "name": "Microsoft.Windows.SDK.NET.Ref",
-              "version": "[10.0.22621.29, 10.0.22621.29]"
-            }
-          ],
           "frameworkReferences": {
             "Microsoft.AspNetCore.App": {
               "privateAssets": "none"
             },
             "Microsoft.NETCore.App": {
-              "privateAssets": "all"
-            },
-            "Microsoft.Windows.SDK.NET.Ref": {
               "privateAssets": "all"
             }
           },
@@ -125,16 +120,20 @@
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
-          "net7.0-windows10.0.22621.0"
+          "net7.0"
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
-          "net7.0-windows10.0.22621": {
-            "targetAlias": "net7.0-windows10.0.22621.0",
-            "projectReferences": {}
+          "net7.0": {
+            "targetAlias": "net7.0",
+            "projectReferences": {
+              "C:\\Users\\tiago\\OneDrive\\Área de Trabalho\\POS GRADUAÇÂO FIAP\\FASE 1\\TechChallenge\\FiapTechChallenge1\\Biblioteca.Modelos\\Biblioteca.Negocio.csproj": {
+                "projectPath": "C:\\Users\\tiago\\OneDrive\\Área de Trabalho\\POS GRADUAÇÂO FIAP\\FASE 1\\TechChallenge\\FiapTechChallenge1\\Biblioteca.Modelos\\Biblioteca.Negocio.csproj"
+              }
+            }
           }
         },
         "warningProperties": {
@@ -144,8 +143,8 @@
         }
       },
       "frameworks": {
-        "net7.0-windows10.0.22621": {
-          "targetAlias": "net7.0-windows10.0.22621.0",
+        "net7.0": {
+          "targetAlias": "net7.0",
           "dependencies": {
             "AutoMapper": {
               "target": "Package",
@@ -189,17 +188,8 @@
           ],
           "assetTargetFallback": true,
           "warn": true,
-          "downloadDependencies": [
-            {
-              "name": "Microsoft.Windows.SDK.NET.Ref",
-              "version": "[10.0.22621.29, 10.0.22621.29]"
-            }
-          ],
           "frameworkReferences": {
             "Microsoft.NETCore.App": {
-              "privateAssets": "all"
-            },
-            "Microsoft.Windows.SDK.NET.Ref": {
               "privateAssets": "all"
             }
           },
@@ -221,15 +211,15 @@
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
-          "net7.0-windows10.0.22621.0"
+          "net7.0"
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
-          "net7.0-windows10.0.22621": {
-            "targetAlias": "net7.0-windows10.0.22621.0",
+          "net7.0": {
+            "targetAlias": "net7.0",
             "projectReferences": {}
           }
         },
@@ -240,9 +230,13 @@
         }
       },
       "frameworks": {
-        "net7.0-windows10.0.22621": {
-          "targetAlias": "net7.0-windows10.0.22621.0",
+        "net7.0": {
+          "targetAlias": "net7.0",
           "dependencies": {
+            "AutoMapper": {
+              "target": "Package",
+              "version": "[12.0.1, )"
+            },
             "FluentValidation": {
               "target": "Package",
               "version": "[11.7.1, )"
@@ -263,17 +257,8 @@
           ],
           "assetTargetFallback": true,
           "warn": true,
-          "downloadDependencies": [
-            {
-              "name": "Microsoft.Windows.SDK.NET.Ref",
-              "version": "[10.0.22621.29, 10.0.22621.29]"
-            }
-          ],
           "frameworkReferences": {
             "Microsoft.NETCore.App": {
-              "privateAssets": "all"
-            },
-            "Microsoft.Windows.SDK.NET.Ref": {
               "privateAssets": "all"
             }
           },
@@ -295,16 +280,23 @@
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
-          "net7.0-windows10.0.22621.0"
+          "net7.0"
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
-          "net7.0-windows10.0.22621": {
-            "targetAlias": "net7.0-windows10.0.22621.0",
-            "projectReferences": {}
+          "net7.0": {
+            "targetAlias": "net7.0",
+            "projectReferences": {
+              "C:\\Users\\tiago\\OneDrive\\Área de Trabalho\\POS GRADUAÇÂO FIAP\\FASE 1\\TechChallenge\\FiapTechChallenge1\\Biblioteca.Infraestrutura\\Biblioteca.Infraestrutura.csproj": {
+                "projectPath": "C:\\Users\\tiago\\OneDrive\\Área de Trabalho\\POS GRADUAÇÂO FIAP\\FASE 1\\TechChallenge\\FiapTechChallenge1\\Biblioteca.Infraestrutura\\Biblioteca.Infraestrutura.csproj"
+              },
+              "C:\\Users\\tiago\\OneDrive\\Área de Trabalho\\POS GRADUAÇÂO FIAP\\FASE 1\\TechChallenge\\FiapTechChallenge1\\Biblioteca.Modelos\\Biblioteca.Negocio.csproj": {
+                "projectPath": "C:\\Users\\tiago\\OneDrive\\Área de Trabalho\\POS GRADUAÇÂO FIAP\\FASE 1\\TechChallenge\\FiapTechChallenge1\\Biblioteca.Modelos\\Biblioteca.Negocio.csproj"
+              }
+            }
           }
         },
         "warningProperties": {
@@ -314,8 +306,8 @@
         }
       },
       "frameworks": {
-        "net7.0-windows10.0.22621": {
-          "targetAlias": "net7.0-windows10.0.22621.0",
+        "net7.0": {
+          "targetAlias": "net7.0",
           "dependencies": {
             "Microsoft.EntityFrameworkCore": {
               "target": "Package",
@@ -333,17 +325,8 @@
           ],
           "assetTargetFallback": true,
           "warn": true,
-          "downloadDependencies": [
-            {
-              "name": "Microsoft.Windows.SDK.NET.Ref",
-              "version": "[10.0.22621.29, 10.0.22621.29]"
-            }
-          ],
           "frameworkReferences": {
             "Microsoft.NETCore.App": {
-              "privateAssets": "all"
-            },
-            "Microsoft.Windows.SDK.NET.Ref": {
               "privateAssets": "all"
             }
           },

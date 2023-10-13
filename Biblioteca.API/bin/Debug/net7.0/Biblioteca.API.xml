@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Biblioteca.API</name>
+    </assembly>
+    <members>
+        <member name="T:Biblioteca.API.Controllers.AutenticacaoController">
+            <summary>
+            Porta de entrada para autenticação.
+            </summary>
+        </member>
+    </members>
+</doc>

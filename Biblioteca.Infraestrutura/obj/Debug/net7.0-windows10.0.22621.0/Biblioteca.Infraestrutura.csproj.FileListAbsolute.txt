@@ -1,8 +1,6 @@
-C:\Users\tiago\OneDrive\Área de Trabalho\POS GRADUAÇÂO FIAP\FASE 1\TechChallenge\FiapTechChallenge1\Biblioteca.Infraestrutura\bin\Debug\net7.0-windows10.0.22621.0\Biblioteca.Infraestrutura.runtimeconfig.json
-C:\Users\tiago\OneDrive\Área de Trabalho\POS GRADUAÇÂO FIAP\FASE 1\TechChallenge\FiapTechChallenge1\Biblioteca.Infraestrutura\bin\Debug\net7.0-windows10.0.22621.0\Biblioteca.Infraestrutura.dll
-C:\Users\tiago\OneDrive\Área de Trabalho\POS GRADUAÇÂO FIAP\FASE 1\TechChallenge\FiapTechChallenge1\Biblioteca.Infraestrutura\bin\Debug\net7.0-windows10.0.22621.0\Biblioteca.Infraestrutura.pdb
 C:\Users\tiago\OneDrive\Área de Trabalho\POS GRADUAÇÂO FIAP\FASE 1\TechChallenge\FiapTechChallenge1\Biblioteca.Infraestrutura\bin\Debug\net7.0-windows10.0.22621.0\Biblioteca.Negocio.dll
 C:\Users\tiago\OneDrive\Área de Trabalho\POS GRADUAÇÂO FIAP\FASE 1\TechChallenge\FiapTechChallenge1\Biblioteca.Infraestrutura\bin\Debug\net7.0-windows10.0.22621.0\Biblioteca.Servicos.dll
+C:\Users\tiago\OneDrive\Área de Trabalho\POS GRADUAÇÂO FIAP\FASE 1\TechChallenge\FiapTechChallenge1\Biblioteca.Infraestrutura\bin\Debug\net7.0-windows10.0.22621.0\Biblioteca.Infraestrutura.dll
 C:\Users\tiago\OneDrive\Área de Trabalho\POS GRADUAÇÂO FIAP\FASE 1\TechChallenge\FiapTechChallenge1\Biblioteca.Infraestrutura\obj\Debug\net7.0-windows10.0.22621.0\Biblioteca.Infraestrutura.csproj.AssemblyReference.cache
 C:\Users\tiago\OneDrive\Área de Trabalho\POS GRADUAÇÂO FIAP\FASE 1\TechChallenge\FiapTechChallenge1\Biblioteca.Infraestrutura\obj\Debug\net7.0-windows10.0.22621.0\Biblioteca.Infraestrutura.GeneratedMSBuildEditorConfig.editorconfig
 C:\Users\tiago\OneDrive\Área de Trabalho\POS GRADUAÇÂO FIAP\FASE 1\TechChallenge\FiapTechChallenge1\Biblioteca.Infraestrutura\obj\Debug\net7.0-windows10.0.22621.0\Biblioteca.Infraestrutura.AssemblyInfoInputs.cache
@@ -12,6 +10,8 @@ C:\Users\tiago\OneDrive\Área de Trabalho\POS GRADUAÇÂO FIAP\FASE 1\TechChalle
 C:\Users\tiago\OneDrive\Área de Trabalho\POS GRADUAÇÂO FIAP\FASE 1\TechChallenge\FiapTechChallenge1\Biblioteca.Infraestrutura\obj\Debug\net7.0-windows10.0.22621.0\Biblioteca.Infraestrutura.dll
 C:\Users\tiago\OneDrive\Área de Trabalho\POS GRADUAÇÂO FIAP\FASE 1\TechChallenge\FiapTechChallenge1\Biblioteca.Infraestrutura\obj\Debug\net7.0-windows10.0.22621.0\refint\Biblioteca.Infraestrutura.dll
 C:\Users\tiago\OneDrive\Área de Trabalho\POS GRADUAÇÂO FIAP\FASE 1\TechChallenge\FiapTechChallenge1\Biblioteca.Infraestrutura\obj\Debug\net7.0-windows10.0.22621.0\Biblioteca.Infraestrutura.pdb
+C:\Users\tiago\OneDrive\Área de Trabalho\POS GRADUAÇÂO FIAP\FASE 1\TechChallenge\FiapTechChallenge1\Biblioteca.Infraestrutura\bin\Debug\net7.0-windows10.0.22621.0\Biblioteca.Infraestrutura.deps.json
+C:\Users\tiago\OneDrive\Área de Trabalho\POS GRADUAÇÂO FIAP\FASE 1\TechChallenge\FiapTechChallenge1\Biblioteca.Infraestrutura\bin\Debug\net7.0-windows10.0.22621.0\Biblioteca.Infraestrutura.runtimeconfig.json
+C:\Users\tiago\OneDrive\Área de Trabalho\POS GRADUAÇÂO FIAP\FASE 1\TechChallenge\FiapTechChallenge1\Biblioteca.Infraestrutura\bin\Debug\net7.0-windows10.0.22621.0\Biblioteca.Infraestrutura.pdb
 C:\Users\tiago\OneDrive\Área de Trabalho\POS GRADUAÇÂO FIAP\FASE 1\TechChallenge\FiapTechChallenge1\Biblioteca.Infraestrutura\obj\Debug\net7.0-windows10.0.22621.0\Biblioteca.Infraestrutura.genruntimeconfig.cache
 C:\Users\tiago\OneDrive\Área de Trabalho\POS GRADUAÇÂO FIAP\FASE 1\TechChallenge\FiapTechChallenge1\Biblioteca.Infraestrutura\obj\Debug\net7.0-windows10.0.22621.0\ref\Biblioteca.Infraestrutura.dll
-C:\Users\tiago\OneDrive\Área de Trabalho\POS GRADUAÇÂO FIAP\FASE 1\TechChallenge\FiapTechChallenge1\Biblioteca.Infraestrutura\bin\Debug\net7.0-windows10.0.22621.0\Biblioteca.Infraestrutura.deps.json

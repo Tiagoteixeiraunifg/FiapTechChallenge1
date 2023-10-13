@@ -33,7 +33,7 @@ namespace Biblioteca.Infraestrutura.Seguranca.JWT.Servico
                 //dados do usuario passados no token
                 Subject = new ClaimsIdentity(new Claim[] {
                     new Claim("Nome", usuario.Nome),
-                    new Claim("Permissao", usuario.Permissao.ToString()),
+                    new Claim(ClaimTypes.Role, usuario.Permissao.ToString()),
                     new Claim("Id", usuario.Id.ToString())
                 }),
                 //validade do token
@@ -88,9 +88,15 @@ namespace Biblioteca.Infraestrutura.Seguranca.JWT.Servico
                     {
                         usuario.Nome = claim.Value.ToString();
                     }
-                    if (claim.Type.Equals("Permissao"))
-                    {
-                        usuario.Permissao = (UsuarioPermissaoEnum)int.Parse(claim.Value.ToString());
+                    if (claim.Type.Contains("/identity/claims/role"))
+                    {  
+                        foreach ( UsuarioPermissaoEnum tipo in Enum.GetValues(typeof(UsuarioPermissaoEnum)))
+                        {
+                            if (tipo.ToString().Equals(claim.Value.ToString())) 
+                            {
+                                usuario.Permissao = tipo;
+                            }
+                        }
                     }
                     if (claim.Type.Equals("Id"))
                     {

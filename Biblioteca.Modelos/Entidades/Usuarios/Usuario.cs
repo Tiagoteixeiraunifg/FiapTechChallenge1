@@ -1,6 +1,8 @@
-﻿using Biblioteca.Infraestrutura.Ferramentas.Conversores;
+﻿
 using Biblioteca.Negocio.Dtos.Usuarios;
+using Biblioteca.Negocio.Entidades.FichaEmprestimos;
 using Biblioteca.Negocio.Enumeradores.Usuarios;
+using Biblioteca.Negocio.Utilidades.Conversores;
 using NPOI.SS.Formula.Functions;
 using System;
 using System.Collections.Generic;
@@ -29,7 +31,6 @@ namespace Biblioteca.Negocio.Entidades.Usuarios
         public string Senha { get; set; }
 
         public UsuarioPermissaoEnum Permissao { get; set; }
-
 
         public UsuarioDto ObtenhaDto() 
         {

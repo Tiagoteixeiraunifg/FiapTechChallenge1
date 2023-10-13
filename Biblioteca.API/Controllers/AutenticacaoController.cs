@@ -9,7 +9,6 @@ using Biblioteca.Servicos.Contratos.Servicos;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
-using Org.BouncyCastle.Ocsp;
 using System.Linq.Expressions;
 
 namespace Biblioteca.API.Controllers
@@ -131,7 +130,7 @@ namespace Biblioteca.API.Controllers
         }
 
         [AllowAnonymous]
-        [HttpPost("RenovarToken")]
+        [HttpPost("RenovarToken/{token}")]
         public IActionResult RenovarToken(string token) 
         {
             try
@@ -149,7 +148,7 @@ namespace Biblioteca.API.Controllers
             }
             catch (Exception ex)
             {
-                _logger.LogInformation("Retornando erro no processo de renovação de token");
+                _logger.LogError("Retornando erro no processo de renovação de token");
                 return StatusCode(500, new { Erro = ex.Message });
             }
         }
