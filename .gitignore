@@ -1,0 +1,12 @@
+﻿################################################################################
+# This .gitignore file was automatically created by Microsoft(R) Visual Studio.
+################################################################################
+
+/.vs/FiapTechChallenge1/FileContentIndex
+/.vs/FiapTechChallenge1/v17/.wsuo
+/Biblioteca.API/.vs/Biblioteca.API/FileContentIndex
+/Biblioteca.API/.vs/Biblioteca.API/v16
+/Biblioteca.API/.vs/Biblioteca.API/v17/TestStore/0
+/Biblioteca.API/bin/Debug/net7.0-windows10.0.22621.0
+/Biblioteca.API/obj
+/Biblioteca.API/.vs/ProjectEvaluation
