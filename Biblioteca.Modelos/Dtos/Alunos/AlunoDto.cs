@@ -10,13 +10,14 @@ using System.Threading.Tasks;
 
 namespace Biblioteca.Negocio.Dtos.Alunos
 {
+    [Serializable]
     public class AlunoDto : EntidadeBase
     {
         private Conversor<AlunoDto, Aluno> _Conversor;
 
-        public AlunoDto(Conversor<AlunoDto, Aluno> conversor)
+        public AlunoDto()
         {
-            this._Conversor = conversor;
+            this._Conversor = new Conversor<AlunoDto, Aluno>();
         }
         public string Nome { get; set; }
 

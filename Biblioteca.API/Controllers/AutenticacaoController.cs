@@ -18,7 +18,7 @@ namespace Biblioteca.API.Controllers
     /// Porta de entrada para autenticação.
     /// </summary>
     [ApiController]
-    [Route("Autenticacao")]
+    [Route("Autenticacao/v1")]
     public class AutenticacaoController : ControladorAbstratoComContexto<AutenticacaoController>
     {
 

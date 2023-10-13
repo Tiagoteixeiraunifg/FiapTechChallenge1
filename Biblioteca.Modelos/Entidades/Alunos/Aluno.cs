@@ -1,4 +1,6 @@
-﻿using Biblioteca.Negocio.Entidades.FichaEmprestimos;
+﻿using Biblioteca.Negocio.Dtos.Alunos;
+using Biblioteca.Negocio.Entidades.FichaEmprestimos;
+using Biblioteca.Negocio.Utilidades.Conversores;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,6 +11,14 @@ namespace Biblioteca.Negocio.Entidades.Alunos
 {
     public class Aluno : EntidadeBase
     {
+
+        private Conversor<Aluno, AlunoDto> _Conversor;
+
+        public Aluno()
+        {
+            _Conversor = new Conversor<Aluno, AlunoDto>();
+        }
+
         public Guid Codigo { get; set; } 
         
         public string Nome { get; set; }
@@ -21,5 +31,11 @@ namespace Biblioteca.Negocio.Entidades.Alunos
 
         public DateTime DataAtualizacao { get; set; }
         
+
+        public AlunoDto ObtenhaDto() 
+        {
+            return _Conversor.ConvertaPara(this);
+        }
+ 
     }
 }

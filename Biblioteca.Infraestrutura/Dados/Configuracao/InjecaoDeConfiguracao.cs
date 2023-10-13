@@ -1,13 +1,14 @@
 ﻿using Biblioteca.Infraestrutura.Dados.Contextos;
+using Biblioteca.Infraestrutura.Dados.Repositorios.Alunos.Implementacoes;
+using Biblioteca.Infraestrutura.Dados.Repositorios.Alunos.Interfaces;
 using Biblioteca.Infraestrutura.Dados.Repositorios.Usuarios.Implementacoes;
 using Biblioteca.Infraestrutura.Dados.Repositorios.Usuarios.Interfaces;
 using Biblioteca.Infraestrutura.Dados.ServicoDados.Implementacoes;
 using Biblioteca.Infraestrutura.Dados.ServicoDados.Interfaces;
-using Biblioteca.Servicos.Contratos.ContratosDeServicosImplementados;
-using Biblioteca.Servicos.Contratos.Servicos;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Options;
 
 
 namespace Biblioteca.Infraestrutura.Dados.Configuracao
@@ -22,13 +23,17 @@ namespace Biblioteca.Infraestrutura.Dados.Configuracao
         /// </summary>
         public static IServiceCollection AdicioneInfraestrutura(this IServiceCollection services, IConfiguration configuration)
         {
-            services.AddScoped<IUsuarioRepositorio, UsuarioRepositorioImpl>();
 
-            services.AddScoped<IServicoUsuario, ServicoUsuarioImpl>();
+            services.AddScoped<IUsuarioRepositorio, UsuarioRepositorioImpl>();
+            services.AddScoped<IAlunoRepositorio, AlunoRepositorioImpl>();
+            
             services.AddTransient<IDataService, DataService>();
 
             services.AddDbContext<ApplicationDbContext>(options =>
-                options.UseSqlServer(configuration.GetConnectionString("ConnectionString")), ServiceLifetime.Scoped);
+                options.UseSqlServer(configuration.GetConnectionString("ConnectionString")) , ServiceLifetime.Scoped); 
+                
+
+         
 
             services.BuildServiceProvider().GetService<IDataService>().InicializarBd();
       

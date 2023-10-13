@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 
 namespace Biblioteca.Negocio.Dtos.Usuarios
 {
+    [Serializable]
     public class UsuarioDto
     {
         private Conversor<UsuarioDto, Usuario> _Conversor;

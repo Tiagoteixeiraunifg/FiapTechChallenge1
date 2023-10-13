@@ -1,0 +1,135 @@
+Information: 0 - Application started. Press Ctrl+C to shut down.
+Information: 0 - Hosting environment: Development
+Information: 0 - Content root path: C:\Users\tiago\OneDrive\Área de Trabalho\POS GRADUAÇÂO FIAP\FASE 1\TechChallenge\FiapTechChallenge1\Biblioteca.API
+Information: 0 - Application started. Press Ctrl+C to shut down.
+Information: 0 - Hosting environment: Development
+Information: 0 - Content root path: C:\Users\tiago\OneDrive\Área de Trabalho\POS GRADUAÇÂO FIAP\FASE 1\TechChallenge\FiapTechChallenge1\Biblioteca.API
+Information: 0 - Iniciando Validação do Usuário
+Information: 0 - Iniciando Autenticação do Usuário
+Information: Microsoft.EntityFrameworkCore.Database.Command.CommandExecuted - Executed DbCommand (3ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+SELECT [u].[Id], [u].[Codigo], [u].[Email], [u].[Nome], [u].[Permissao], [u].[Senha]
+FROM [Usuarios] AS [u]
+Information: Microsoft.EntityFrameworkCore.Database.Command.CommandExecuted - Executed DbCommand (0ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+SELECT [u].[Id], [u].[Codigo], [u].[Email], [u].[Nome], [u].[Permissao], [u].[Senha]
+FROM [Usuarios] AS [u]
+Information: 0 - Autenticação do Usuário Executada - Gerando Token
+Information: 0 - Token Gerado = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJOb21lIjoidGlhZ28iLCJyb2xlIjoiQURNSU5JU1RSQURPUiIsIklkIjoiMSIsIm5iZiI6MTY5NzIwMTM2MiwiZXhwIjoxNjk3MjMwMTYyLCJpYXQiOjE2OTcyMDEzNjJ9.SQ5oNcdYHKs40EMFESlslfmJjA7s1ZeZDLvl3nbzres
+Information: 0 - Usuario logado com sucesso
+Error: UnhandledException - An unhandled exception has occurred while executing the request.
+Error: UnhandledException - An unhandled exception has occurred while executing the request.
+Information: 0 - Application started. Press Ctrl+C to shut down.
+Information: 0 - Hosting environment: Development
+Information: 0 - Content root path: C:\Users\tiago\OneDrive\Área de Trabalho\POS GRADUAÇÂO FIAP\FASE 1\TechChallenge\FiapTechChallenge1\Biblioteca.API
+Information: 0 - Iniciando Validação do Usuário
+Information: 0 - Iniciando Autenticação do Usuário
+Information: Microsoft.EntityFrameworkCore.Database.Command.CommandExecuted - Executed DbCommand (3ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+SELECT [u].[Id], [u].[Codigo], [u].[Email], [u].[Nome], [u].[Permissao], [u].[Senha]
+FROM [Usuarios] AS [u]
+Information: Microsoft.EntityFrameworkCore.Database.Command.CommandExecuted - Executed DbCommand (0ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+SELECT [u].[Id], [u].[Codigo], [u].[Email], [u].[Nome], [u].[Permissao], [u].[Senha]
+FROM [Usuarios] AS [u]
+Information: 0 - Autenticação do Usuário Executada - Gerando Token
+Information: 0 - Token Gerado = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJOb21lIjoidGlhZ28iLCJyb2xlIjoiQURNSU5JU1RSQURPUiIsIklkIjoiMSIsIm5iZiI6MTY5NzIwMTU4MiwiZXhwIjoxNjk3MjMwMzgyLCJpYXQiOjE2OTcyMDE1ODJ9.ztdgYX4aCXxfzCq1hN7cybDiVILS6THwsJ2dfXvjUqo
+Information: 0 - Usuario logado com sucesso
+Information: 0 - Iniciando Validação do Aluno
+Information: 0 - Validação do Concluída
+Information: 0 - Iniciando Cadastro do Aluno
+Information: 0 - Iniciando o cadastro do Aluno
+Information: 0 - Ajustando datas do cadastro
+Information: 0 - Datas ajustadas no cadastro
+Information: Microsoft.EntityFrameworkCore.Database.Command.CommandExecuted - Executed DbCommand (25ms) [Parameters=[@p0='?' (DbType = Guid), @p1='?' (DbType = DateTime2), @p2='?' (DbType = DateTime2), @p3='?' (Size = 100), @p4='?' (Size = 100), @p5='?' (Size = 20)], CommandType='Text', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+INSERT INTO [Alunos] ([Codigo], [DataAtualizacao], [DataCriacao], [Email], [Nome], [Telefone])
+OUTPUT INSERTED.[Id]
+VALUES (@p0, @p1, @p2, @p3, @p4, @p5);
+Information: 0 - Aluno cadastrado corretamente
+Information: Microsoft.EntityFrameworkCore.Database.Command.CommandExecuted - Executed DbCommand (3ms) [Parameters=[@__dto_Codigo_0='?' (DbType = Guid)], CommandType='Text', CommandTimeout='30']
+SELECT TOP(1) [a].[Id], [a].[Codigo], [a].[DataAtualizacao], [a].[DataCriacao], [a].[Email], [a].[Nome], [a].[Telefone]
+FROM [Alunos] AS [a]
+WHERE [a].[Codigo] = @__dto_Codigo_0
+Information: 0 - Cadastro do Aluno Concluido
+Information: 0 - Application started. Press Ctrl+C to shut down.
+Information: 0 - Hosting environment: Development
+Information: 0 - Content root path: C:\Users\tiago\OneDrive\Área de Trabalho\POS GRADUAÇÂO FIAP\FASE 1\TechChallenge\FiapTechChallenge1\Biblioteca.API
+Information: 0 - Iniciando Validação do Usuário
+Information: 0 - Iniciando Autenticação do Usuário
+Information: Microsoft.EntityFrameworkCore.Database.Command.CommandExecuted - Executed DbCommand (2ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+SELECT [u].[Id], [u].[Codigo], [u].[Email], [u].[Nome], [u].[Permissao], [u].[Senha]
+FROM [Usuarios] AS [u]
+Information: Microsoft.EntityFrameworkCore.Database.Command.CommandExecuted - Executed DbCommand (0ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+SELECT [u].[Id], [u].[Codigo], [u].[Email], [u].[Nome], [u].[Permissao], [u].[Senha]
+FROM [Usuarios] AS [u]
+Information: 0 - Autenticação do Usuário Executada - Gerando Token
+Information: 0 - Token Gerado = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJOb21lIjoidGlhZ28iLCJyb2xlIjoiQURNSU5JU1RSQURPUiIsIklkIjoiMSIsIm5iZiI6MTY5NzIwMjMzOSwiZXhwIjoxNjk3MjMxMTM5LCJpYXQiOjE2OTcyMDIzMzl9.VbrBwUMMMpbktvdcFXMCGeDwLIMRdoH87TivGuyksgg
+Information: 0 - Usuario logado com sucesso
+Information: 0 - Iniciando Validação do Aluno
+Information: 0 - Validação do Concluída
+Information: 0 - Iniciando atualização do Aluno
+Information: 0 - Serviço: Iniciando a atualização do Aluno
+Information: Microsoft.EntityFrameworkCore.Database.Command.CommandExecuted - Executed DbCommand (27ms) [Parameters=[@__dto_Id_0='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
+SELECT TOP(1) [a].[Id], [a].[Codigo], [a].[DataAtualizacao], [a].[DataCriacao], [a].[Email], [a].[Nome], [a].[Telefone]
+FROM [Alunos] AS [a]
+WHERE [a].[Id] = @__dto_Id_0
+Information: 0 - Application started. Press Ctrl+C to shut down.
+Information: 0 - Hosting environment: Development
+Information: 0 - Content root path: C:\Users\tiago\OneDrive\Área de Trabalho\POS GRADUAÇÂO FIAP\FASE 1\TechChallenge\FiapTechChallenge1\Biblioteca.API
+Information: 0 - Iniciando Validação do Usuário
+Information: 0 - Iniciando Autenticação do Usuário
+Information: Microsoft.EntityFrameworkCore.Database.Command.CommandExecuted - Executed DbCommand (3ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+SELECT [u].[Id], [u].[Codigo], [u].[Email], [u].[Nome], [u].[Permissao], [u].[Senha]
+FROM [Usuarios] AS [u]
+Information: Microsoft.EntityFrameworkCore.Database.Command.CommandExecuted - Executed DbCommand (2ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+SELECT [u].[Id], [u].[Codigo], [u].[Email], [u].[Nome], [u].[Permissao], [u].[Senha]
+FROM [Usuarios] AS [u]
+Information: 0 - Autenticação do Usuário Executada - Gerando Token
+Information: 0 - Token Gerado = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJOb21lIjoidGlhZ28iLCJyb2xlIjoiQURNSU5JU1RSQURPUiIsIklkIjoiMSIsIm5iZiI6MTY5NzIwMjc3NCwiZXhwIjoxNjk3MjMxNTc0LCJpYXQiOjE2OTcyMDI3NzR9.sidIrt7wT8twajhDo2mst_AJ5NGXla2D0-FQHYEGiy0
+Information: 0 - Usuario logado com sucesso
+Information: 0 - Iniciando Validação do Aluno
+Information: 0 - Validação do Concluída
+Information: 0 - Iniciando atualização do Aluno
+Information: 0 - Serviço: Iniciando a atualização do Aluno
+Information: Microsoft.EntityFrameworkCore.Database.Command.CommandExecuted - Executed DbCommand (19ms) [Parameters=[@__dto_Id_0='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
+SELECT TOP(1) [a].[Id], [a].[Codigo], [a].[DataAtualizacao], [a].[DataCriacao], [a].[Email], [a].[Nome], [a].[Telefone]
+FROM [Alunos] AS [a]
+WHERE [a].[Id] = @__dto_Id_0
+Information: 0 - Application started. Press Ctrl+C to shut down.
+Information: 0 - Hosting environment: Development
+Information: 0 - Content root path: C:\Users\tiago\OneDrive\Área de Trabalho\POS GRADUAÇÂO FIAP\FASE 1\TechChallenge\FiapTechChallenge1\Biblioteca.API
+Information: 0 - Application started. Press Ctrl+C to shut down.
+Information: 0 - Hosting environment: Development
+Information: 0 - Content root path: C:\Users\tiago\OneDrive\Área de Trabalho\POS GRADUAÇÂO FIAP\FASE 1\TechChallenge\FiapTechChallenge1\Biblioteca.API
+Information: 0 - Iniciando Validação do Usuário
+Information: 0 - Iniciando Autenticação do Usuário
+Information: Microsoft.EntityFrameworkCore.Database.Command.CommandExecuted - Executed DbCommand (5ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+SELECT [u].[Id], [u].[Codigo], [u].[Email], [u].[Nome], [u].[Permissao], [u].[Senha]
+FROM [Usuarios] AS [u]
+Information: Microsoft.EntityFrameworkCore.Database.Command.CommandExecuted - Executed DbCommand (0ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+SELECT [u].[Id], [u].[Codigo], [u].[Email], [u].[Nome], [u].[Permissao], [u].[Senha]
+FROM [Usuarios] AS [u]
+Information: 0 - Autenticação do Usuário Executada - Gerando Token
+Information: 0 - Token Gerado = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJOb21lIjoidGlhZ28iLCJyb2xlIjoiQURNSU5JU1RSQURPUiIsIklkIjoiMSIsIm5iZiI6MTY5NzIwNDA0MywiZXhwIjoxNjk3MjMyODQzLCJpYXQiOjE2OTcyMDQwNDN9.75DqmdvqN9vjKdh9ZIFqpFYi6c59GCDjXYo9Gl4-kmM
+Information: 0 - Usuario logado com sucesso
+Information: 0 - Iniciando Validação do Aluno
+Information: 0 - Validação do Concluída
+Information: 0 - Iniciando atualização do Aluno
+Information: 0 - Serviço: Iniciando a atualização do Aluno
+Information: Microsoft.EntityFrameworkCore.Database.Command.CommandExecuted - Executed DbCommand (17ms) [Parameters=[@__dto_Id_0='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
+SELECT TOP(1) [a].[Id], [a].[Codigo], [a].[DataAtualizacao], [a].[DataCriacao], [a].[Email], [a].[Nome], [a].[Telefone]
+FROM [Alunos] AS [a]
+WHERE [a].[Id] = @__dto_Id_0
+Information: Microsoft.EntityFrameworkCore.Database.Command.CommandExecuted - Executed DbCommand (4ms) [Parameters=[@p6='?' (DbType = Int32), @p0='?' (DbType = Guid), @p1='?' (DbType = DateTime2), @p2='?' (DbType = DateTime2), @p3='?' (Size = 100), @p4='?' (Size = 100), @p5='?' (Size = 20)], CommandType='Text', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+UPDATE [Alunos] SET [Codigo] = @p0, [DataAtualizacao] = @p1, [DataCriacao] = @p2, [Email] = @p3, [Nome] = @p4, [Telefone] = @p5
+OUTPUT 1
+WHERE [Id] = @p6;
+Information: 0 - Serviço: Aluno atualizado Corretamente
+Information: Microsoft.EntityFrameworkCore.Database.Command.CommandExecuted - Executed DbCommand (3ms) [Parameters=[@__dto_Codigo_0='?' (DbType = Guid)], CommandType='Text', CommandTimeout='30']
+SELECT TOP(1) [a].[Id], [a].[Codigo], [a].[DataAtualizacao], [a].[DataCriacao], [a].[Email], [a].[Nome], [a].[Telefone]
+FROM [Alunos] AS [a]
+WHERE [a].[Codigo] = @__dto_Codigo_0
+Information: 0 - Atualização do Aluno Concluido
+Information: 0 - Application started. Press Ctrl+C to shut down.
+Information: 0 - Hosting environment: Development
+Information: 0 - Content root path: C:\Users\tiago\OneDrive\Área de Trabalho\POS GRADUAÇÂO FIAP\FASE 1\TechChallenge\FiapTechChallenge1\Biblioteca.API

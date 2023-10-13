@@ -3,6 +3,7 @@ using Biblioteca.Infraestrutura.Dados.Repositorios.Alunos.Interfaces;
 using Biblioteca.Infraestrutura.Dados.Repositorios.Generico;
 using Biblioteca.Negocio.Entidades.Alunos;
 using Biblioteca.Servicos.Contratos.Servicos;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 
 
@@ -21,38 +22,40 @@ namespace Biblioteca.Servicos.Contratos.ContratosDeServicosImplementados
 
         public Aluno AtualizeAluno(Aluno dto)
         {
-            _logger.LogInformation("Iniciando a atualização do Aluno");
+            _logger.LogInformation("Serviço: Iniciando a atualização do Aluno");
             try
             {
-                base.Altere(dto);
-                _logger.LogInformation("Aluno atualizado Corretamente");
+                base.Altere(ObtenhaAlunoParaAtualizacao(dto));
+                _logger.LogInformation("Serviço: Aluno atualizado Corretamente");
                 return base._DbSet.Where(x => x.Codigo == dto.Codigo).First();
             }
             catch (Exception ex)
             {
-                _logger.LogError("Erro na atualização do Aluno", ex);
+                _logger.LogError("Serviço: Erro na atualização do Aluno", ex);
                 return null;
             }
         }
 
         public Aluno CadastreAluno(Aluno dto)
         {
-            _logger.LogInformation("Iniciando o cadastro do Aluno");
+            _logger.LogInformation("Serviço: Iniciando o cadastro do Aluno");
             try
             {
-                _logger.LogInformation("Ajustando datas do cadastro");
+                _logger.LogInformation("Serviço: Ajustando datas do cadastro");
                 dto.DataCriacao = DateTime.Now;
                 dto.DataAtualizacao = DateTime.Now;
-                _logger.LogInformation("Datas ajustadas no cadastro");
-                
-                 base.Cadastre(dto);
-                _logger.LogInformation("Aluno cadastrado corretamente");
+                _logger.LogInformation("Serviço: Datas ajustadas no cadastro");
+                _logger.LogInformation("Serviço: Criando código Guid no cadastro");
+                dto.Codigo = Guid.NewGuid();
+
+                base.Cadastre(dto);
+                _logger.LogInformation("Serviço: Aluno cadastrado corretamente");
                 return base._DbSet.Where(x => x.Codigo == dto.Codigo).First();
             }
 
             catch (Exception ex)
             {
-                _logger.LogError("Erro no cadastro do Aluno", ex);
+                _logger.LogError("Serviço: Erro no cadastro do Aluno", ex);
                 return null;
             }   
         }
@@ -60,16 +63,16 @@ namespace Biblioteca.Servicos.Contratos.ContratosDeServicosImplementados
 
         public bool DeleteAluno(int Id)
         {
-            _logger.LogInformation("Iniciando a remoção do Aluno");
+            _logger.LogInformation("Serviço: Iniciando a remoção do Aluno");
             try
             { 
                 var res = base.Delete(Id);
-                _logger.LogInformation("Remoção do aluno executada");
+                _logger.LogInformation("Serviço: Remoção do aluno executada");
                 return res;
             }
             catch (Exception ex)
             {
-                _logger.LogError("Erro ao remover aluno.", ex);
+                _logger.LogError("Serviço: Erro ao remover aluno.", ex);
                 return false;
             }
             
@@ -77,16 +80,16 @@ namespace Biblioteca.Servicos.Contratos.ContratosDeServicosImplementados
 
         public Aluno ObtenhaAluno(int Id)
         {
-            _logger.LogInformation("Iniciando a busca do aluno");
+            _logger.LogInformation("Serviço: Iniciando a busca do aluno");
             try
             {
                 var res = base.ObtenhaPorId(Id);
-                _logger.LogInformation("Aluno encontrado com sucesso.");
+                _logger.LogInformation("Serviço: Aluno encontrado com sucesso.");
                 return res;
             }
             catch (Exception ex)
             {
-                _logger.LogError("Erro ao tentar obter aluno", ex);
+                _logger.LogError("Serviço: Erro ao tentar obter aluno", ex);
                 return null;
                 
             }
@@ -95,19 +98,42 @@ namespace Biblioteca.Servicos.Contratos.ContratosDeServicosImplementados
 
         public IList<Aluno> ObtenhaTodosAlunos()
         {
-            _logger.LogInformation("Iniciando a busca dos alunos");
+            _logger.LogInformation("Serviço: Iniciando a busca dos alunos");
             try
             {
                 var res = base.ObtenhaTodos();
-                _logger.LogInformation("Alunos encontrados");
+                _logger.LogInformation("Serviço: Alunos encontrados");
                 return res;
             }
             catch (Exception ex)
             {
-                _logger.LogError("Erro ao tentar obter a lista de alunos.",ex);
+                _logger.LogError("Serviço: Erro ao tentar obter a lista de alunos.", ex);
                 return null;
             }
             
         }
+
+
+        private Aluno ObtenhaAlunoParaAtualizacao(Aluno dto) 
+        {
+
+            ///AsNoTracking() usado para não gerar o Cache no contexto atual.
+            ///
+            var AlunoAtual = base._DbSet.AsNoTracking().Where(x => x.Id == dto.Id).First();
+   
+
+            dto.Id = dto.Id;
+            dto.Codigo = AlunoAtual.Codigo;
+            dto.Nome = AlunoAtual.Nome != dto.Nome ? dto.Nome : AlunoAtual.Nome;
+            dto.Email = AlunoAtual.Email != dto.Email ? dto.Email : AlunoAtual.Email;
+            dto.Telefone = AlunoAtual.Telefone != dto.Telefone ? dto.Telefone : AlunoAtual.Telefone;
+            dto.DataCriacao = AlunoAtual.DataCriacao;
+            dto.DataAtualizacao = DateTime.Now;
+
+            return dto;
+
+        }
+
+
     }
 }

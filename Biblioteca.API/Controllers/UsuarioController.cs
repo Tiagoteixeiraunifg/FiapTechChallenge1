@@ -11,7 +11,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace Biblioteca.API.Controllers
 {
     [ApiController]
-    [Route("Usuario")]
+    [Route("Usuario/v1")]
     public class UsuarioController : ControladorAbstratoComContexto<UsuarioController>
     {
         private readonly IServicoUsuario _servicoUsuario;
