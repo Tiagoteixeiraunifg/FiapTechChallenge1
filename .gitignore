@@ -1,0 +1,25 @@
+﻿################################################################################
+# This .gitignore file was automatically created by Microsoft(R) Visual Studio.
+################################################################################
+
+obj/
+
+# Ignorar a pasta bin
+bin/
+
+# Ignorar pastas de depuração
+Debug/
+Release/
+
+/.vs/FiapTechChallenge1
+/.vs
+/Biblioteca.API/.vs/ProjectEvaluation/biblioteca.api.metadata.v7.bin
+/Biblioteca.API/.vs/ProjectEvaluation/biblioteca.api.projects.v7.bin
+/Biblioteca.API/obj/Release/net7.0
+/Biblioteca.API/.vs/Biblioteca.API/FileContentIndex
+/Biblioteca.API/.vs/Biblioteca.API/v17/TestStore/0/000.testlog
+/Biblioteca.API/.vs/Biblioteca.API/v17/TestStore/0/testlog.manifest
+/Biblioteca.Infraestrutura/obj/Release/net7.0
+/Biblioteca.Modelos/obj/Release/net7.0
+/Biblioteca.Servicos/obj/Release/net7.0
+/Biblioteca.UIWeb.MVC/obj/Release/net7.0
