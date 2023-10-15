@@ -10,6 +10,12 @@
     <NoWarn>$(NoWarm);1591</NoWarn>
   </PropertyGroup>
   <ItemGroup>
+    <Content Remove="dados.json" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="dados.json" />
+  </ItemGroup>
+  <ItemGroup>
     <PackageReference Include="FluentValidation" Version="11.7.1" />
     <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="7.0.12" />
     <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="7.0.12" />

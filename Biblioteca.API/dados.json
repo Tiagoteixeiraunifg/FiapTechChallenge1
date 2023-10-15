@@ -1,0 +1,172 @@
+[
+  {
+
+    "Codigo": "c6e68218-dbb7-432f-9b10-8d8c709b7343",
+    "Titulo": "Livro A",
+    "SubTitulo": "Subtítulo A",
+    "Status": 1,
+    "QuantidadeEstoque": 50.00,
+    "DataCriacao": "2023-10-13T12:34:56",
+    "DataAtualizacao": "2023-10-14T08:45:30",
+    "Editora": {
+      "Codigo": "ddbe4174-3ec0-4d6f-9a09-50eaeb184799",
+      "Cnpj": "12345678901234",
+      "Nome": "Empresa A",
+      "Cidade": "Cidade A",
+      "DataCriacao": "2023-10-14T09:00:00Z",
+      "DataAtualizacao": "2023-10-14T11:30:00Z"
+    },
+    "Autores": [
+      {
+        "Codigo": "5fc10552-ceab-438b-923f-d31e240d8faf",
+        "Autor": {
+          "Codigo": "d6e52c21-9b23-4c0b-915d-6b126faa5d9a",
+          "Nome": "João Silva",
+          "Telefone": "123-456-7890",
+          "DataCriacao": "2023-10-14T10:00:00Z",
+          "DataAtualizacao": "2023-10-14T12:30:00Z"
+        }
+
+      },
+      {
+        "Codigo": "8aff3995-0433-43ed-9022-e25c9b84e3e8",
+        "Autor": {
+          "Codigo": "f74e3904-0e7b-437b-93e7-8c771785e5a2",
+          "Nome": "Maria Santos",
+          "Telefone": "987-654-3210",
+          "DataCriacao": "2023-10-14T11:15:00Z",
+          "DataAtualizacao": "2023-10-14T14:45:00Z"
+        }
+      }
+    ]
+  },
+  {
+    "Codigo": "a90e9354-2dcb-4aa9-bd6c-15f8ef32ac0a",
+    "Titulo": "Livro B",
+    "SubTitulo": "Subtítulo B",
+    "Status": 1,
+    "QuantidadeEstoque": 40.00,
+    "DataCriacao": "2023-10-12T15:20:10",
+    "DataAtualizacao": "2023-10-14T09:15:45",
+    "Editora": {
+      "Codigo": "2f16b240-2f78-481c-9eb1-497b67dbaa6c",
+      "Cnpj": "98765432109876",
+      "Nome": "Empresa B",
+      "Cidade": "Cidade B",
+      "DataCriacao": "2023-10-14T10:15:00Z",
+      "DataAtualizacao": "2023-10-14T13:45:00Z"
+    },
+    "Autores": [
+      {
+        "Codigo": "9acc59af-87a5-474e-8918-a35363c14963",
+        "Autor": {
+          "Codigo": "c71dd8ae-42d4-471a-9d6a-d53dce5c45c1",
+          "Nome": "Ana Pereira",
+          "Telefone": "555-123-7890",
+          "DataCriacao": "2023-10-14T14:30:00Z",
+          "DataAtualizacao": "2023-10-14T16:45:00Z"
+        }
+      },
+      {
+        "Codigo": "b0c497f3-b380-4f40-844c-ef91e89c2c77",
+        "Autor": {
+          "Codigo": "f7be3a19-8d83-4c34-94f0-11a7bf06a26d",
+          "Nome": "Pedro Santos",
+          "Telefone": "123-555-9876",
+          "DataCriacao": "2023-10-14T13:15:00Z",
+          "DataAtualizacao": "2023-10-14T15:30:00Z"
+        }
+      },
+      {
+        "Codigo": "ae04025d-12b9-489f-8b76-f36cc2896634",
+        "Autor": {
+          "Codigo": "f56a3e5a-d0c6-41b9-afdf-cb6894ce3e17",
+          "Nome": "Marta Costa",
+          "Telefone": "987-654-1234",
+          "DataCriacao": "2023-10-14T12:00:00Z",
+          "DataAtualizacao": "2023-10-14T14:15:00Z"
+        }
+      }
+
+
+    ]
+  },
+  {
+    "Codigo": "c6e68218-dbb7-432f-9b10-8d8c709b7343",
+    "Titulo": "Livro A",
+    "SubTitulo": "Subtítulo A",
+    "Status": 1,
+    "QuantidadeEstoque": 50.00,
+    "DataCriacao": "2023-10-13T12:34:56",
+    "DataAtualizacao": "2023-10-14T08:45:30",
+    "Editora": {
+      "Codigo": "ddbe4174-3ec0-4d6f-9a09-50eaeb184799",
+      "Cnpj": "12345678901234",
+      "Nome": "Empresa A",
+      "Cidade": "Cidade A",
+      "DataCriacao": "2023-10-14T09:00:00Z",
+      "DataAtualizacao": "2023-10-14T11:30:00Z"
+    },
+    "Autores": [
+      {
+        "Codigo": "5fc10552-ceab-438b-923f-d31e240d8faf",
+        "Autor": {
+          "Codigo": "d6e52c21-9b23-4c0b-915d-6b126faa5d9a",
+          "Nome": "João Silva",
+          "Telefone": "123-456-7890",
+          "DataCriacao": "2023-10-14T10:00:00Z",
+          "DataAtualizacao": "2023-10-14T12:30:00Z"
+        }
+      },
+      {
+        "Codigo": "8aff3995-0433-43ed-9022-e25c9b84e3e8",
+        "Autor": {
+          "Codigo": "f74e3904-0e7b-437b-93e7-8c771785e5a2",
+          "Nome": "Maria Santos",
+          "Telefone": "987-654-3210",
+          "DataCriacao": "2023-10-14T11:15:00Z",
+          "DataAtualizacao": "2023-10-14T14:45:00Z"
+        }
+      }
+    ]
+  },
+  {
+    "Codigo": "fdb5e7a9-cc14-4a29-b51f-9ab6110f8ae3",
+    "Titulo": "Livro D",
+    "SubTitulo": "Subtítulo D",
+    "Status": 2,
+    "QuantidadeEstoque": 35.00,
+    "DataCriacao": "2023-10-13T14:45:30",
+    "DataAtualizacao": "2023-10-14T10:20:10",
+    "Editora": {
+      "Codigo": "a4a13e7c-8a7f-4d6c-bc14-7390e7b4c52d",
+      "Cnpj": "55555555555555",
+      "Nome": "Editora XYZ",
+      "Cidade": "Cidade XYZ",
+      "DataCriacao": "2023-10-14T08:00:00Z",
+      "DataAtualizacao": "2023-10-14T11:00:00Z"
+    },
+    "Autores": [
+      {
+        "Codigo": "1f5a2d3b-1342-44d8-b01e-12f7a38c70a1",
+        "Autor": {
+          "Codigo": "da44c401-4f76-4d95-96e7-8fcf7f9a1c95",
+          "Nome": "Eduardo Silva",
+          "Telefone": "555-555-5555",
+          "DataCriacao": "2023-10-14T13:00:00Z",
+          "DataAtualizacao": "2023-10-14T15:30:00Z"
+        }
+      },
+      {
+        "Codigo": "2f5d1b3a-5a3f-4a5b-cb1e-2a8c5b7d5a3a",
+        "Autor": {
+          "Codigo": "b0a4f3b5-a3b5-4c9e-a5f0-b1b7c3b8b8a3",
+          "Nome": "Isabel Santos",
+          "Telefone": "333-333-3333",
+          "DataCriacao": "2023-10-14T11:45:00Z",
+          "DataAtualizacao": "2023-10-14T14:00:00Z"
+        }
+      }
+    ]
+  }
+]
