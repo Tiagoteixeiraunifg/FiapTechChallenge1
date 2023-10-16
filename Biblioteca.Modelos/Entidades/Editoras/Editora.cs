@@ -1,14 +1,11 @@
-﻿using Biblioteca.Negocio.Entidades.Livros;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
+﻿
+using Biblioteca.Negocio.Dtos.Editoras;
 namespace Biblioteca.Negocio.Entidades.Editoras
 {
     public class Editora : EntidadeBase
     {
+        public Editora() { }
+         
         public Guid Codigo { get; set; }
 
         public string Cnpj {  get; set; }

@@ -64,7 +64,7 @@ namespace Biblioteca.Infraestrutura.Dados.Repositorios.Generico
 
         public T ObtenhaPorId(int Id)
         {
-            return _DbSet.FirstOrDefault(x => x.Id == Id);
+            return _DbSet.AsNoTracking().FirstOrDefault(x => x.Id == Id);
         }
 
         public IList<T> ObtenhaTodos()
