@@ -21,13 +21,13 @@ namespace Biblioteca.Servicos.Contratos.ContratosDeServicosImplementados
         {
             if (!dto.IsValid()) return dto.RetornarInconsistencia();
 
-            var Editora = ObterPorId(dto.Id);
+            var editora = ObterPorId(dto.Id);
 
-            if (Editora is null) return new InconsistenciaDeValidacao { Mensagem = "Não registrado" };
+            if (editora is null) return new InconsistenciaDeValidacao { Mensagem = "Não registrado" };
 
-            var retorno = Editora.Atualizar(dto);
+            editora = dto.ObtenhaEntidade(editora);
 
-            _editoraRepositorio.Altere(retorno);
+            _editoraRepositorio.Altere(editora);
 
             return new InconsistenciaDeValidacao { Mensagem = "Sucesso" };
         }
@@ -36,30 +36,30 @@ namespace Biblioteca.Servicos.Contratos.ContratosDeServicosImplementados
         {
             if (!dto.IsValid()) return dto.RetornarInconsistencia();
 
-            _editoraRepositorio.Cadastre(new Editora(dto));
+            _editoraRepositorio.Cadastre(dto.ObtenhaEntidade());
 
             return new InconsistenciaDeValidacao { Mensagem = "Sucesso" };
         }
 
-        public InconsistenciaDeValidacao Deletar(int Id)
+        public InconsistenciaDeValidacao Deletar(int id)
         {
-            var Editora = ObterPorId(Id);
+            var editora = ObterPorId(id);
 
-            if(Editora is null) return new InconsistenciaDeValidacao { Mensagem = "Não registrado" };
+            if (editora is null) return new InconsistenciaDeValidacao { Mensagem = "Não registrado" };
 
-            _editoraRepositorio.Delete(Editora.Id);
-            
+            _editoraRepositorio.Delete(editora.Id);
+
             return new InconsistenciaDeValidacao { Mensagem = "Sucesso" };
         }
 
         public Editora ObterPorId(int Id)
         {
-          return _editoraRepositorio.ObtenhaPorId(Id);
+            return _editoraRepositorio.ObtenhaPorId(Id);
         }
 
         public IList<Editora> ObterTodos()
         {
-         return  _editoraRepositorio.ObtenhaTodos();
+            return _editoraRepositorio.ObtenhaTodos();
         }
     }
 }

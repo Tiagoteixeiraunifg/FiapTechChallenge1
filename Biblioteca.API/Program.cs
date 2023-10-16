@@ -28,7 +28,7 @@ builder.Services.AdicioneInfraestrutura(configuracao);
 builder.Services.AddScoped<IServicoUsuario, ServicoUsuarioImpl>();
 builder.Services.AddScoped<IServicoAluno, ServicoAlunoImpl>();
 
-
+builder.Services.AddScoped<IServicoAutor, ServicoAutor>();
 builder.Services.AddScoped<IServicoEditora, ServicoEditora>();
 
 
