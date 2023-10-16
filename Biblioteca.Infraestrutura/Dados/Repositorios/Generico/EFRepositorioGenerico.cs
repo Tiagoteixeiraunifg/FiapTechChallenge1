@@ -57,6 +57,11 @@ namespace Biblioteca.Infraestrutura.Dados.Repositorios.Generico
 
         }
 
+        public void Dispose()
+        {
+            
+        }
+
         public T ObtenhaPorId(int Id)
         {
             return _DbSet.FirstOrDefault(x => x.Id == Id);

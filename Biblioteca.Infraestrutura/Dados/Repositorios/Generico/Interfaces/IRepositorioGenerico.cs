@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Biblioteca.Infraestrutura.Dados.Repositorios.Generico.Interfaces
 {
-    public interface IRepositorioGenerico<T> where T : EntidadeBase
+    public interface IRepositorioGenerico<T> : IDisposable where T : EntidadeBase
     {
         IList<T> ObtenhaTodos();
 

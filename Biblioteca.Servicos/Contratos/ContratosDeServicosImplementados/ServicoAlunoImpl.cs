@@ -1,11 +1,13 @@
 ﻿using Biblioteca.Infraestrutura.Dados.Contextos;
 using Biblioteca.Infraestrutura.Dados.Repositorios.Alunos.Interfaces;
 using Biblioteca.Infraestrutura.Dados.Repositorios.Generico;
+using Biblioteca.Infraestrutura.Dados.Repositorios.Generico.Interfaces;
 using Biblioteca.Negocio.Entidades.Alunos;
+using Biblioteca.Negocio.Entidades.Editoras;
 using Biblioteca.Servicos.Contratos.Servicos;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
-
+using System.Runtime.CompilerServices;
 
 namespace Biblioteca.Servicos.Contratos.ContratosDeServicosImplementados
 {
@@ -112,7 +114,6 @@ namespace Biblioteca.Servicos.Contratos.ContratosDeServicosImplementados
             }
             
         }
-
 
         private Aluno ObtenhaAlunoParaAtualizacao(Aluno dto) 
         {

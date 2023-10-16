@@ -15,5 +15,6 @@ namespace Biblioteca.Infraestrutura.Dados.Repositorios.Alunos.Implementacoes
         public AlunoRepositorioImpl(ApplicationDbContext contexto) : base(contexto)
         {
         }
+
     }
 }

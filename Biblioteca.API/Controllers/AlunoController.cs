@@ -1,5 +1,6 @@
 ﻿using Biblioteca.Infraestrutura.Ferramentas.Extensoes;
 using Biblioteca.Negocio.Dtos.Alunos;
+using Biblioteca.Negocio.Enumeradores.Usuarios;
 using Biblioteca.Negocio.Validacoes.Alunos;
 using Biblioteca.Servicos.Contratos.Servicos;
 using Microsoft.AspNetCore.Authorization;
@@ -98,7 +99,42 @@ namespace Biblioteca.API.Controllers
             }
         }
 
+        [Authorize]
+        [Authorize(Roles = Permissoes.ADMINISTRADOR)]
+        [HttpDelete("Deletar/{Id}")]
+        public IActionResult Deletar(int Id)
+        {
+            try
+            {
+                _logger.LogInformation("Iniciando a busca das informações");
+                var resultado = _servicoAluno.ObtenhaTodosAlunos();
+                if (resultado.PossuiValor()
+                    && resultado.PossuiLinhas()
+                    && resultado.Any(x => x.Id == Id))
+                {
 
+                    _logger.LogInformation("Deletando o aluno");
+
+                    var res = _servicoAluno.DeleteAluno(Id);
+
+                    return res
+                        ? StatusCode(200, new { Informacao = "Aluno deletado com sucesso" })
+                        : StatusCode(500, new { Informacao = "Erro ao deletar o aluno." });
+
+                }
+                else
+                {
+                    _logger.LogInformation("Sem informacoes na busca das informações");
+                    return StatusCode(204, new { Informacao = "Não foi encontrado registros" });
+                }
+
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError("Erro ao deletar informações", ex);
+                return StatusCode(500, new { Erro = ex.Message });
+            }
+        }
 
     }
 }
