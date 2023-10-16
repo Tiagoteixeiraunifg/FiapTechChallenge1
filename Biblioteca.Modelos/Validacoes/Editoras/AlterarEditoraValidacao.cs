@@ -2,24 +2,27 @@
 using Biblioteca.Negocio.Validacoes.FabricaDeValidacoes;
 using FluentValidation;
 
-
 namespace Biblioteca.Negocio.Validacoes.Editoras
 {
-    public class CadastroEditoraValidator : ValidadorAbstratro<CadastroEditoraDto>
+    public class AlterarEditoraValidacao : ValidadorAbstratro<AlterarEditoraDto>
     {
 
-        public InconsistenciaDeValidacao ValidarCadastro(CadastroEditoraDto dados)
+        public InconsistenciaDeValidacao ValidarAlteracao(AlterarEditoraDto dados)
         {
-            AssineRegrasCadastro();
+            AssineRegrasAlteracao();
             return base.Valide(dados);
         }
 
-        private void AssineRegrasCadastro()
+        private void AssineRegrasAlteracao()
         {
 
-            RuleFor(x => x.Cnpj)
+            RuleFor(x => x.Id)
                  .NotEmpty()
-                 .WithMessage("Deve ser informado um Cnpj ");
+                 .WithMessage("Deve ser informado um Id");
+
+            RuleFor(x => x.Cnpj)
+                .NotEmpty()
+                .WithMessage("Deve ser informado um Cnpj ");
 
             RuleFor(x => x.Nome)
                 .NotEmpty()
@@ -29,7 +32,7 @@ namespace Biblioteca.Negocio.Validacoes.Editoras
             RuleFor(x => x.Cidade)
                 .NotEmpty()
                 .WithMessage("Deve ser informado uma cidade ");
-        }  
-        
+        }
+   
     }
 }

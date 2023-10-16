@@ -1,6 +1,8 @@
 ﻿using Biblioteca.Infraestrutura.Dados.Contextos;
 using Biblioteca.Infraestrutura.Dados.Repositorios.Alunos.Implementacoes;
 using Biblioteca.Infraestrutura.Dados.Repositorios.Alunos.Interfaces;
+using Biblioteca.Infraestrutura.Dados.Repositorios.Autores.Implementacoes;
+using Biblioteca.Infraestrutura.Dados.Repositorios.Autores.Interface;
 using Biblioteca.Infraestrutura.Dados.Repositorios.Editoras.Implementacoes;
 using Biblioteca.Infraestrutura.Dados.Repositorios.Editoras.Interface;
 using Biblioteca.Infraestrutura.Dados.Repositorios.Livros.Implementacoes;
@@ -31,7 +33,9 @@ namespace Biblioteca.Infraestrutura.Dados.Configuracao
             services.AddScoped<IAlunoRepositorio, AlunoRepositorioImpl>();
 
             services.AddScoped<IEditoraRepositorio, EditoraRepositorio>();
-           
+            services.AddScoped<IAutorRepositorio, AutorRepositorio>();
+
+
             services.AddScoped<ILivroRepositorio, LivroRepositorio>();
 
             services.AddTransient<IDataService, DataService>();

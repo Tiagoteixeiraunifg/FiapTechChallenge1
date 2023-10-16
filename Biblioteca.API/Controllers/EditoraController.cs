@@ -1,9 +1,6 @@
 ﻿using Biblioteca.Negocio.Dtos.Editoras;
-using Biblioteca.Negocio.Validacoes.Editoras;
 using Biblioteca.Servicos.Contratos.Servicos;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using NPOI.SS.Formula.Functions;
 
 namespace Biblioteca.API.Controllers
 {
@@ -27,8 +24,8 @@ namespace Biblioteca.API.Controllers
               return RespostaResponalizada(retorno);           
         }
 
-        [HttpPut("Alterar")]
-        public IActionResult Alterar(AlterarEditoraDto dto)
+        [HttpPut("Atualizar")]
+        public IActionResult Atualizar(AlterarEditoraDto dto)
         {
             var retorno = _servicoEditora.Atualizar(dto);
             return RespostaResponalizada(retorno);
