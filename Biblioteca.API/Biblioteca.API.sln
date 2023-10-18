@@ -8,8 +8,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Biblioteca.API", "Bibliotec
 		{12D94659-3CE2-4A69-BA3C-7BA4DEEB8C75} = {12D94659-3CE2-4A69-BA3C-7BA4DEEB8C75}
 	EndProjectSection
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Biblioteca.UIWeb.MVC", "..\Biblioteca.UIWeb.MVC\Biblioteca.UIWeb.MVC.csproj", "{FA292E6B-5E5E-4FAE-AC83-C2C770F47077}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Biblioteca.Infraestrutura", "..\Biblioteca.Infraestrutura\Biblioteca.Infraestrutura.csproj", "{12D94659-3CE2-4A69-BA3C-7BA4DEEB8C75}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Biblioteca.Negocio", "..\Biblioteca.Modelos\Biblioteca.Negocio.csproj", "{0D82409F-FBBC-4146-9857-5CA4CFB5EB3E}"
@@ -26,10 +24,6 @@ Global
 		{1A9D8224-22B5-4E98-B204-641DCCF054F2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1A9D8224-22B5-4E98-B204-641DCCF054F2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1A9D8224-22B5-4E98-B204-641DCCF054F2}.Release|Any CPU.Build.0 = Release|Any CPU
-		{FA292E6B-5E5E-4FAE-AC83-C2C770F47077}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{FA292E6B-5E5E-4FAE-AC83-C2C770F47077}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{FA292E6B-5E5E-4FAE-AC83-C2C770F47077}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{FA292E6B-5E5E-4FAE-AC83-C2C770F47077}.Release|Any CPU.Build.0 = Release|Any CPU
 		{12D94659-3CE2-4A69-BA3C-7BA4DEEB8C75}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{12D94659-3CE2-4A69-BA3C-7BA4DEEB8C75}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{12D94659-3CE2-4A69-BA3C-7BA4DEEB8C75}.Release|Any CPU.ActiveCfg = Release|Any CPU
