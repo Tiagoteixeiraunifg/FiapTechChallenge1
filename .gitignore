@@ -28,7 +28,7 @@ Release/
 /Biblioteca.API/obj/Debug/net7.0/Biblioteca.API.GeneratedMSBuildEditorConfig.editorconfig
 /Biblioteca.API/Biblioteca.API.csproj.user
 /Biblioteca.API/obj/Debug/net7.0/Biblioteca.API.GeneratedMSBuildEditorConfig.editorconfig
-/Biblioteca.API/appsettings.json
+#/Biblioteca.API/appsettings.json
 /Biblioteca.API/.vs/Biblioteca.API/v17/.suo
 /Biblioteca.API/bin/Debug/net7.0/appsettings.json
 /Biblioteca.API/bin/Debug/net7.0/Biblioteca.API.dll
