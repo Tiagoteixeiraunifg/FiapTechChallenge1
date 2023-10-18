@@ -1,4 +1,5 @@
 ﻿using Biblioteca.Negocio.Entidades;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,5 +20,6 @@ namespace Biblioteca.Infraestrutura.Dados.Repositorios.Generico.Interfaces
 
         bool Delete(int Id);
 
+        DbSet<T> ObtenhaDbSet();
     }
 }

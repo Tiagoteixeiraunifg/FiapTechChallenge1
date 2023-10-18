@@ -1,5 +1,6 @@
 ﻿using Biblioteca.Negocio.Dtos.Editoras;
 using Biblioteca.Servicos.Contratos.Servicos;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Biblioteca.API.Controllers
@@ -17,6 +18,7 @@ namespace Biblioteca.API.Controllers
             _servicoEditora = servicoEditora;
         }
 
+        [Authorize]
         [HttpPost("Cadastrar")]
         public IActionResult Cadastrar(CadastroEditoraDto dto)
         {
@@ -24,6 +26,7 @@ namespace Biblioteca.API.Controllers
               return RespostaResponalizada(retorno);           
         }
 
+        [Authorize]
         [HttpPut("Atualizar")]
         public IActionResult Atualizar(AlterarEditoraDto dto)
         {
@@ -31,6 +34,7 @@ namespace Biblioteca.API.Controllers
             return RespostaResponalizada(retorno);
         }
 
+        [Authorize]
         [HttpDelete("Deletar/{id}")]
         public IActionResult Deletar(int id)
         {
@@ -38,6 +42,7 @@ namespace Biblioteca.API.Controllers
             return RespostaResponalizada(retorno);
         }
 
+        [Authorize]
         [HttpGet("ObterPorId/{id}")]
         public IActionResult ObterPorId(int id)
         {
@@ -45,6 +50,7 @@ namespace Biblioteca.API.Controllers
             return RespostaResponalizada(retorno);
         }
 
+        [Authorize]
         [HttpGet("ObterTodos")]
         public IActionResult ObterTodos()
         {

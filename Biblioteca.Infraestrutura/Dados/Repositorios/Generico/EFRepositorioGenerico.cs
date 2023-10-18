@@ -57,6 +57,12 @@ namespace Biblioteca.Infraestrutura.Dados.Repositorios.Generico
 
         }
 
+        public DbSet<T> ObtenhaDbSet() 
+        {
+            return _DbSet;
+        }
+
+
         public void Dispose()
         {
             

@@ -17,6 +17,6 @@ namespace Biblioteca.Servicos.Contratos.Servicos
 
         Aluno AtualizeAluno(Aluno dto);
 
-        bool DeleteAluno(int Id);
+        List<string> DeleteAluno(int Id);
     }
 }

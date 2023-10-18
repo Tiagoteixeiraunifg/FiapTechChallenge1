@@ -2,11 +2,14 @@
 using Biblioteca.Infraestrutura.Dados.Repositorios.Alunos.Interfaces;
 using Biblioteca.Infraestrutura.Dados.Repositorios.Generico;
 using Biblioteca.Infraestrutura.Dados.Repositorios.Generico.Interfaces;
+using Biblioteca.Infraestrutura.Ferramentas.Extensoes;
 using Biblioteca.Negocio.Entidades.Alunos;
 using Biblioteca.Negocio.Entidades.Editoras;
+using Biblioteca.Negocio.Entidades.FichaEmprestimos;
 using Biblioteca.Servicos.Contratos.Servicos;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
+using System.Linq;
 using System.Runtime.CompilerServices;
 
 namespace Biblioteca.Servicos.Contratos.ContratosDeServicosImplementados
@@ -63,19 +66,33 @@ namespace Biblioteca.Servicos.Contratos.ContratosDeServicosImplementados
         }
              
 
-        public bool DeleteAluno(int Id)
+        public List<string> DeleteAluno(int Id)
         {
             _logger.LogInformation("Serviço: Iniciando a remoção do Aluno");
             try
-            { 
+            {
+
+                _logger.LogInformation("Serviço: Iniciando a busca por fichas de emprestimo do Aluno.");
+                using (IRepositorioGenerico<FichaEmprestimoAluno> ser = new EFRepositorioGenerico<FichaEmprestimoAluno>(_contexto))
+                {
+                    var resposta = ser.ObtenhaDbSet().AsNoTracking().Where(x => x.AlunoId == Id || x.Aluno.Id == Id).ToList();
+                    if(resposta.PossuiValor() && resposta.PossuiLinhas()) 
+                    {
+                        List<string> lista = new List<string>();
+                        resposta.ToList().ForEach(x => lista.Add($"Ficha de Emprestimo Código: {x.Id.ToString("00000000")}"));
+                        return lista;
+                    }
+                }
+
+
                 var res = base.Delete(Id);
                 _logger.LogInformation("Serviço: Remoção do aluno executada");
-                return res;
+                return null;
             }
             catch (Exception ex)
             {
                 _logger.LogError("Serviço: Erro ao remover aluno.", ex);
-                return false;
+                return null;
             }
             
         }

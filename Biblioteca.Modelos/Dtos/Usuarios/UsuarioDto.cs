@@ -30,9 +30,7 @@ namespace Biblioteca.Negocio.Dtos.Usuarios
         public UsuarioPermissaoEnum Permissao { get; set; }
 
 
-        public Usuario ObtenhaEntidade() 
-        {
-            return _Conversor.ConvertaPara(this);
-        }
+        public Usuario ObtenhaEntidade() => _Conversor.ConvertaPara(this);
+       
     }
 }

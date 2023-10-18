@@ -12,7 +12,7 @@ namespace Biblioteca.API.Controllers
 {
     [ApiController]
     [Route("Alunos/v1")]
-    public class AlunoController : ControladorAbstratoComContexto<AlunoController>
+    public class AlunoController : PrincipalController
     {
         
         private readonly IServicoAluno  _servicoAluno;
@@ -30,11 +30,7 @@ namespace Biblioteca.API.Controllers
             try
             {
                 AlunoDto retorno = null;
-                AlunoValidador validador = new AlunoValidador();
-                _logger.LogInformation("Iniciando Validação do Aluno");
-                var inconsistencias = validador.ValideCadastroDeAluno(dto.ObtenhaEntidade());
-                _logger.LogInformation("Validação do Concluída");
-                if (inconsistencias.EhValido()) 
+                if (dto.EhValidoCadastro()) 
                 {
                     _logger.LogInformation("Iniciando Cadastro do Aluno");
                     var resposta = _servicoAluno.CadastreAluno(dto.ObtenhaEntidade());
@@ -48,7 +44,7 @@ namespace Biblioteca.API.Controllers
                 else 
                 {
                     _logger.LogInformation("Validação do Concluída com Inconsistencias");
-                    return StatusCode(200, new { Inconsistencias = inconsistencias.listaDeInconsistencias });
+                    return RespostaResponalizada(dto.RetornarInconsistencia());
                 }
 
                 return StatusCode(200, retorno);
@@ -68,11 +64,7 @@ namespace Biblioteca.API.Controllers
             try
             {
                 AlunoDto retorno = null;
-                AlunoValidador validador = new AlunoValidador();
-                _logger.LogInformation("Iniciando Validação do Aluno");
-                var inconsistencias = validador.ValideAtualizacaoDeAluno(dto.ObtenhaEntidade());
-                _logger.LogInformation("Validação do Concluída");
-                if (inconsistencias.EhValido())
+                if (dto.EhValidoAtualizacao())
                 {
                     _logger.LogInformation("Iniciando atualização do Aluno");
                     var resposta = _servicoAluno.AtualizeAluno(dto.ObtenhaEntidade());
@@ -86,7 +78,7 @@ namespace Biblioteca.API.Controllers
                 else
                 {
                     _logger.LogInformation("Atualização com Inconsistencias");
-                    return StatusCode(200, new { Inconsistencias = inconsistencias.listaDeInconsistencias });
+                    return RespostaResponalizada(dto.RetornarInconsistencia());
                 }
 
                 return StatusCode(200, retorno);
@@ -107,19 +99,17 @@ namespace Biblioteca.API.Controllers
             try
             {
                 _logger.LogInformation("Iniciando a busca das informações");
-                var resultado = _servicoAluno.ObtenhaTodosAlunos();
-                if (resultado.PossuiValor()
-                    && resultado.PossuiLinhas()
-                    && resultado.Any(x => x.Id == Id))
+                var resultado = _servicoAluno.ObtenhaAluno(Id);
+                if (resultado.PossuiValor())
                 {
 
                     _logger.LogInformation("Deletando o aluno");
 
                     var res = _servicoAluno.DeleteAluno(Id);
 
-                    return res
-                        ? StatusCode(200, new { Informacao = "Aluno deletado com sucesso" })
-                        : StatusCode(500, new { Informacao = "Erro ao deletar o aluno." });
+                    return res.PossuiValor()
+                        ? StatusCode(204, new { Informacao = res })
+                        : StatusCode(200, new { Informacao = "Aluno deletado" });
 
                 }
                 else
@@ -132,6 +122,74 @@ namespace Biblioteca.API.Controllers
             catch (Exception ex)
             {
                 _logger.LogError("Erro ao deletar informações", ex);
+                return StatusCode(500, new { Erro = ex.Message });
+            }
+        }
+
+        [Authorize]
+        [HttpGet("ObtenhaTodosAlunos")]
+        public IActionResult ObtenhaTodosAlunos() 
+        {
+            try
+            {
+                _logger.LogInformation("Iniciando a busca das informações");
+                var resposta = _servicoAluno.ObtenhaTodosAlunos();
+
+
+                if (resposta.PossuiValor() && resposta.PossuiLinhas()) 
+                {
+                    _logger.LogInformation("Convertendo as informações");
+                    List<AlunoDto> lista = new List<AlunoDto>();
+                    resposta.ToList().ForEach(x => lista.Add(x.ObtenhaDto()));
+
+                    _logger.LogInformation("Retornando as informações");
+                    return StatusCode(200, lista);
+                }
+                else 
+                {
+                    _logger.LogInformation("Sem informações");
+                    return StatusCode(204, new { Inconsistencia = "Sem dados para retornar." });
+                }
+
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError("Erro no serviço de busca", ex);
+                return StatusCode(500, new { Erro = ex.Message });
+            }
+        }
+
+        [Authorize]
+        [HttpGet("ObtenhaAluno/{Id}")]
+        public IActionResult ObtenhaAluno(int Id) 
+        {
+            try
+            {
+                if (!Id.PossuiValor()) 
+                {
+                    return StatusCode(500, new { Erro = "Necessário informar o ID" });
+                }
+
+
+                _logger.LogInformation("Iniciando a busca das informações");
+                var resposta = _servicoAluno.ObtenhaAluno(Id);
+
+
+                if (resposta.PossuiValor())
+                {
+                    _logger.LogInformation("Convertendo as informações");
+                    _logger.LogInformation("Retornando as informações");
+                    return StatusCode(200, resposta.ObtenhaDto());
+                }
+                else
+                {
+                    _logger.LogInformation("Sem informações");
+                    return StatusCode(204, new { Inconsistencia = "Sem dados para retornar." });
+                }
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError("Erro no serviço de busca", ex);
                 return StatusCode(500, new { Erro = ex.Message });
             }
         }
