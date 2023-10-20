@@ -14,9 +14,11 @@ namespace Biblioteca.Infraestrutura.Dados.Contextos
 {
     public class ApplicationDbContext : DbContext
     {
-    
+
+        private static ApplicationDbContext _ApplicationDbContext;
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> opcoes) : base(opcoes) 
         {
+            _ApplicationDbContext = this;
         }
 
         #region CONFIGURAÇÃO DOS DBSETS
@@ -31,6 +33,11 @@ namespace Biblioteca.Infraestrutura.Dados.Contextos
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.ApplyConfigurationsFromAssembly(typeof(ApplicationDbContext).Assembly);
+        }
+        
+        public static ApplicationDbContext Instancia() 
+        {
+            return _ApplicationDbContext;
         }
 
     }

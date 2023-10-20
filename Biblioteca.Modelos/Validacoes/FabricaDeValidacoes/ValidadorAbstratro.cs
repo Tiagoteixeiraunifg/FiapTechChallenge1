@@ -102,7 +102,7 @@ namespace Biblioteca.Negocio.Validacoes.FabricaDeValidacoes
 
             foreach (ValidationFailure item in resultado.Errors)
             {
-                _inconsistencia.listaDeInconsistencias.Add(
+                _inconsistenciaTipada.listaDeInconsistencias.Add(
                     new InconsistenciaDeValidacao
                     {
                         TipoValidacao = item.Severity == Severity.Error ? TipoValidacaoEnum.IMPEDITIVA : TipoValidacaoEnum.AVISO,

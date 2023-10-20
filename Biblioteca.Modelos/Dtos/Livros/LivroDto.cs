@@ -3,13 +3,10 @@ using Biblioteca.Negocio.Entidades.Editoras;
 using Biblioteca.Negocio.Entidades.Livros;
 using Biblioteca.Negocio.Enumeradores.Livros;
 using Biblioteca.Negocio.Utilidades.Conversores;
+using Biblioteca.Negocio.Utilidades.Extensoes;
 using Biblioteca.Negocio.Validacoes.FabricaDeValidacoes;
 using Biblioteca.Negocio.Validacoes.Livros;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Text.Json.Serialization;
 
 namespace Biblioteca.Negocio.Dtos.Livros
 {
@@ -22,6 +19,7 @@ namespace Biblioteca.Negocio.Dtos.Livros
         public LivroDto()
         {
             _Conversor = new Conversor<LivroDto, Livro>();
+            Autores = new List<LivroAutores>();
         }
 
         public LivrosTipoOperacaoDeDadosEnum TipoOperacaoDeDadosEnum { private get; set; }
@@ -36,9 +34,13 @@ namespace Biblioteca.Negocio.Dtos.Livros
 
         public StatusLivroEnum Status { get; set; }
 
+        [JsonIgnore]
         public IList<LivroAutores> Autores { get; set; }
 
         public int EditoraId { get; set; }
+
+        public IList<LivrosAutoresDto> AutoresDto { get; set; }
+
 
         public bool IsValid() 
         {
@@ -62,7 +64,29 @@ namespace Biblioteca.Negocio.Dtos.Livros
 
         public InconsistenciaDeValidacaoTipado<Livro> RetornarInconsistencia() => _Inconsistencias;
 
-        public Livro ObtenhaEntidade() => _Conversor.ConvertaPara(this);
+        public Livro ObtenhaEntidade() 
+        {
+            CarregueListaDeAutoresPeloDto(); 
+            return _Conversor.ConvertaPara(this);
+        } 
+
+        private void CarregueListaDeAutoresPeloDto() 
+        {
+            if (AutoresDto.PossuiValor() && AutoresDto.PossuiLinhas())
+            {
+
+                foreach (var item in AutoresDto)
+                {
+                    Autores.Add(
+                        new LivroAutores()
+                        {
+                            Codigo = Guid.NewGuid(),
+                            AutorId = item.AutorId,
+                        }
+                        );
+                }
+            }
+        }
 
     }
 }

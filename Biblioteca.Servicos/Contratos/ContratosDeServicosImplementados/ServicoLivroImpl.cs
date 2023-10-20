@@ -8,14 +8,10 @@ using Biblioteca.Negocio.Entidades.FichaEmprestimos;
 using Biblioteca.Negocio.Entidades.Livros;
 using Biblioteca.Negocio.Validacoes.FabricaDeValidacoes;
 using Biblioteca.Servicos.Contratos.Servicos;
+using Biblioteca.Servicos.Validacoes.Livros;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Linq.Expressions;
-using System.Text;
-using System.Threading.Tasks;
+
 
 namespace Biblioteca.Servicos.Contratos.ContratosDeServicosImplementados
 {
@@ -82,6 +78,11 @@ namespace Biblioteca.Servicos.Contratos.ContratosDeServicosImplementados
             livroModel.DataAtualizacao = DateTime.Now;
 
             _logger.LogInformation("Serviço 'Serviço de Livro': Início da Validação do Livro");
+
+            var validacoesIniciais = new ServicoLivroValidador().ValideInicial(livroModel);
+            if (!validacoesIniciais.EhValido()) return validacoesIniciais;
+
+
             if (!livro.IsValid()) 
             {
                 _logger.LogInformation("Serviço 'Serviço de Livro': Encontrado inconsistências.");
@@ -93,7 +94,7 @@ namespace Biblioteca.Servicos.Contratos.ContratosDeServicosImplementados
               
                 _logger.LogInformation("Serviço 'Serviço de Livro': Executando o cadsatro.");
                 base.Cadastre(livroModel);
-                var cadastroAtualizado = base._DbSet.AsNoTracking().Where(x => x.Codigo == livro.Codigo).Include(x => x.Autores).Include(x => x.Editora).FirstOrDefault();
+                var cadastroAtualizado = base._DbSet.AsNoTracking().Where(x => x.Codigo == livroModel.Codigo).Include(x => x.Autores).Include(x => x.Editora).FirstOrDefault();
 
                 _logger.LogInformation("Serviço 'Serviço de Livro': Devolvendo o resultado.");
                 return new InconsistenciaDeValidacaoTipado<Livro>() { _RetornoServico = cadastroAtualizado, Mensagem = "Cadastrado com Sucesso" };

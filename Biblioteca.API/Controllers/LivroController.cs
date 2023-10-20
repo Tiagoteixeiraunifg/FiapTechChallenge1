@@ -2,6 +2,7 @@
 using Biblioteca.Negocio.Dtos.Livros;
 using Biblioteca.Negocio.Entidades.Livros;
 using Biblioteca.Servicos.Contratos.Servicos;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Biblioteca.API.Controllers
@@ -11,6 +12,7 @@ namespace Biblioteca.API.Controllers
     public class LivroController : PrincipalControllerTipado<Livro>
     {
         private readonly IServicoLivro _ServicoLivro;
+
         public LivroController(IServicoLivro servicoLivro, ILogger<LivroController> logger)
         {
             _logger = logger;
@@ -18,7 +20,7 @@ namespace Biblioteca.API.Controllers
         }
 
         [HttpPost("Cadastrar")]
-
+        [Authorize]
         public IActionResult Cadastre(LivroDto dto) 
         {
             dto.TipoOperacaoDeDadosEnum = Negocio.Enumeradores.Livros.LivrosTipoOperacaoDeDadosEnum.CADASTRAR;
@@ -27,7 +29,7 @@ namespace Biblioteca.API.Controllers
         }
 
         [HttpPut("Atualizar")]
-
+        [Authorize]
         public IActionResult Atualize(LivroDto dto)
         {
             dto.TipoOperacaoDeDadosEnum = Negocio.Enumeradores.Livros.LivrosTipoOperacaoDeDadosEnum.ALTERAR;
@@ -37,7 +39,7 @@ namespace Biblioteca.API.Controllers
 
         
         [HttpDelete("Deletar/{Id}")]
-
+        [Authorize]
         public IActionResult Delete(int id) 
         {
             var resposta = _ServicoLivro.Deletar(id);
@@ -46,6 +48,7 @@ namespace Biblioteca.API.Controllers
 
         
         [HttpGet("Obtenha/{Id}")]
+        [Authorize]
         public IActionResult ObtenhaLivro(int Id) 
         {
             var resposta = _ServicoLivro.ObtenhaLivro(Id);
@@ -54,6 +57,7 @@ namespace Biblioteca.API.Controllers
         
         
         [HttpGet("ObtenhaTodos")]
+        [Authorize]
         public IActionResult ObtenhaTodosLivros() 
         {
             var resposta = _ServicoLivro.ObtenhaTodosLivros();
