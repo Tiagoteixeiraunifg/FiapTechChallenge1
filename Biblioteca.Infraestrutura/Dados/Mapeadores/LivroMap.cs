@@ -16,7 +16,7 @@ namespace Biblioteca.Infraestrutura.Dados.Mapeadores
         {
             m.ToTable("Livros");
             m.HasKey(u => u.Id);
-            m.Property(u => u.Id).UseIdentityColumn().HasColumnName("Id");
+            m.Property<int>(u => u.Id).UseIdentityColumn().HasColumnName("Id");
             m.Property(u => u.Codigo).HasMaxLength(100);
             m.Property(u => u.Titulo).HasMaxLength(100);
             m.Property(u => u.SubTitulo).HasMaxLength(100);
@@ -24,10 +24,11 @@ namespace Biblioteca.Infraestrutura.Dados.Mapeadores
             m.Property(u => u.QuantidadeEstoque).HasPrecision(14,2);
             m.Property(u => u.DataCriacao).HasColumnName("DataCriacao");
             m.Property(u => u.DataAtualizacao).HasColumnName("DataAtualizacao");
+
             
-            m.HasOne(u => u.Editora).WithOne().HasForeignKey<Livro>(a => a.EditoraId).IsRequired(false);
+            m.HasOne(u => u.Editora).WithOne().HasForeignKey<Livro>(x => x.EditoraId);
             
-            m.HasMany(u => u.Autores).WithOne(x => x.Livro).HasForeignKey(x => x.LivroId).IsRequired(false);
+            m.HasMany(u => u.Autores).WithOne(x => x.Livro).OnDelete(DeleteBehavior.Cascade);
 
         }
     }

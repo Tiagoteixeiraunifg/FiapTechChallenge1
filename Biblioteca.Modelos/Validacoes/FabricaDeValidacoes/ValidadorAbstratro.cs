@@ -15,7 +15,9 @@ namespace Biblioteca.Negocio.Validacoes.FabricaDeValidacoes
         private IList<InconsistenciaDeValidacao> _inconsistencias = new List<InconsistenciaDeValidacao>();
 
         private InconsistenciaDeValidacao _inconsistencia = new InconsistenciaDeValidacao();
-        
+
+        private InconsistenciaDeValidacaoTipado<T> _inconsistenciaTipada = new InconsistenciaDeValidacaoTipado<T>();
+
         private ValidationResult resultado = new ValidationResult();
 
 
@@ -58,9 +60,6 @@ namespace Biblioteca.Negocio.Validacoes.FabricaDeValidacoes
         }
 
 
-
-
-
         public IList<InconsistenciaDeValidacao> ValideLista(T t)
         {
             resultado = base.Validate(t);
@@ -91,6 +90,29 @@ namespace Biblioteca.Negocio.Validacoes.FabricaDeValidacoes
         public bool ExisteInconsistencias()
         {
             return !resultado.IsValid;
+        }
+
+        public InconsistenciaDeValidacaoTipado<T> ValideTipado(T t)
+        {
+            resultado = base.Validate(t);
+
+            if (resultado.IsValid) { return new InconsistenciaDeValidacaoTipado<T>(); }
+
+            _inconsistenciaTipada.listaDeInconsistencias = new List<InconsistenciaDeValidacao>();
+
+            foreach (ValidationFailure item in resultado.Errors)
+            {
+                _inconsistencia.listaDeInconsistencias.Add(
+                    new InconsistenciaDeValidacao
+                    {
+                        TipoValidacao = item.Severity == Severity.Error ? TipoValidacaoEnum.IMPEDITIVA : TipoValidacaoEnum.AVISO,
+                        PropriedadeValidada = ObtenhaValorDaPropriedade(item.FormattedMessagePlaceholderValues),
+                        Mensagem = item.ErrorMessage,
+
+                    });
+            }
+
+            return _inconsistenciaTipada;
         }
     }
 }

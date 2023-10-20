@@ -1,5 +1,6 @@
 ﻿using Biblioteca.Negocio.Dtos.Usuarios;
 using Biblioteca.Negocio.Entidades.Usuarios;
+using Biblioteca.Negocio.Enumeradores.Validacoes;
 using Biblioteca.Negocio.Validacoes.FabricaDeValidacoes;
 using FluentValidation;
 using System;
@@ -39,13 +40,13 @@ namespace Biblioteca.Negocio.Validacoes.Usuarios
             RuleFor(x => x.Nome)
                 .NotEmpty()
                 .NotNull()
-                .WithSeverity(Severity.Error)
+                .TipoValidacao(TipoValidacaoEnum.IMPEDITIVA)
                 .WithMessage("Necessário Informar o Nome do Usuário");
 
             RuleFor(x => x.Senha)
                 .NotEmpty()
                 .NotNull()
-                .WithSeverity(Severity.Error)
+                .TipoValidacao(TipoValidacaoEnum.IMPEDITIVA)
                 .WithMessage("Necessaário Informar a Senha do Usuário");
 
         }
@@ -55,7 +56,7 @@ namespace Biblioteca.Negocio.Validacoes.Usuarios
             RuleFor(x => x.Email)
                 .NotEmpty()
                 .NotNull()
-                .WithSeverity(Severity.Error)
+                .TipoValidacao(TipoValidacaoEnum.IMPEDITIVA)
                 .WithMessage("Email do Usuário Não Informado.");
         }
 

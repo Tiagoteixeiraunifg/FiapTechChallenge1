@@ -11,7 +11,7 @@ using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using System.Reflection;
 using System.Text;
-
+using System.Text.Json.Serialization;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -21,13 +21,14 @@ var secretKey = Encoding.ASCII.GetBytes(configuracao.GetValue<string>("Secret"))
 
 // Add services to the container.
 builder.Services.AddControllers();
-
+builder.Services.AddControllers().AddJsonOptions(x =>
+   x.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.Preserve);
 
 //Adicionando Contexto de Conexão e Banco de Dados
 builder.Services.AdicioneInfraestrutura(configuracao);
 builder.Services.AddScoped<IServicoUsuario, ServicoUsuarioImpl>();
 builder.Services.AddScoped<IServicoAluno, ServicoAlunoImpl>();
-
+builder.Services.AddScoped<IServicoLivro, ServicoLivroImpl>();
 builder.Services.AddScoped<IServicoAutor, ServicoAutor>();
 builder.Services.AddScoped<IServicoEditora, ServicoEditora>();
 

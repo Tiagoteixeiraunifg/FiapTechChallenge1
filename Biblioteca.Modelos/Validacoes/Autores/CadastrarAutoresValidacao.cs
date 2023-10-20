@@ -1,5 +1,6 @@
 ﻿using Biblioteca.Negocio.Dtos.Autores;
 using Biblioteca.Negocio.Dtos.Editoras;
+using Biblioteca.Negocio.Enumeradores.Validacoes;
 using Biblioteca.Negocio.Validacoes.FabricaDeValidacoes;
 using FluentValidation;
 using System;
@@ -22,11 +23,13 @@ namespace Biblioteca.Negocio.Validacoes.Autores
         {
             RuleFor(x => x.Nome)
                 .NotEmpty()
+                .TipoValidacao(TipoValidacaoEnum.IMPEDITIVA)
                 .WithMessage("Deve ser informado um Nome ");
 
 
             RuleFor(x => x.Telefone)
                 .NotEmpty()
+                .TipoValidacao(TipoValidacaoEnum.IMPEDITIVA)
                 .WithMessage("Deve ser informado um telefone ");
         }
     }

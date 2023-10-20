@@ -1,11 +1,8 @@
 ﻿using Biblioteca.Negocio.Entidades.Alunos;
+using Biblioteca.Negocio.Enumeradores.Validacoes;
 using Biblioteca.Negocio.Validacoes.FabricaDeValidacoes;
 using FluentValidation;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
 
 namespace Biblioteca.Negocio.Validacoes.Alunos
 {
@@ -37,19 +34,19 @@ namespace Biblioteca.Negocio.Validacoes.Alunos
             RuleFor(x => x.Nome)
                 .NotNull()
                 .NotEmpty()
-                .WithSeverity(Severity.Error)
+                .TipoValidacao(TipoValidacaoEnum.IMPEDITIVA)
                 .WithMessage("Deve ser informado um Nome");
 
             RuleFor(x => x.Telefone)
                 .NotNull()
                 .NotEmpty()
-                .WithSeverity(Severity.Error)
+                .TipoValidacao(TipoValidacaoEnum.IMPEDITIVA)
                 .WithMessage("Deve ser informado um Telefone");
 
             RuleFor(x => x.Email)
                 .NotNull()
                 .NotEmpty()
-                .WithSeverity(Severity.Error)
+                .TipoValidacao(TipoValidacaoEnum.IMPEDITIVA)
                 .WithMessage("Deve ser informado um email");
         }
 

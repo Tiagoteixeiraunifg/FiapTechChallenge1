@@ -4,6 +4,7 @@ using Biblioteca.Infraestrutura.Dados.Contextos;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Biblioteca.Infraestrutura.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20231020003809_Migration3")]
+    partial class Migration3
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -270,7 +273,7 @@ namespace Biblioteca.Infraestrutura.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int>("AutorId")
+                    b.Property<int?>("AutorId")
                         .HasColumnType("int");
 
                     b.Property<Guid>("Codigo")
@@ -363,7 +366,7 @@ namespace Biblioteca.Infraestrutura.Migrations
                     b.HasOne("Biblioteca.Negocio.Entidades.Editoras.Editora", "Editora")
                         .WithOne()
                         .HasForeignKey("Biblioteca.Negocio.Entidades.Livros.Livro", "EditoraId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.Navigation("Editora");
@@ -373,9 +376,7 @@ namespace Biblioteca.Infraestrutura.Migrations
                 {
                     b.HasOne("Biblioteca.Negocio.Entidades.Autores.Autor", "Autor")
                         .WithMany()
-                        .HasForeignKey("AutorId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("AutorId");
 
                     b.HasOne("Biblioteca.Negocio.Entidades.Livros.Livro", "Livro")
                         .WithMany("Autores")

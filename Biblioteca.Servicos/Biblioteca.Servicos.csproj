@@ -19,4 +19,8 @@
     <ProjectReference Include="..\Biblioteca.Modelos\Biblioteca.Negocio.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Validacoes\EmprestimoAlunos\" />
+  </ItemGroup>
+
 </Project>

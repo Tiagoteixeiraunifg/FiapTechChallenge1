@@ -25,5 +25,8 @@ namespace Biblioteca.Negocio.Validacoes.FabricaDeValidacoes
 
         IList<InconsistenciaDeValidacao> ValideLista(T t);
 
+
+        InconsistenciaDeValidacaoTipado<T> ValideTipado(T t);
+
     }
 }

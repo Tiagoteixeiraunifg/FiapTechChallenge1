@@ -15,7 +15,7 @@ namespace Biblioteca.Infraestrutura.Dados.Mapeadores
         {
             m.ToTable("Editoras");
             m.HasKey(u => u.Id);
-            m.Property(u => u.Id).UseIdentityColumn().HasColumnName("Id");
+            m.Property<int>(u => u.Id).UseIdentityColumn().HasColumnName("Id");
             m.Property(u => u.Codigo).HasMaxLength(100);
             m.Property(u => u.Nome).HasMaxLength(100);
             m.Property(u => u.Cnpj).HasMaxLength(25);

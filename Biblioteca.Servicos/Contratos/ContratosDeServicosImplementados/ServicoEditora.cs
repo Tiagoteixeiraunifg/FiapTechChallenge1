@@ -27,6 +27,8 @@ namespace Biblioteca.Servicos.Contratos.ContratosDeServicosImplementados
 
             editora = dto.ObtenhaEntidade(editora);
 
+            editora.DataAtualizacao = DateTime.Now;
+
             _editoraRepositorio.Altere(editora);
 
             return new InconsistenciaDeValidacao { Mensagem = "Sucesso" };
@@ -36,7 +38,12 @@ namespace Biblioteca.Servicos.Contratos.ContratosDeServicosImplementados
         {
             if (!dto.IsValid()) return dto.RetornarInconsistencia();
 
-            _editoraRepositorio.Cadastre(dto.ObtenhaEntidade());
+            var entidade = dto.ObtenhaEntidade();
+            entidade.Codigo = Guid.NewGuid();
+            entidade.DataCriacao = DateTime.Now;
+            entidade.DataAtualizacao = DateTime.Now;
+
+            _editoraRepositorio.Cadastre(entidade);
 
             return new InconsistenciaDeValidacao { Mensagem = "Sucesso" };
         }
