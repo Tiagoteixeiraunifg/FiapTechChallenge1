@@ -1,4 +1,5 @@
 ﻿using Biblioteca.Negocio.Entidades.Livros;
+using NPOI.HPSF;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,6 +19,8 @@ namespace Biblioteca.Negocio.Entidades.FichaEmprestimos
         public int LivroId { get; set; }
 
         public Livro Livro { get; set; }
+
+        public decimal Quantidade { get; set; }
 
     }
 }

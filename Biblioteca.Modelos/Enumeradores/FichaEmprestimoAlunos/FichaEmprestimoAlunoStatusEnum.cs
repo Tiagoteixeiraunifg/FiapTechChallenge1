@@ -9,6 +9,7 @@ namespace Biblioteca.Negocio.Enumeradores.FichaEmprestimoAlunos
     public enum FichaEmprestimoAlunoStatusEnum
     {
         NORMAL = 1,
-        ATRASADO = 2
+        ATRASADO = 2,
+        FINALIZADO = 3
     }
 }

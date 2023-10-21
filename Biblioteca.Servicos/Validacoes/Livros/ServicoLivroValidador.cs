@@ -27,8 +27,11 @@ namespace Biblioteca.Servicos.Validacoes.Livros
             AssineRegrasItensObrigatorios();
             
             return base.ValideTipado(dto);
-        } 
-      
+        }
+
+
+
+
 
         private void AssineRegrasItensObrigatorios() 
         {

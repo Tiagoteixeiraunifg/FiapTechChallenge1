@@ -252,7 +252,6 @@ namespace Biblioteca.Infraestrutura.Ferramentas.Extensoes
             return valor.ToString();
         }
 
-
         public static string DuasCasasSemSifra(this decimal valor)
         {
             return string.Format("{0:C2}", valor).Replace("R$", "");
