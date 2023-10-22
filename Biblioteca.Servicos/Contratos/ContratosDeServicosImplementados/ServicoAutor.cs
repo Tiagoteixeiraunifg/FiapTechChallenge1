@@ -53,7 +53,7 @@ namespace Biblioteca.Servicos.Contratos.ContratosDeServicosImplementados
 
             var livrosAutores = _livroAutoresRepositorio.ConsultarLivroAutoresPorIdAutor(id);
 
-            if(livrosAutores.PossuiValor()) new InconsistenciaDeValidacao { Mensagem = $"Existem livros relacionados a este autor, ele não pode ser deletado" };
+            if(livrosAutores.PossuiValor()) return new InconsistenciaDeValidacao { Mensagem = $"Existem livros relacionados a este autor, ele não pode ser deletado" };
 
             _autoresRepositorio.Delete(autor.Id);
 
