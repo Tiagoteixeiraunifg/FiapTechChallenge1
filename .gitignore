@@ -109,3 +109,5 @@ Release/
 /Biblioteca.UIWeb.MVC/obj/Debug/net7.0/Biblioteca.UIWeb.MVC.GeneratedMSBuildEditorConfig.editorconfig
 /Biblioteca.UIWeb.MVC/obj/project.assets.json
 /Biblioteca.UIWeb.MVC/obj/project.nuget.cache
+/Biblioteca.API/.vs/Biblioteca.API/DesignTimeBuild/.dtbcache.v2
+/Biblioteca.API/.vs/Biblioteca.API/v17/.suo

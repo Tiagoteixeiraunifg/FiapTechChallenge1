@@ -47,6 +47,8 @@ namespace Biblioteca.Infraestrutura.Dados.Repositorios.Generico
                 var resp = _DbSet.FirstOrDefault(x => x.Id == Id);
                 _DbSet.Remove(resp);
                 _contexto.SaveChanges();
+                Dispose();
+
                 return true;
             }
             catch (Exception)
@@ -62,10 +64,10 @@ namespace Biblioteca.Infraestrutura.Dados.Repositorios.Generico
             return _DbSet;
         }
 
+        public void Dispose() {
 
-        public void Dispose()
-        {
-            
+            _contexto.Dispose();
+            GC.SuppressFinalize(this);
         }
 
         public T ObtenhaPorId(int Id)
