@@ -1,6 +1,8 @@
 ﻿using Biblioteca.Infraestrutura.Dados.Contextos;
 using Biblioteca.Infraestrutura.Dados.Repositorios.Editoras.Interface;
 using Biblioteca.Infraestrutura.Dados.Repositorios.Generico;
+using Biblioteca.Infraestrutura.Dados.Repositorios.Livros.Interfaces;
+using Biblioteca.Infraestrutura.Ferramentas.Extensoes;
 using Biblioteca.Negocio.Dtos.Editoras;
 using Biblioteca.Negocio.Entidades.Editoras;
 using Biblioteca.Negocio.Validacoes.FabricaDeValidacoes;
@@ -11,10 +13,11 @@ namespace Biblioteca.Servicos.Contratos.ContratosDeServicosImplementados
     public class ServicoEditora : EFRepositorioGenerico<Editora>, IServicoEditora
     {
         private readonly IEditoraRepositorio _editoraRepositorio;
-
-        public ServicoEditora(ApplicationDbContext contexto, IEditoraRepositorio editoraRepositorio) : base(contexto)
+        private readonly ILivroRepositorio _livroRepositorio;
+        public ServicoEditora(ApplicationDbContext contexto, IEditoraRepositorio editoraRepositorio, ILivroRepositorio livroRepositorio) : base(contexto)
         {
             _editoraRepositorio = editoraRepositorio;
+            _livroRepositorio = livroRepositorio;
         }
 
         public InconsistenciaDeValidacao Atualizar(AlterarEditoraDto dto)
@@ -23,7 +26,7 @@ namespace Biblioteca.Servicos.Contratos.ContratosDeServicosImplementados
 
             var editora = ObterPorId(dto.Id);
 
-            if (editora is null) return new InconsistenciaDeValidacao { Mensagem = "Não registrado" };
+            if (editora.PossuiValor()) return new InconsistenciaDeValidacao { Mensagem = "Não registrado" };
 
             editora = dto.ObtenhaEntidade(editora);
 
@@ -52,12 +55,18 @@ namespace Biblioteca.Servicos.Contratos.ContratosDeServicosImplementados
         {
             var editora = ObterPorId(id);
 
-            if (editora is null) return new InconsistenciaDeValidacao { Mensagem = "Não registrado" };
+            if (!editora.PossuiValor()) return new InconsistenciaDeValidacao { Mensagem = "Não registrado" };
+
+            var livro = _livroRepositorio.ConsultarLivroPorIdEditar(id);
+
+            if(livro.PossuiValor()) return new InconsistenciaDeValidacao { Mensagem = $"O livro: {livro.Titulo} está relacionado a está editora, ela não pode ser deletada" };
 
             _editoraRepositorio.Delete(editora.Id);
 
             return new InconsistenciaDeValidacao { Mensagem = "Sucesso" };
         }
+
+ 
 
         public Editora ObterPorId(int Id)
         {

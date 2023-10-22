@@ -111,6 +111,11 @@ namespace Biblioteca.Servicos.Contratos.ContratosDeServicosImplementados
         {
             CadastrarLivros(livros);
         }
+                
+        public Livro ConsultarLivroPorIdEditar(int idEditora)
+        {
+            throw new NotImplementedException();
+        }
 
         public InconsistenciaDeValidacaoTipado<Livro> Deletar(int Id)
         {

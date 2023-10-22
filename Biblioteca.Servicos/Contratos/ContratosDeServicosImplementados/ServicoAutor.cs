@@ -1,8 +1,11 @@
 ﻿using Biblioteca.Infraestrutura.Dados.Contextos;
 using Biblioteca.Infraestrutura.Dados.Repositorios.Autores.Interface;
 using Biblioteca.Infraestrutura.Dados.Repositorios.Generico;
+using Biblioteca.Infraestrutura.Dados.Repositorios.LivrosAutores.Interfaces;
+using Biblioteca.Infraestrutura.Ferramentas.Extensoes;
 using Biblioteca.Negocio.Dtos.Autores;
 using Biblioteca.Negocio.Entidades.Autores;
+using Biblioteca.Negocio.Entidades.Livros;
 using Biblioteca.Negocio.Validacoes.FabricaDeValidacoes;
 using Biblioteca.Servicos.Contratos.Servicos;
 
@@ -11,10 +14,11 @@ namespace Biblioteca.Servicos.Contratos.ContratosDeServicosImplementados
     public class ServicoAutor : EFRepositorioGenerico<Autor>, IServicoAutor
     {
         private readonly IAutorRepositorio _autoresRepositorio;
-
-        public ServicoAutor(ApplicationDbContext contexto, IAutorRepositorio autoresRepositorio) : base(contexto)
+        private readonly ILivroAutoresRepositorio _livroAutoresRepositorio;
+        public ServicoAutor(ApplicationDbContext contexto, IAutorRepositorio autoresRepositorio, ILivroAutoresRepositorio livroAutoresRepositorio) : base(contexto)
         {
             _autoresRepositorio = autoresRepositorio;
+            _livroAutoresRepositorio = livroAutoresRepositorio;
         }
 
         public InconsistenciaDeValidacao Atualizar(AlterarAutorDto dto)
@@ -23,7 +27,7 @@ namespace Biblioteca.Servicos.Contratos.ContratosDeServicosImplementados
 
             var autor = ObterPorId(dto.Id);
 
-            if (autor is null) return new InconsistenciaDeValidacao { Mensagem = "Não registrado" };
+            if (!autor.PossuiValor()) return new InconsistenciaDeValidacao { Mensagem = "Não registrado" };
 
             autor = dto.ObtenhaEntidade(autor);
 
@@ -45,9 +49,12 @@ namespace Biblioteca.Servicos.Contratos.ContratosDeServicosImplementados
         {
             var autor = ObterPorId(id);
 
-            if (autor is null) return new InconsistenciaDeValidacao { Mensagem = "Não registrado" };
+            if (!autor.PossuiValor()) return new InconsistenciaDeValidacao { Mensagem = "Não registrado" };
 
-            //Verificar antes de deletar o autor se ele não está associado a algum livro, por que conflito com relacionamento do banco.
+            var livrosAutores = _livroAutoresRepositorio.ConsultarLivroAutoresPorIdAutor(id);
+
+            if(livrosAutores.PossuiValor()) return new InconsistenciaDeValidacao { Mensagem = $"Existem livros relacionados a este autor, ele não pode ser deletado" };
+
             _autoresRepositorio.Delete(autor.Id);
 
             return new InconsistenciaDeValidacao { Mensagem = "Sucesso" };

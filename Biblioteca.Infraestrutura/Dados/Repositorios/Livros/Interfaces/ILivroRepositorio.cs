@@ -6,6 +6,7 @@ namespace Biblioteca.Infraestrutura.Dados.Repositorios.Livros.Interfaces
 {
     public interface ILivroRepositorio : IRepositorioGenerico<Livro>
     {
+        Livro ConsultarLivroPorIdEditar(int idEditora);
         void CadastrarLivros(List<Livro> livros);
     }
 }

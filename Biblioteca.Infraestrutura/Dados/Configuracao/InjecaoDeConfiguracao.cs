@@ -7,6 +7,8 @@ using Biblioteca.Infraestrutura.Dados.Repositorios.Editoras.Implementacoes;
 using Biblioteca.Infraestrutura.Dados.Repositorios.Editoras.Interface;
 using Biblioteca.Infraestrutura.Dados.Repositorios.Livros.Implementacoes;
 using Biblioteca.Infraestrutura.Dados.Repositorios.Livros.Interfaces;
+using Biblioteca.Infraestrutura.Dados.Repositorios.LivrosAutores.Implementacoes;
+using Biblioteca.Infraestrutura.Dados.Repositorios.LivrosAutores.Interfaces;
 using Biblioteca.Infraestrutura.Dados.Repositorios.Usuarios.Implementacoes;
 using Biblioteca.Infraestrutura.Dados.Repositorios.Usuarios.Interfaces;
 using Biblioteca.Infraestrutura.Dados.ServicoDados.Implementacoes;
@@ -37,6 +39,8 @@ namespace Biblioteca.Infraestrutura.Dados.Configuracao
 
 
             services.AddScoped<ILivroRepositorio, LivroRepositorio>();
+
+            services.AddScoped<ILivroAutoresRepositorio, LivroAutoresRepositorio>();
 
             services.AddTransient<IDataService, DataService>();
 
