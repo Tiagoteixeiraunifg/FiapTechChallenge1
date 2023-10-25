@@ -6,10 +6,10 @@ using System.Threading.Tasks;
 
 namespace Biblioteca.Negocio.Enumeradores.FichaEmprestimoAlunos
 {
-    public enum FichaEmprestimoAlunoStatusEnum
+    public enum FichaEmprestimoAlunoItensStatusEnum
     {
-        NORMAL = 1,
-        ATRASADO = 2,
-        ENTREGUE = 3
+        ENTREGUE = 1,
+        A_ENTREGAR = 2
+        
     }
 }

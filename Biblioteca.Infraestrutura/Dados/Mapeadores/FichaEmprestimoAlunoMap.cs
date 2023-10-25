@@ -23,7 +23,7 @@ namespace Biblioteca.Infraestrutura.Dados.Mapeadores
             m.Property(u => u.StatusEmprestimo).HasColumnType("INT");
             m.Property(u => u.Observacoes).HasMaxLength(4000);
             m.Property(u => u.DataEmprestimo).HasColumnName("DataEmprestimo");
-            m.Property(u => u.DataVencimentoEmprestimo).HasColumnName("DataVencimentoEmprestimo");
+            m.Property(u => u.DataEntregaEmprestimo).HasColumnName("DataVencimentoEmprestimo");
             m.Property(u => u.DataCriacao).HasColumnName("DataCriacao");
             m.Property(u => u.DataAtualizacao).HasColumnName("DataAtualizacao");
 

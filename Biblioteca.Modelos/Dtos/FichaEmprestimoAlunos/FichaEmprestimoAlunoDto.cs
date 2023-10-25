@@ -121,7 +121,10 @@ namespace Biblioteca.Negocio.Dtos.FichaEmprestimoAlunos
                         new FichaEmprestimoItem() 
                         {
                             Codigo = Guid.NewGuid(),
-                            LivroId = item.LivroId
+                            LivroId = item.LivroId,
+                            StatusItem = item.StatusItem,
+                            DataStatusItem = DateTime.Now,
+                            Quantidade = item.Quantidade,
                         }
                         
                         );

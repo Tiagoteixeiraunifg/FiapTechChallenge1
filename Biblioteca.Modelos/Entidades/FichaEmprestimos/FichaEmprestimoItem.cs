@@ -1,4 +1,5 @@
 ﻿using Biblioteca.Negocio.Entidades.Livros;
+using Biblioteca.Negocio.Enumeradores.FichaEmprestimoAlunos;
 using NPOI.HPSF;
 using System;
 using System.Collections.Generic;
@@ -21,6 +22,10 @@ namespace Biblioteca.Negocio.Entidades.FichaEmprestimos
         public Livro Livro { get; set; }
 
         public decimal Quantidade { get; set; }
+
+        public FichaEmprestimoAlunoItensStatusEnum StatusItem {  get; set; }
+
+        public DateTime DataStatusItem { get; set; }
 
     }
 }

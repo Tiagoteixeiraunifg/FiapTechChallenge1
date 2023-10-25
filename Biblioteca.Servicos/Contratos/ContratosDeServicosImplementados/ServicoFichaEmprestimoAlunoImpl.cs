@@ -1,6 +1,9 @@
 ﻿using Biblioteca.Infraestrutura.Dados.Contextos;
 using Biblioteca.Infraestrutura.Dados.Repositorios.Generico;
+using Biblioteca.Infraestrutura.Dados.Repositorios.Generico.Interfaces;
+using Biblioteca.Infraestrutura.Ferramentas.Extensoes;
 using Biblioteca.Negocio.Dtos.FichaEmprestimoAlunos;
+using Biblioteca.Negocio.Entidades.Alunos;
 using Biblioteca.Negocio.Entidades.FichaEmprestimos;
 using Biblioteca.Negocio.Entidades.Livros;
 using Biblioteca.Negocio.Enumeradores.FichaEmprestimoAlunos;
@@ -9,6 +12,7 @@ using Biblioteca.Servicos.Contratos.Servicos;
 using Biblioteca.Servicos.Validacoes.EmprestimoAlunos;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
+using NPOI.SS.Formula.Functions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,6 +21,9 @@ using System.Threading.Tasks;
 
 namespace Biblioteca.Servicos.Contratos.ContratosDeServicosImplementados
 {
+    /// <summary>
+    /// Prover os serviços para emprestimos de livros da biblioteca.
+    /// </summary>
     public class ServicoFichaEmprestimoAlunoImpl : EFRepositorioGenerico<FichaEmprestimoAluno>, IServicoFichaEmprestimoAluno
     {
 
@@ -29,6 +36,11 @@ namespace Biblioteca.Servicos.Contratos.ContratosDeServicosImplementados
             this._contexto = contexto;
         }
 
+        /// <summary>
+        /// Cadastro de Nova Ficha de Emprestimo
+        /// </summary>
+        /// <param name="dados">Os Dados para Validação e Cadastro da Ficha</param>
+        /// <returns>InconsistenciaDeValidacaoTipado<FichaEmprestimoAluno></returns>
         public InconsistenciaDeValidacaoTipado<FichaEmprestimoAluno> CadastreFicha(FichaEmprestimoAlunoDto dados)
         {
             var fichaNova = new FichaEmprestimoAluno();
@@ -69,46 +81,275 @@ namespace Biblioteca.Servicos.Contratos.ContratosDeServicosImplementados
             catch (Exception ex)
             {
                 _logger.LogError("Serviço 'Serviço de Ficha Emprestimo': Erro nos dados para cadastro.", ex);
-                return new InconsistenciaDeValidacaoTipado<FichaEmprestimoAluno>() { _RetornoServico = ex, Mensagem = "Erro no cadastro do Livro" };
+                return new InconsistenciaDeValidacaoTipado<FichaEmprestimoAluno>() { _RetornoServico = ex, Mensagem = "Erro no cadastro da Ficha" };
             }
 
         }
 
-
-
-        public InconsistenciaDeValidacaoTipado<FichaEmprestimoAluno> ExcluaFicha(int FihaId)
+        /// <summary>
+        /// Exclui a Ficha de Emprestimo
+        /// </summary>
+        /// <param name="FichaId">Os Dados para Validação e Exclusão da Ficha</param>
+        /// <returns>InconsistenciaDeValidacaoTipado<FichaEmprestimoAluno></returns>
+        public InconsistenciaDeValidacaoTipado<FichaEmprestimoAluno> ExcluaFicha(int FichaId)
         {
-            throw new NotImplementedException();
+
+            InconsistenciaDeValidacaoTipado<FichaEmprestimoAluno> retorno = null;
+
+            try
+            {
+                var ficha = base.ObtenhaPorId(FichaId);
+
+                if (!ficha.PossuiValor())
+                {
+                    _logger.LogInformation("Serviço 'Serviço de Ficha Emprestimo': Ficha não encontrada");
+                    retorno = new InconsistenciaDeValidacaoTipado<FichaEmprestimoAluno>() { _RetornoServico = null, Mensagem = "Ficha não encontrada" };
+                    return retorno;
+                }
+
+                _logger.LogInformation("Serviço 'Serviço de Ficha Emprestimo': Executando validação para exclusão");
+                var itensTodosAhEntregar = ficha.FichaEmprestimoItens.Any() && ficha.FichaEmprestimoItens.Any(x => x.StatusItem == FichaEmprestimoAlunoItensStatusEnum.A_ENTREGAR);
+                var ficaSemItens = !ficha.FichaEmprestimoItens.Any();
+                var fichaAberta = ficha.StatusEmprestimo == FichaEmprestimoAlunoStatusEnum.NORMAL;
+
+                if (fichaAberta && itensTodosAhEntregar || ficaSemItens)
+                {
+                    _logger.LogInformation("Serviço 'Serviço de Ficha Emprestimo': Iniciando a exclusão");
+                    base.Delete(FichaId);
+                    _logger.LogInformation("Serviço 'Serviço de Ficha Emprestimo': Ficha removida.");
+                    retorno = new InconsistenciaDeValidacaoTipado<FichaEmprestimoAluno>() { Mensagem = $"Livro de código {FichaId.ToString("0000000")} foi deletado com sucesso" };
+                }
+
+                return retorno;
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError("Serviço 'Serviço de Ficha Emprestimo': Erro nos dados para cadastro.", ex);
+                return new InconsistenciaDeValidacaoTipado<FichaEmprestimoAluno>() { _RetornoServico = ex, Mensagem = "Erro na exclusão da Ficha" };
+            }
+            
         }
 
+        /// <summary>
+        /// Executa a Entrega do Livro Individual da Ficha
+        /// </summary>
+        /// <param name="FichaId">Identificação da Ficha</param>
+        /// <param name="LivroId">Identificação do Livro</param>
+        /// <returns>InconsistenciaDeValidacaoTipado</returns>
+        public InconsistenciaDeValidacaoTipado<FichaEmprestimoAluno> ExecuteEntregaDeLivro(int FichaId, int LivroId)
+        {
+            try
+            {
+                if (!FichaId.PossuiValor() || !LivroId.PossuiValor()) throw new InvalidOperationException("Não foi informado os Parametros");
+
+                using (IRepositorioGenerico<FichaEmprestimoItem> servico = new EFRepositorioGenerico<FichaEmprestimoItem>(_contexto))
+                {
+                    var livro = servico.ObtenhaDbSet().AsNoTracking().Where(x => x.LivroId == LivroId && x.FichaEmprestimoAlunoId == FichaId).FirstOrDefault();
+                    
+                    if (!livro.PossuiValor()) throw new Exception("Objeto não encontrado");
+
+                    livro.DataStatusItem = DateTime.Now;
+                    livro.StatusItem = FichaEmprestimoAlunoItensStatusEnum.ENTREGUE;
+
+                    servico.Altere(livro);
+
+                    _logger.LogInformation("Serviço 'Serviço de Ficha Emprestimo':Livro entregue.");
+                    return new InconsistenciaDeValidacaoTipado<FichaEmprestimoAluno>() { _RetornoServico = livro, Mensagem = $"Livro de código {livro.LivroId.ToString("0000000")} foi entregue com sucesso" };
+                }
+
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError("Serviço 'Serviço de Ficha Emprestimo': Erro nos dados para Finalização da Ficha.", ex);
+                return new InconsistenciaDeValidacaoTipado<FichaEmprestimoAluno>() { _RetornoServico = ex, Mensagem = "Erro na entrega do livro" };
+            }
+  
+        }
+
+        /// <summary>
+        /// Finaliza a Ficha de Emprestimo do Aluno
+        /// </summary>
+        /// <param name="dados">Os Dados Para Finalização da Ficha De Emprestimo</param>
+        /// <returns>InconsistenciaDeValidacaoTipado<FichaEmprestimoAluno></returns>
         public InconsistenciaDeValidacaoTipado<FichaEmprestimoAluno> FinalizeFicha(FichaEmprestimoAlunoDto dados)
         {
-            throw new NotImplementedException();
+            _logger.LogInformation("Serviço 'Serviço de Ficha Emprestimo': Inicio da Finalização da Ficha");
+            var fichaNova = new FichaEmprestimoAluno();
+            try
+            {
+                fichaNova = dados.ObtenhaEntidade();
+                fichaNova.StatusEmprestimo = FichaEmprestimoAlunoStatusEnum.ENTREGUE;
+                fichaNova.DataEntregaEmprestimo = DateTime.Now;
+                fichaNova.DataAtualizacao = DateTime.Now;
+
+                _logger.LogInformation("Serviço 'Serviço de Ficha Emprestimo': Validandação da Finalização da Ficha");
+                var inconsistencias = new ServicoValidacaoFichaEmprestimoAluno().ValideFinalizacaoFicha(fichaNova);
+                
+                if (!inconsistencias.EhValido()) 
+                {
+                    _logger.LogInformation("Serviço 'Serviço de Ficha Emprestimo': Encontrado Inconsistencias na Finalização da Ficha");
+                    return inconsistencias;
+                }
+
+                _logger.LogInformation("Serviço 'Serviço de Ficha Emprestimo': Inicio da persistência da Finalização da Ficha");
+                base.Altere(fichaNova);
+
+                var fichaFinalizada = _DbSet.AsNoTracking().Where(x => x.Codigo == fichaNova.Codigo).FirstOrDefault();
+                _logger.LogInformation("Serviço 'Serviço de Ficha Emprestimo': Fim da persistência dos dados.");
+                return new InconsistenciaDeValidacaoTipado<FichaEmprestimoAluno>() { _RetornoServico = fichaFinalizada, Mensagem = "Finalizada com Sucesso" };
+
+
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError("Serviço 'Serviço de Ficha Emprestimo': Erro nos dados para Finalização da Ficha.", ex);
+                return new InconsistenciaDeValidacaoTipado<FichaEmprestimoAluno>() { _RetornoServico = ex, Mensagem = "Erro na Finalização da Ficha" };
+            }
+
         }
 
+        /// <summary>
+        /// Obtem a Ficha pelo Código
+        /// </summary>
+        /// <param name="FichaId"></param>
+        /// <returns></returns>
         public FichaEmprestimoAluno ObtenhaFichaPorCodigo(int FichaId)
         {
-            throw new NotImplementedException();
+            _logger.LogInformation("Serviço 'Serviço de Ficha Emprestimo': Inicio da busca da Ficha");
+       
+            if (!FichaId.PossuiValor()) return null;
+
+            try
+            {
+                _logger.LogInformation("Serviço 'Serviço de Ficha Emprestimo': Buscando a Ficha");
+                return base.ObtenhaPorId(FichaId);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError("Serviço 'Serviço de Ficha Emprestimo': Erro na busca dos dados da Ficha.", ex);
+                return null;
+            }
         }
 
+        /// <summary>
+        /// Obtem uma coleção de Fichas pelo código do aluno e limite de registros
+        /// </summary>
+        /// <param name="AlunoId">Identificação do Aluno</param>
+        /// <param name="limiteRegistros">Limite de Registros Retornados</param>
+        /// <returns>Lista de Ficha de Emprestimo</returns>
         public IList<FichaEmprestimoAluno> ObtenhaFichasDoAlunoPorCodigo(int AlunoId, int limiteRegistros)
         {
-            throw new NotImplementedException();
+            _logger.LogInformation("Serviço 'Serviço de Ficha Emprestimo': Inicio da busca das Fichas");
+
+            if (!AlunoId.PossuiValor() || !limiteRegistros.PossuiValor()) return null;
+
+
+            try
+            {
+                _logger.LogInformation("Serviço 'Serviço de Ficha Emprestimo': Buscando as Fichas");
+                return base.ObtenhaDbSet().AsNoTracking().Where(x => x.AlunoId == AlunoId).Take(limiteRegistros).ToList();
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError("Serviço 'Serviço de Ficha Emprestimo': Erro na busca dos dados das Fichas.", ex);
+                return null;
+            }
         }
 
-        public IList<FichaEmprestimoAluno> ObtenhaFichasDoAlunoPorCodigoEhIntervaloEhSituacao(int AlunoId, DateTime DataInicial, DateTime DataFinal, FichaEmprestimoAlunoStatusEnum situacao, int limiteRegistros)
+        /// <summary>
+        /// Obtem as fichas do aluno seguindo os critérios
+        /// </summary>
+        /// <param name="AlunoId">Identificação do Aluno</param>
+        /// <param name="DataInicial">Data Inicial de Cadastro</param>
+        /// <param name="DataFinal">Data Final de Cadastro</param>
+        /// <param name="situacao">Situação da Ficha</param>
+        /// <param name="limiteRegistros">Limite de Registros Retornados</param>
+        /// <returns>Lista de ficha de Alunos</returns>
+        public IList<FichaEmprestimoAluno> ObtenhaFichasDoAlunoPorCodigoEhIntervaloEhSituacao(int AlunoId, 
+                                                                                              DateTime DataInicial, 
+                                                                                              DateTime DataFinal, 
+                                                                                              FichaEmprestimoAlunoStatusEnum situacao, 
+                                                                                              int limiteRegistros)
         {
-            throw new NotImplementedException();
+            _logger.LogInformation("Serviço 'Serviço de Ficha Emprestimo': Inicio da busca das Fichas");
+
+            if (!AlunoId.PossuiValor() || !limiteRegistros.PossuiValor() || !DataInicial.PossuiValor() || !DataFinal.PossuiValor() || !situacao.PossuiValor()) return null;
+
+
+            try
+            {
+                _logger.LogInformation("Serviço 'Serviço de Ficha Emprestimo': Buscando as Fichas");
+                return base.ObtenhaDbSet().AsNoTracking().Where(x => x.AlunoId == AlunoId 
+                                                                    && x.StatusEmprestimo == situacao 
+                                                                    && x.DataCriacao.Date >= DataInicial.Date 
+                                                                    && x.DataCriacao.Date <= DataFinal.Date)
+                                                                        .Take(limiteRegistros).ToList();
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError("Serviço 'Serviço de Ficha Emprestimo': Erro na busca dos dados das Fichas.", ex);
+                return null;
+            }
         }
 
-        public IList<FichaEmprestimoAluno> ObtenhaFichasEmAtrasoDeEntregaPorIntervalo(DateTime DataInicial, DateTime DataFinal, int limiteRegistros)
+        /// <summary>
+        /// Obtem as fichas atrasadas de entrega em 8 dias corridos
+        /// </summary>
+        /// <param name="DataInicial">Data Inicial de Cadastro</param>
+        /// <param name="DataFinal">Data final de cadastro</param>
+        /// <param name="limiteRegistros">LImite de registros retornados</param>
+        /// <returns>Lista de Fichas em Atraso</returns>
+        public IList<FichaEmprestimoAluno> ObtenhaFichasEmAtrasoDeEntregaPorIntervalo(DateTime DataInicial, 
+                                                                                      DateTime DataFinal, 
+                                                                                      int limiteRegistros)
         {
-            throw new NotImplementedException();
+            //considerando que 8 dias seja um atraso na entrega do livro.
+            _logger.LogInformation("Serviço 'Serviço de Ficha Emprestimo': Inicio da busca das Fichas");
+            try
+            {
+                _logger.LogInformation("Serviço 'Serviço de Ficha Emprestimo': Buscando as Fichas");
+                var fichasEncontradas = base.ObtenhaDbSet().AsNoTracking().Where(x => x.DataCriacao.Date >= DataInicial.Date
+                                                                    && x.DataCriacao.Date <= DataFinal.Date)
+                                                                        .Take(limiteRegistros).ToList();
+                
+                var FichasAtrasadasNoIntervalo = new List<FichaEmprestimoAluno>();
+                
+                foreach (var Ficha in fichasEncontradas)
+                {
+                    var atrasada = (Ficha.DataCriacao.Date - DateTime.Now.Date).Days > 8;
+                    FichasAtrasadasNoIntervalo.Add(Ficha);
+                }
+
+                return FichasAtrasadasNoIntervalo;
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError("Serviço 'Serviço de Ficha Emprestimo': Erro na busca dos dados das Fichas.", ex);
+                return null;
+
+            }
+            
         }
 
+        /// <summary>
+        /// Obtem uma coleção total das Fichas de Cadastro
+        /// </summary>
+        /// <returns></returns>
         public IList<FichaEmprestimoAluno> ObtenhaTodasFichas()
         {
-            throw new NotImplementedException();
+            _logger.LogInformation("Serviço 'Serviço de Ficha Emprestimo': Inicio da busca das Fichas");
+            try
+            {
+                _logger.LogInformation("Serviço 'Serviço de Ficha Emprestimo': Buscando as Fichas");
+                return base.ObtenhaDbSet().AsNoTracking().ToList();
+
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError("Serviço 'Serviço de Ficha Emprestimo': Erro na busca dos dados das Fichas.", ex);
+                return null;
+
+            }
         }
     }
 }

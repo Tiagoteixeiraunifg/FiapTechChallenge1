@@ -8,31 +8,52 @@ using Biblioteca.Negocio.Validacoes.FabricaDeValidacoes;
 using Biblioteca.Negocio.Enumeradores.FichaEmprestimoAlunos;
 using FluentValidation;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Biblioteca.Servicos.Validacoes.Livros;
+using Biblioteca.Negocio.Validacoes.FichaEmprestimoAlunos;
 
 namespace Biblioteca.Servicos.Validacoes.EmprestimoAlunos
 {
-    public class ServicoValidacaoFichaEmprestimoAluno : ValidadorAbstratro<FichaEmprestimoAluno>
+    public class ServicoValidacaoFichaEmprestimoAluno : FichaEmprestimoAlunoValidador
     {
+        
         private ApplicationDbContext _Contexto;
+
+        private ApplicationDbContext Contexto 
+        {
+            get 
+            {
+                _Contexto = ApplicationDbContext.Instancia();
+
+                return _Contexto;
+            }
+        }
+
 
         public ServicoValidacaoFichaEmprestimoAluno()
         {
             _Contexto = ApplicationDbContext.Instancia();
+  
         }
-        public InconsistenciaDeValidacaoTipado<FichaEmprestimoAluno> ValideFichaCadastro(FichaEmprestimoAluno dados) 
+
+
+        public InconsistenciaDeValidacaoTipado<FichaEmprestimoAluno> ValideFichaCadastro(FichaEmprestimoAluno dados)
         {
+            AssineRegrasIniciaisCadastro(dados);
             AssineRegraDeQuantidadeDeLivrosDisponiveis(dados);
             AssineRegraDeEmprestimoEmAndamento(dados);
-            
+
             return base.ValideTipado(dados);
         }
 
+        public override InconsistenciaDeValidacaoTipado<FichaEmprestimoAluno> ValideFinalizacaoFicha(FichaEmprestimoAluno dados) 
+        {
+            AssineRegrasIniciaisFinalizacao(dados);
+
+            return base.ValideTipado(dados);
+        } 
+
+
+
+        #region CADASTRO DA FICHA
 
         private void AssineRegraDeQuantidadeDeLivrosDisponiveis(FichaEmprestimoAluno dados)
         {
@@ -54,7 +75,8 @@ namespace Biblioteca.Servicos.Validacoes.EmprestimoAlunos
             }
 
         }
-        private void AssineRegraDeEmprestimoEmAndamento(FichaEmprestimoAluno dados) 
+
+        private void AssineRegraDeEmprestimoEmAndamento(FichaEmprestimoAluno dados)
         {
             RuleFor(x => x)
                 .Must(x => VerifiqueEmprestimoEmAndamentoDoAluno(x.AlunoId))
@@ -62,52 +84,69 @@ namespace Biblioteca.Servicos.Validacoes.EmprestimoAlunos
                 .SobrescrevaPropriedade("EmprestimoEmAndamento")
                 .TipoValidacao(Negocio.Enumeradores.Validacoes.TipoValidacaoEnum.IMPEDITIVA)
                 .WithMessage("Não é possível emprestar enquanto não finalizar os Emprestimos em aberto do Aluno.");
-        } 
-        private bool LivroPossuiQuantidadePositiva(int LivroId) 
+        }
+
+        private bool LivroPossuiQuantidadePositiva(int LivroId)
         {
             bool possui = false;
             decimal quantidadeTotalLivro = 0;
             decimal quantidadeJaEmprestada = 0;
-            
 
 
-            using (IRepositorioGenerico<Livro> repLivro = new EFRepositorioGenerico<Livro>(_Contexto))
+
+            using (IRepositorioGenerico<Livro> repLivro = new EFRepositorioGenerico<Livro>(Contexto))
             {
-                quantidadeTotalLivro = repLivro.ObtenhaDbSet().AsNoTracking().Where(x => x.Id == LivroId).FirstOrDefault().QuantidadeEstoque;
+                var livro = repLivro.ObtenhaDbSet().ToList();
+
+                quantidadeTotalLivro = livro.PossuiValor() && livro.Any(x => x.Id == LivroId) ? livro.Where(x => x.Id == LivroId).First().QuantidadeEstoque : 0; 
             }
 
 
-            using (IRepositorioGenerico<FichaEmprestimoAluno> repEmprestimo = new EFRepositorioGenerico<FichaEmprestimoAluno>(_Contexto))
+            using (IRepositorioGenerico<FichaEmprestimoAluno> repFicha = new EFRepositorioGenerico<FichaEmprestimoAluno>(Contexto))
             {
-                var lista = repEmprestimo.ObtenhaDbSet()
-                    .AsNoTracking()
-                    .Where(x => x.StatusEmprestimo == FichaEmprestimoAlunoStatusEnum.NORMAL && x.FichaEmprestimoItens.Any(x => x.LivroId == LivroId))
-                    .Include(x => x.FichaEmprestimoItens)
-                    .ToList();
-                
-                foreach (var item in lista) 
+                var lista = repFicha.ObtenhaDbSet()
+               .AsNoTracking()
+               .Where(x => x.StatusEmprestimo == FichaEmprestimoAlunoStatusEnum.NORMAL && x.FichaEmprestimoItens.Any(x => x.LivroId == LivroId))
+               .Include(x => x.FichaEmprestimoItens)
+               .ToList();
+
+                if (lista.PossuiValor() && lista.PossuiLinhas())
                 {
-                    quantidadeJaEmprestada += item.FichaEmprestimoItens.Sum(x => x.Quantidade);
+                    foreach (var item in lista)
+                    {
+                        quantidadeJaEmprestada += item.FichaEmprestimoItens.Where(x => x.StatusItem == FichaEmprestimoAlunoItensStatusEnum.A_ENTREGAR).Sum(x => x.Quantidade);
+                    }
                 }
             }
+
+
+           
+            
 
             possui = quantidadeTotalLivro > quantidadeJaEmprestada;
 
             return possui;
         }
 
-        private bool VerifiqueEmprestimoEmAndamentoDoAluno(int AlunoId) 
+        private bool VerifiqueEmprestimoEmAndamentoDoAluno(int AlunoId)
         {
-            using (IRepositorioGenerico<FichaEmprestimoAluno> repEmprestimo = new EFRepositorioGenerico<FichaEmprestimoAluno>(_Contexto))
+
+            using (IRepositorioGenerico<FichaEmprestimoAluno> repFicha = new EFRepositorioGenerico<FichaEmprestimoAluno>(_Contexto))
             {
-                return !repEmprestimo.ObtenhaDbSet()
-                    .AsNoTracking()
-                    .Any(x => x.AlunoId == AlunoId 
-                    && x.StatusEmprestimo == FichaEmprestimoAlunoStatusEnum.NORMAL 
-                    || x.StatusEmprestimo == FichaEmprestimoAlunoStatusEnum.ATRASADO);
+                return !repFicha.ObtenhaDbSet()
+                .AsNoTracking()
+                .Any(x => x.AlunoId == AlunoId
+                && x.StatusEmprestimo == FichaEmprestimoAlunoStatusEnum.NORMAL
+                || x.StatusEmprestimo == FichaEmprestimoAlunoStatusEnum.ATRASADO);
             }
 
+            
         }
+
+
+        #endregion
+
+
 
     }
 }

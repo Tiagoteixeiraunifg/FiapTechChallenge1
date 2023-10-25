@@ -31,6 +31,9 @@ builder.Services.AddScoped<IServicoAluno, ServicoAlunoImpl>();
 builder.Services.AddScoped<IServicoLivro, ServicoLivroImpl>();
 builder.Services.AddScoped<IServicoAutor, ServicoAutor>();
 builder.Services.AddScoped<IServicoEditora, ServicoEditora>();
+builder.Services.AddScoped<IServicoFichaEmprestimoAluno, ServicoFichaEmprestimoAlunoImpl>();
+
+
 
 
 //Parametrização do Swagger

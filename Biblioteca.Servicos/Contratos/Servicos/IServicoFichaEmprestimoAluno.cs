@@ -17,6 +17,8 @@ namespace Biblioteca.Servicos.Contratos.Servicos
 
         InconsistenciaDeValidacaoTipado<FichaEmprestimoAluno> FinalizeFicha(FichaEmprestimoAlunoDto dados);
 
+        InconsistenciaDeValidacaoTipado<FichaEmprestimoAluno> ExecuteEntregaDeLivro(int FichaId, int LivroId);
+
         InconsistenciaDeValidacaoTipado<FichaEmprestimoAluno> ExcluaFicha(int FihaId);
 
         FichaEmprestimoAluno ObtenhaFichaPorCodigo(int FichaId);

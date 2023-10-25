@@ -1,5 +1,6 @@
 ﻿using Biblioteca.Negocio.Entidades;
 using Biblioteca.Negocio.Entidades.FichaEmprestimos;
+using Biblioteca.Negocio.Enumeradores.FichaEmprestimoAlunos;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,6 +13,9 @@ namespace Biblioteca.Negocio.Dtos.FichaEmprestimoAlunos
     {
         public int LivroId { get; set; }
 
-        public decimal Quantidade {  get; set; }    
+        public decimal Quantidade {  get; set; }
+
+        public FichaEmprestimoAlunoItensStatusEnum StatusItem { get; set; }
+
     }
 }

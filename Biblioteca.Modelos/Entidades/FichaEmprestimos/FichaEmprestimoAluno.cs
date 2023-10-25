@@ -30,7 +30,7 @@ namespace Biblioteca.Negocio.Entidades.FichaEmprestimos
 
         public DateTime DataEmprestimo { get; set; }
 
-        public DateTime DataVencimentoEmprestimo { get; set; }
+        public DateTime DataEntregaEmprestimo { get; set; }
 
         public DateTime DataCriacao { get; set; }
 
