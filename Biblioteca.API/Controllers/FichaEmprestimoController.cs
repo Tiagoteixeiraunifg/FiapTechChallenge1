@@ -6,7 +6,7 @@ using Biblioteca.Negocio.Enumeradores.FichaEmprestimoAlunos;
 using Biblioteca.Servicos.Contratos.Servicos;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using static System.Runtime.InteropServices.JavaScript.JSType;
+
 
 namespace Biblioteca.API.Controllers
 {
