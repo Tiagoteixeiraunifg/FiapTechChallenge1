@@ -5,6 +5,8 @@ using Biblioteca.Infraestrutura.Dados.Repositorios.Autores.Implementacoes;
 using Biblioteca.Infraestrutura.Dados.Repositorios.Autores.Interface;
 using Biblioteca.Infraestrutura.Dados.Repositorios.Editoras.Implementacoes;
 using Biblioteca.Infraestrutura.Dados.Repositorios.Editoras.Interface;
+using Biblioteca.Infraestrutura.Dados.Repositorios.FichaEmprestimoAlunos.Implementacoes;
+using Biblioteca.Infraestrutura.Dados.Repositorios.FichaEmprestimoAlunos.Interfaces;
 using Biblioteca.Infraestrutura.Dados.Repositorios.Livros.Implementacoes;
 using Biblioteca.Infraestrutura.Dados.Repositorios.Livros.Interfaces;
 using Biblioteca.Infraestrutura.Dados.Repositorios.LivrosAutores.Implementacoes;
@@ -33,15 +35,11 @@ namespace Biblioteca.Infraestrutura.Dados.Configuracao
 
             services.AddScoped<IUsuarioRepositorio, UsuarioRepositorioImpl>();
             services.AddScoped<IAlunoRepositorio, AlunoRepositorioImpl>();
-
             services.AddScoped<IEditoraRepositorio, EditoraRepositorio>();
             services.AddScoped<IAutorRepositorio, AutorRepositorio>();
-
-
             services.AddScoped<ILivroRepositorio, LivroRepositorio>();
-
             services.AddScoped<ILivroAutoresRepositorio, LivroAutoresRepositorio>();
-
+            services.AddScoped<IFichaEmprestimoAlunoRepositorio, FichaEmprestimoAlunoRepositorioImpl>();
             services.AddTransient<IDataService, DataService>();
 
             services.AddDbContext<ApplicationDbContext>(options =>

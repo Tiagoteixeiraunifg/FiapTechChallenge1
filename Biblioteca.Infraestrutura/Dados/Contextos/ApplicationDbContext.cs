@@ -17,16 +17,17 @@ namespace Biblioteca.Infraestrutura.Dados.Contextos
     {
 
         private static ApplicationDbContext _ApplicationDbContext;
+        private static DbContextOptions<ApplicationDbContext> _opcoes;
+
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> opcoes) : base(opcoes) 
         {
             _ApplicationDbContext = this;
+            _opcoes = opcoes;   
         }
 
         #region CONFIGURAÇÃO DOS DBSETS
 
-        public DbSet<Usuario> Usuario { get; set; }
-        //public DbSet<Pedidos> Pedidos { get; set; }
-
+        //public DbSet<Usuario> Usuario { get; set; }
 
         #endregion
 
@@ -36,10 +37,12 @@ namespace Biblioteca.Infraestrutura.Dados.Contextos
             modelBuilder.ApplyConfigurationsFromAssembly(typeof(ApplicationDbContext).Assembly);
         }
         
-        public static ApplicationDbContext Instancia() 
+
+        public static ApplicationDbContext NovaInstancia() 
         {
-            return _ApplicationDbContext;
+            return new ApplicationDbContext(_opcoes);
         }
+
 
     }
 }

@@ -21,7 +21,7 @@ namespace Biblioteca.Servicos.Validacoes.EmprestimoAlunos
         {
             get 
             {
-                _Contexto = ApplicationDbContext.Instancia();
+                _Contexto = ApplicationDbContext.NovaInstancia();
 
                 return _Contexto;
             }
@@ -30,8 +30,7 @@ namespace Biblioteca.Servicos.Validacoes.EmprestimoAlunos
 
         public ServicoValidacaoFichaEmprestimoAluno()
         {
-            _Contexto = ApplicationDbContext.Instancia();
-  
+
         }
 
 
@@ -96,7 +95,7 @@ namespace Biblioteca.Servicos.Validacoes.EmprestimoAlunos
 
             using (IRepositorioGenerico<Livro> repLivro = new EFRepositorioGenerico<Livro>(Contexto))
             {
-                var livro = repLivro.ObtenhaDbSet().ToList();
+                var livro = repLivro.ObtenhaDbSet().AsNoTracking().ToList();
 
                 quantidadeTotalLivro = livro.PossuiValor() && livro.Any(x => x.Id == LivroId) ? livro.Where(x => x.Id == LivroId).First().QuantidadeEstoque : 0; 
             }
@@ -131,7 +130,7 @@ namespace Biblioteca.Servicos.Validacoes.EmprestimoAlunos
         private bool VerifiqueEmprestimoEmAndamentoDoAluno(int AlunoId)
         {
 
-            using (IRepositorioGenerico<FichaEmprestimoAluno> repFicha = new EFRepositorioGenerico<FichaEmprestimoAluno>(_Contexto))
+            using (IRepositorioGenerico<FichaEmprestimoAluno> repFicha = new EFRepositorioGenerico<FichaEmprestimoAluno>(Contexto))
             {
                 return !repFicha.ObtenhaDbSet()
                 .AsNoTracking()

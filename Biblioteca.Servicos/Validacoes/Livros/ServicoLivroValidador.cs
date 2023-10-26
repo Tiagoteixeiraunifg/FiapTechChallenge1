@@ -15,11 +15,18 @@ namespace Biblioteca.Servicos.Validacoes.Livros
     public class ServicoLivroValidador : ValidadorAbstratro<Livro>
     {
 
-        ApplicationDbContext _Contexto;
+        private ApplicationDbContext _Contexto;
+
+        private ApplicationDbContext Contexto { 
+            get 
+            {
+                return ApplicationDbContext.NovaInstancia();
+            } 
+        }
 
         public ServicoLivroValidador() 
         {
-            _Contexto = ApplicationDbContext.Instancia();
+
         }
 
         public InconsistenciaDeValidacaoTipado<Livro> ValideInicial(Livro dto) 
@@ -57,7 +64,7 @@ namespace Biblioteca.Servicos.Validacoes.Livros
 
         private bool VerifiqueSeEditoraInformadoExiste(int IdDaEditora) 
         {
-            using (IRepositorioGenerico<Editora> servico = new EFRepositorioGenerico<Editora>(_Contexto))
+            using (IRepositorioGenerico<Editora> servico = new EFRepositorioGenerico<Editora>(Contexto))
             {
                 var ret = servico.ObtenhaDbSet().AsNoTracking().Any(x => x.Id == IdDaEditora);
                 return ret;
@@ -66,7 +73,7 @@ namespace Biblioteca.Servicos.Validacoes.Livros
 
         private bool VerifiqueSeAutoresInformadosExistem(int IdDoAutor) 
         {
-            using (IRepositorioGenerico<Autor> servico = new EFRepositorioGenerico<Autor>(_Contexto))
+            using (IRepositorioGenerico<Autor> servico = new EFRepositorioGenerico<Autor>(Contexto))
             {
                 var ret = servico.ObtenhaDbSet().AsNoTracking().Any(x => x.Id == IdDoAutor);
                 return ret;
