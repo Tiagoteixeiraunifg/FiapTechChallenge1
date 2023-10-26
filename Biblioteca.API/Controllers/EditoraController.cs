@@ -1,4 +1,5 @@
-﻿using Biblioteca.Negocio.Dtos.Editoras;
+﻿using Biblioteca.Negocio.Atributos;
+using Biblioteca.Negocio.Dtos.Editoras;
 using Biblioteca.Servicos.Contratos.Servicos;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -19,6 +20,7 @@ namespace Biblioteca.API.Controllers
         }
 
         [Authorize]
+        [VersaoApi(VersaoDaApi = "V1.0")]
         [HttpPost("Cadastrar")]
         public IActionResult Cadastrar(CadastroEditoraDto dto)
         {
@@ -27,6 +29,7 @@ namespace Biblioteca.API.Controllers
         }
 
         [Authorize]
+        [VersaoApi(VersaoDaApi = "V1.0")]
         [HttpPut("Atualizar")]
         public IActionResult Atualizar(AlterarEditoraDto dto)
         {
@@ -35,6 +38,7 @@ namespace Biblioteca.API.Controllers
         }
 
         [Authorize]
+        [VersaoApi(VersaoDaApi = "V1.0")]
         [HttpDelete("Deletar/{id}")]
         public IActionResult Deletar(int id)
         {
@@ -43,6 +47,7 @@ namespace Biblioteca.API.Controllers
         }
 
         [Authorize]
+        [VersaoApi(VersaoDaApi = "V1.0")]
         [HttpGet("ObterPorId/{id}")]
         public IActionResult ObterPorId(int id)
         {
@@ -51,6 +56,7 @@ namespace Biblioteca.API.Controllers
         }
 
         [Authorize]
+        [VersaoApi(VersaoDaApi = "V1.0")]
         [HttpGet("ObterTodos")]
         public IActionResult ObterTodos()
         {

@@ -1,4 +1,5 @@
 ﻿using Biblioteca.Infraestrutura.Ferramentas.Extensoes;
+using Biblioteca.Negocio.Atributos;
 using Biblioteca.Negocio.Dtos.Livros;
 using Biblioteca.Negocio.Entidades.Livros;
 using Biblioteca.Servicos.Contratos.Servicos;
@@ -21,6 +22,7 @@ namespace Biblioteca.API.Controllers
 
         [HttpPost("Cadastrar")]
         [Authorize]
+        [VersaoApi(VersaoDaApi = "V1.0")]
         public IActionResult Cadastre(LivroDto dto) 
         {
             dto.TipoOperacaoDeDadosEnum = Negocio.Enumeradores.Livros.LivrosTipoOperacaoDeDadosEnum.CADASTRAR;
@@ -30,6 +32,7 @@ namespace Biblioteca.API.Controllers
 
         [HttpPut("Atualizar")]
         [Authorize]
+        [VersaoApi(VersaoDaApi = "V1.0")]
         public IActionResult Atualize(LivroDto dto)
         {
             dto.TipoOperacaoDeDadosEnum = Negocio.Enumeradores.Livros.LivrosTipoOperacaoDeDadosEnum.ALTERAR;
@@ -40,6 +43,7 @@ namespace Biblioteca.API.Controllers
         
         [HttpDelete("Deletar/{Id}")]
         [Authorize]
+        [VersaoApi(VersaoDaApi = "V1.0")]
         public IActionResult Delete(int id) 
         {
             var resposta = _ServicoLivro.Deletar(id);
@@ -49,6 +53,7 @@ namespace Biblioteca.API.Controllers
         
         [HttpGet("Obtenha/{Id}")]
         [Authorize]
+        [VersaoApi(VersaoDaApi = "V1.0")]
         public IActionResult ObtenhaLivro(int Id) 
         {
             var resposta = _ServicoLivro.ObtenhaLivro(Id);
@@ -58,6 +63,7 @@ namespace Biblioteca.API.Controllers
         
         [HttpGet("ObtenhaTodos")]
         [Authorize]
+        [VersaoApi(VersaoDaApi = "V1.0")]
         public IActionResult ObtenhaTodosLivros() 
         {
             var resposta = _ServicoLivro.ObtenhaTodosLivros();

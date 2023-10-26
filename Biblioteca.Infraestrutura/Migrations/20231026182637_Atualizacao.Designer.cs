@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Biblioteca.Infraestrutura.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20231020010422_Migration4")]
-    partial class Migration4
+    [Migration("20231026182637_Atualizacao")]
+    partial class Atualizacao
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -163,7 +163,7 @@ namespace Biblioteca.Infraestrutura.Migrations
                         .HasColumnType("datetime2")
                         .HasColumnName("DataEmprestimo");
 
-                    b.Property<DateTime>("DataVencimentoEmprestimo")
+                    b.Property<DateTime>("DataEntregaEmprestimo")
                         .HasColumnType("datetime2")
                         .HasColumnName("DataVencimentoEmprestimo");
 
@@ -179,11 +179,13 @@ namespace Biblioteca.Infraestrutura.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("AlunoId")
-                        .IsUnique();
+                    b.HasIndex("AlunoId");
 
-                    b.HasIndex("UsuarioId")
-                        .IsUnique();
+                    SqlServerIndexBuilderExtensions.IsClustered(b.HasIndex("AlunoId"), false);
+
+                    b.HasIndex("UsuarioId");
+
+                    SqlServerIndexBuilderExtensions.IsClustered(b.HasIndex("UsuarioId"), false);
 
                     b.ToTable("FichaEmprestimoAlunos", (string)null);
                 });
@@ -201,18 +203,31 @@ namespace Biblioteca.Infraestrutura.Migrations
                         .HasMaxLength(100)
                         .HasColumnType("uniqueidentifier");
 
+                    b.Property<DateTime>("DataStatusItem")
+                        .HasColumnType("datetime2");
+
                     b.Property<int>("FichaEmprestimoAlunoId")
                         .HasColumnType("int");
 
                     b.Property<int>("LivroId")
                         .HasColumnType("int");
 
+                    b.Property<decimal>("Quantidade")
+                        .HasPrecision(14, 2)
+                        .HasColumnType("decimal(14,2)");
+
+                    b.Property<int>("StatusItem")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
 
                     b.HasIndex("FichaEmprestimoAlunoId");
 
-                    b.HasIndex("LivroId")
-                        .IsUnique();
+                    SqlServerIndexBuilderExtensions.IsClustered(b.HasIndex("FichaEmprestimoAlunoId"), false);
+
+                    b.HasIndex("LivroId");
+
+                    SqlServerIndexBuilderExtensions.IsClustered(b.HasIndex("LivroId"), false);
 
                     b.ToTable("FichaEmprestimoItens", (string)null);
                 });
@@ -258,8 +273,9 @@ namespace Biblioteca.Infraestrutura.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("EditoraId")
-                        .IsUnique();
+                    b.HasIndex("EditoraId");
+
+                    SqlServerIndexBuilderExtensions.IsClustered(b.HasIndex("EditoraId"), false);
 
                     b.ToTable("Livros", (string)null);
                 });
@@ -328,13 +344,13 @@ namespace Biblioteca.Infraestrutura.Migrations
                     b.HasOne("Biblioteca.Negocio.Entidades.Alunos.Aluno", "Aluno")
                         .WithOne()
                         .HasForeignKey("Biblioteca.Negocio.Entidades.FichaEmprestimos.FichaEmprestimoAluno", "AlunoId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.HasOne("Biblioteca.Negocio.Entidades.Usuarios.Usuario", "Usuario")
                         .WithOne()
                         .HasForeignKey("Biblioteca.Negocio.Entidades.FichaEmprestimos.FichaEmprestimoAluno", "UsuarioId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.Navigation("Aluno");
@@ -366,7 +382,7 @@ namespace Biblioteca.Infraestrutura.Migrations
                     b.HasOne("Biblioteca.Negocio.Entidades.Editoras.Editora", "Editora")
                         .WithOne()
                         .HasForeignKey("Biblioteca.Negocio.Entidades.Livros.Livro", "EditoraId")
-                        .OnDelete(DeleteBehavior.NoAction)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("Editora");

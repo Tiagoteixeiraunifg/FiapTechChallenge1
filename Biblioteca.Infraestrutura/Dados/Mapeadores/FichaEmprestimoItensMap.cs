@@ -20,6 +20,8 @@ namespace Biblioteca.Infraestrutura.Dados.Mapeadores
             m.Property(u => u.Id).UseIdentityColumn().HasColumnName("Id");
             m.Property(u => u.Codigo).HasMaxLength(100);
             m.Property(u => u.Quantidade).HasPrecision(14, 2);
+            m.HasIndex(u => u.LivroId).IsClustered(false).IsUnique(false);
+            m.HasIndex(u => u.FichaEmprestimoAlunoId).IsClustered(false).IsUnique(false);
 
             m.HasOne(x => x.Livro).WithOne().HasForeignKey<FichaEmprestimoItem>(x => x.LivroId);
 

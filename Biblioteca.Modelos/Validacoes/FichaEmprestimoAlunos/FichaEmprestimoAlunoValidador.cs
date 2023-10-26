@@ -101,14 +101,14 @@ namespace Biblioteca.Negocio.Validacoes.FichaEmprestimoAlunos
         private void AssineRegraDeFinalizacaoDaFicha(FichaEmprestimoAluno dados) 
         {
 
-            RuleFor(x => x.DataEntregaEmprestimo.Date)
-                .NotEqual(x => x.DataCriacao.Date)
+            RuleFor(x => x.DataEntregaEmprestimo)
+                .NotEqual(x => x.DataCriacao)
                 .TipoValidacao(Enumeradores.Validacoes.TipoValidacaoEnum.IMPEDITIVA)
                 .SobrescrevaPropriedade("Data de Entrega")
                 .WithMessage("A data da entrega tem de ser diferente da data de cadastro do livro.");
 
-            RuleFor(x => x.DataEntregaEmprestimo.Date)
-                .GreaterThan(x => x.DataCriacao.Date)
+            RuleFor(x => x.DataEntregaEmprestimo)
+                .GreaterThan(x => x.DataCriacao)
                 .TipoValidacao(Enumeradores.Validacoes.TipoValidacaoEnum.IMPEDITIVA)
                 .SobrescrevaPropriedade("Data de Entrega")
                 .WithMessage("A data da entrega tem de ser maior que a data de cadastro.");
@@ -122,13 +122,7 @@ namespace Biblioteca.Negocio.Validacoes.FichaEmprestimoAlunos
             RuleForEach(x => x.FichaEmprestimoItens).Cascade(CascadeMode.Continue).ChildRules(v => 
             {
 
-                v.RuleFor(x => x.DataStatusItem.Date)
-                    .GreaterThan(x => dados.DataCriacao.Date)
-                    .TipoValidacao(Enumeradores.Validacoes.TipoValidacaoEnum.IMPEDITIVA)
-                    .WithMessage("A data do status do item deve ser maior que a data de criação da ficha");
-
-
-                v.RuleFor(x => x.StatusItem)
+                    v.RuleFor(x => x.StatusItem)
                     .NotNull()
                     .Equal(Enumeradores.FichaEmprestimoAlunos.FichaEmprestimoAlunoItensStatusEnum.ENTREGUE)
                     .TipoValidacao(Enumeradores.Validacoes.TipoValidacaoEnum.IMPEDITIVA)

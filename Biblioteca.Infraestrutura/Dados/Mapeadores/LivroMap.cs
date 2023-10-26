@@ -24,7 +24,7 @@ namespace Biblioteca.Infraestrutura.Dados.Mapeadores
             m.Property(u => u.QuantidadeEstoque).HasPrecision(14,2);
             m.Property(u => u.DataCriacao).HasColumnName("DataCriacao");
             m.Property(u => u.DataAtualizacao).HasColumnName("DataAtualizacao");
-
+            m.HasIndex(u => u.EditoraId).IsClustered(false).IsUnique(false);
             
             m.HasOne(u => u.Editora).WithOne().HasForeignKey<Livro>(x => x.EditoraId);
             

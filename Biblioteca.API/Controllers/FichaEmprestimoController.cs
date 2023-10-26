@@ -1,7 +1,10 @@
-﻿using Biblioteca.Negocio.Dtos.FichaEmprestimoAlunos;
+﻿using Biblioteca.Infraestrutura.Ferramentas.Extensoes;
+using Biblioteca.Negocio.Atributos;
+using Biblioteca.Negocio.Dtos.FichaEmprestimoAlunos;
 using Biblioteca.Negocio.Entidades.FichaEmprestimos;
 using Biblioteca.Negocio.Enumeradores.FichaEmprestimoAlunos;
 using Biblioteca.Servicos.Contratos.Servicos;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using static System.Runtime.InteropServices.JavaScript.JSType;
 
@@ -21,21 +24,30 @@ namespace Biblioteca.API.Controllers
         }
 
         [HttpPost("Cadastrar")]
-        
+        [Authorize]
+        [VersaoApi(VersaoDaApi = "V1.0")]
         public IActionResult Cadastrar(FichaEmprestimoAlunoDto dto) 
         {
             var resposta = _ServicoFicha.CadastreFicha(dto);
             return RespostaResponalizada(resposta);
         }
 
-        [HttpPost("Finalizar")]
-        public IActionResult Finalizar(FichaEmprestimoAlunoDto dto) 
+        [HttpPost("Finalizar/{FichaId:int}")]
+        [Authorize]
+        [VersaoApi(VersaoDaApi = "V1.0")]
+        public IActionResult Finalizar(int FichaId) 
         {
-            var resposta = _ServicoFicha.FinalizeFicha(dto);
+            var ficha = _ServicoFicha.ObtenhaFichaPorCodigo(FichaId);
+            if (!ficha.PossuiValor()) { return RespostaResponalizada(ficha); }
+
+
+            var resposta = _ServicoFicha.FinalizeFicha(ficha);
             return RespostaResponalizada(resposta);
         }
 
         [HttpPost("EntregarLivro")]
+        [Authorize]
+        [VersaoApi(VersaoDaApi = "V1.0")]
         public IActionResult EntregarLivro([FromQuery]int LivroId, [FromQuery] int FichaId) 
         {
             var resposta = _ServicoFicha.ExecuteEntregaDeLivro(LivroId, FichaId);
@@ -43,6 +55,7 @@ namespace Biblioteca.API.Controllers
         }
 
         [HttpDelete("ExcluirFicha/{FichaId:int}")]
+        [Authorize]
         public IActionResult ExcluirFicha(int FichaId) 
         {
             var resposta = _ServicoFicha.ExcluaFicha(FichaId);  
@@ -50,6 +63,8 @@ namespace Biblioteca.API.Controllers
         }
 
         [HttpGet("ObtenhaTodasFichas")]
+        [Authorize]
+        [VersaoApi(VersaoDaApi = "V1.0")]
         public IActionResult ObtenhaTodasFichas() 
         {
             var resposta = _ServicoFicha.ObtenhaTodasFichas();
@@ -58,6 +73,8 @@ namespace Biblioteca.API.Controllers
 
 
         [HttpGet("ObtenhaFichasDoAlunoNoIntervalo")]
+        [Authorize]
+        [VersaoApi(VersaoDaApi = "V1.0")]
         public IActionResult ObtenhaTodosFichasDoAlunoNoIntervalo([FromQuery] string DataInicio, 
                                                                   [FromQuery] string DataFim, 
                                                                   [FromQuery] int AlunoId, 
@@ -79,6 +96,8 @@ namespace Biblioteca.API.Controllers
 
 
         [HttpGet("ObtenhaFichasNoIntervaloEmAtraso")]
+        [Authorize]
+        [VersaoApi(VersaoDaApi = "V1.0")]
         public IActionResult ObtenhaFichasNoIntervaloEmAtraso([FromQuery] DateTime DataInicio,
                                                                  [FromQuery] DateTime DataFim)
         {
@@ -89,6 +108,8 @@ namespace Biblioteca.API.Controllers
 
 
         [HttpGet("ObtenhaAsFichasDoAluno/{AlunoId:int}")]
+        [Authorize]
+        [VersaoApi(VersaoDaApi = "V1.0")]
         public IActionResult ObtenhaAsFichasDoAluno(int AlunoId) 
         {
             var resposta = _ServicoFicha.ObtenhaFichasDoAlunoPorCodigo(AlunoId, LIMITE_DE_REGISTRO_PADRAO);
@@ -97,6 +118,8 @@ namespace Biblioteca.API.Controllers
         }
 
         [HttpGet("ObtenhaFicha/{FichaId:int}")]
+        [Authorize]
+        [VersaoApi(VersaoDaApi = "V1.0")]
         public IActionResult ObtenhaFicha(int FichaId)
         {
             var resposta = _ServicoFicha.ObtenhaFichaPorCodigo(FichaId);

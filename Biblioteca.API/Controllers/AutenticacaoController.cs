@@ -2,6 +2,7 @@
 using Biblioteca.Infraestrutura.Ferramentas.Criptografia;
 using Biblioteca.Infraestrutura.Ferramentas.Extensoes;
 using Biblioteca.Infraestrutura.Seguranca.JWT.Interfaces;
+using Biblioteca.Negocio.Atributos;
 using Biblioteca.Negocio.Dtos.Usuarios;
 using Biblioteca.Negocio.Entidades.Usuarios;
 using Biblioteca.Negocio.Validacoes.Usuarios;
@@ -34,6 +35,7 @@ namespace Biblioteca.API.Controllers
 
 
         [AllowAnonymous]
+        [VersaoApi(VersaoDaApi = "V1.0")]
         [HttpPost("AutenticarUsuario")]
         public IActionResult Autentique(Usuario dto)
         {
@@ -83,6 +85,7 @@ namespace Biblioteca.API.Controllers
         }
 
         [AllowAnonymous]
+        [VersaoApi(VersaoDaApi = "V1.0")]
         [HttpPost("CadastrarUsuario")]
         public IActionResult Cadastre(Usuario dto) 
         {
@@ -130,6 +133,7 @@ namespace Biblioteca.API.Controllers
         }
 
         [AllowAnonymous]
+        [VersaoApi(VersaoDaApi = "V1.0")]
         [HttpPost("RenovarToken/{token}")]
         public IActionResult RenovarToken(string token) 
         {

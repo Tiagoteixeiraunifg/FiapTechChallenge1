@@ -176,11 +176,13 @@ namespace Biblioteca.Infraestrutura.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("AlunoId")
-                        .IsUnique();
+                    b.HasIndex("AlunoId");
 
-                    b.HasIndex("UsuarioId")
-                        .IsUnique();
+                    SqlServerIndexBuilderExtensions.IsClustered(b.HasIndex("AlunoId"), false);
+
+                    b.HasIndex("UsuarioId");
+
+                    SqlServerIndexBuilderExtensions.IsClustered(b.HasIndex("UsuarioId"), false);
 
                     b.ToTable("FichaEmprestimoAlunos", (string)null);
                 });
@@ -218,8 +220,11 @@ namespace Biblioteca.Infraestrutura.Migrations
 
                     b.HasIndex("FichaEmprestimoAlunoId");
 
-                    b.HasIndex("LivroId")
-                        .IsUnique();
+                    SqlServerIndexBuilderExtensions.IsClustered(b.HasIndex("FichaEmprestimoAlunoId"), false);
+
+                    b.HasIndex("LivroId");
+
+                    SqlServerIndexBuilderExtensions.IsClustered(b.HasIndex("LivroId"), false);
 
                     b.ToTable("FichaEmprestimoItens", (string)null);
                 });
@@ -265,8 +270,9 @@ namespace Biblioteca.Infraestrutura.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("EditoraId")
-                        .IsUnique();
+                    b.HasIndex("EditoraId");
+
+                    SqlServerIndexBuilderExtensions.IsClustered(b.HasIndex("EditoraId"), false);
 
                     b.ToTable("Livros", (string)null);
                 });
@@ -335,13 +341,13 @@ namespace Biblioteca.Infraestrutura.Migrations
                     b.HasOne("Biblioteca.Negocio.Entidades.Alunos.Aluno", "Aluno")
                         .WithOne()
                         .HasForeignKey("Biblioteca.Negocio.Entidades.FichaEmprestimos.FichaEmprestimoAluno", "AlunoId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.HasOne("Biblioteca.Negocio.Entidades.Usuarios.Usuario", "Usuario")
                         .WithOne()
                         .HasForeignKey("Biblioteca.Negocio.Entidades.FichaEmprestimos.FichaEmprestimoAluno", "UsuarioId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.Navigation("Aluno");

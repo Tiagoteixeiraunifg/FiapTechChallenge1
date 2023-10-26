@@ -32,10 +32,8 @@ namespace Biblioteca.Negocio.Entidades.Alunos
         public DateTime DataAtualizacao { get; set; }
         
 
-        public AlunoDto ObtenhaDto() 
-        {
-            return _Conversor.ConvertaPara(this);
-        }
+        public AlunoDto ObtenhaDto() => _Conversor.ConvertaPara(this);
+       
  
     }
 }

@@ -1,4 +1,5 @@
-﻿using Biblioteca.Negocio.Dtos.Autores;
+﻿using Biblioteca.Negocio.Atributos;
+using Biblioteca.Negocio.Dtos.Autores;
 using Biblioteca.Negocio.Enumeradores.Usuarios;
 using Biblioteca.Servicos.Contratos.Servicos;
 using Microsoft.AspNetCore.Authorization;
@@ -20,6 +21,7 @@ namespace Biblioteca.API.Controllers
         }
 
         [Authorize]
+        [VersaoApi(VersaoDaApi = "V1.0")]
         [HttpPost("Cadastrar")]
         public IActionResult Cadastrar(CadastrarAutorDto dto)
         {
@@ -28,6 +30,7 @@ namespace Biblioteca.API.Controllers
         }
 
         [Authorize]
+        [VersaoApi(VersaoDaApi = "V1.0")]
         [HttpPut("Atualizar")]
         public IActionResult Atualizar(AlterarAutorDto dto)
         {
@@ -36,6 +39,7 @@ namespace Biblioteca.API.Controllers
         }
 
         [Authorize]
+        [VersaoApi(VersaoDaApi = "V1.0")]
         [Authorize(Roles = Permissoes.ADMINISTRADOR)]
         [HttpDelete("Deletar{id}")]
         public IActionResult Atualizar(int id)
@@ -45,6 +49,7 @@ namespace Biblioteca.API.Controllers
         }
 
         [Authorize]
+        [VersaoApi(VersaoDaApi = "V1.0")]
         [HttpGet("ObterPorId/{id}")]
         public IActionResult ObterPorId(int id)
         {
@@ -53,6 +58,7 @@ namespace Biblioteca.API.Controllers
         }
 
         [Authorize]
+        [VersaoApi(VersaoDaApi = "V1.0")]
         [HttpGet("ObterTodos")]
         public IActionResult ObterTodos()
         {

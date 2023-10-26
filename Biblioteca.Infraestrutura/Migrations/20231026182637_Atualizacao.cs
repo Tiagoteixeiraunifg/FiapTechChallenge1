@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace Biblioteca.Infraestrutura.Migrations
 {
     /// <inheritdoc />
-    public partial class InicialCriarBancoDados : Migration
+    public partial class Atualizacao : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -103,7 +103,8 @@ namespace Biblioteca.Infraestrutura.Migrations
                         name: "FK_Livros_Editoras_EditoraId",
                         column: x => x.EditoraId,
                         principalTable: "Editoras",
-                        principalColumn: "Id");
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -129,14 +130,12 @@ namespace Biblioteca.Infraestrutura.Migrations
                         name: "FK_FichaEmprestimoAlunos_Alunos_AlunoId",
                         column: x => x.AlunoId,
                         principalTable: "Alunos",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "Id");
                     table.ForeignKey(
                         name: "FK_FichaEmprestimoAlunos_Usuarios_UsuarioId",
                         column: x => x.UsuarioId,
                         principalTable: "Usuarios",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "Id");
                 });
 
             migrationBuilder.CreateTable(
@@ -147,7 +146,7 @@ namespace Biblioteca.Infraestrutura.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Codigo = table.Column<Guid>(type: "uniqueidentifier", maxLength: 100, nullable: false),
                     LivroId = table.Column<int>(type: "int", nullable: false),
-                    AutorId = table.Column<int>(type: "int", nullable: true)
+                    AutorId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -156,12 +155,14 @@ namespace Biblioteca.Infraestrutura.Migrations
                         name: "FK_LivroAutores_Autores_AutorId",
                         column: x => x.AutorId,
                         principalTable: "Autores",
-                        principalColumn: "Id");
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_LivroAutores_Livros_LivroId",
                         column: x => x.LivroId,
                         principalTable: "Livros",
-                        principalColumn: "Id");
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -172,7 +173,10 @@ namespace Biblioteca.Infraestrutura.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Codigo = table.Column<Guid>(type: "uniqueidentifier", maxLength: 100, nullable: false),
                     FichaEmprestimoAlunoId = table.Column<int>(type: "int", nullable: false),
-                    LivroId = table.Column<int>(type: "int", nullable: false)
+                    LivroId = table.Column<int>(type: "int", nullable: false),
+                    Quantidade = table.Column<decimal>(type: "decimal(14,2)", precision: 14, scale: 2, nullable: false),
+                    StatusItem = table.Column<int>(type: "int", nullable: false),
+                    DataStatusItem = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -194,25 +198,26 @@ namespace Biblioteca.Infraestrutura.Migrations
             migrationBuilder.CreateIndex(
                 name: "IX_FichaEmprestimoAlunos_AlunoId",
                 table: "FichaEmprestimoAlunos",
-                column: "AlunoId",
-                unique: true);
+                column: "AlunoId")
+                .Annotation("SqlServer:Clustered", false);
 
             migrationBuilder.CreateIndex(
                 name: "IX_FichaEmprestimoAlunos_UsuarioId",
                 table: "FichaEmprestimoAlunos",
-                column: "UsuarioId",
-                unique: true);
+                column: "UsuarioId")
+                .Annotation("SqlServer:Clustered", false);
 
             migrationBuilder.CreateIndex(
                 name: "IX_FichaEmprestimoItens_FichaEmprestimoAlunoId",
                 table: "FichaEmprestimoItens",
-                column: "FichaEmprestimoAlunoId");
+                column: "FichaEmprestimoAlunoId")
+                .Annotation("SqlServer:Clustered", false);
 
             migrationBuilder.CreateIndex(
                 name: "IX_FichaEmprestimoItens_LivroId",
                 table: "FichaEmprestimoItens",
-                column: "LivroId",
-                unique: true);
+                column: "LivroId")
+                .Annotation("SqlServer:Clustered", false);
 
             migrationBuilder.CreateIndex(
                 name: "IX_LivroAutores_AutorId",
@@ -227,8 +232,8 @@ namespace Biblioteca.Infraestrutura.Migrations
             migrationBuilder.CreateIndex(
                 name: "IX_Livros_EditoraId",
                 table: "Livros",
-                column: "EditoraId",
-                unique: true);
+                column: "EditoraId")
+                .Annotation("SqlServer:Clustered", false);
         }
 
         /// <inheritdoc />

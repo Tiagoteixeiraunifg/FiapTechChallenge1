@@ -63,11 +63,13 @@ namespace Biblioteca.Servicos.Validacoes.EmprestimoAlunos
                 {
 
                     v.RuleFor(x => x)
-                    .Must(x => LivroPossuiQuantidadePositiva(x.LivroId))
-                    .When(x => x.Quantidade > 0)
-                    .TipoValidacao(Negocio.Enumeradores.Validacoes.TipoValidacaoEnum.IMPEDITIVA)
-                    .SobrescrevaPropriedade("Saldo do Livro")
-                    .WithMessage("O Livro está sem saldo para emprestimo.");
+                     .Must(x => LivroPossuiQuantidadePositiva(x.LivroId, x.Quantidade))
+                     .When(x => x.Quantidade > 0)
+                     .TipoValidacao(Negocio.Enumeradores.Validacoes.TipoValidacaoEnum.IMPEDITIVA)
+                     .SobrescrevaPropriedade("Saldo do Livro")
+                     .WithMessage("O Livro está sem saldo para emprestimo.");
+
+
 
                 });
 
@@ -85,7 +87,7 @@ namespace Biblioteca.Servicos.Validacoes.EmprestimoAlunos
                 .WithMessage("Não é possível emprestar enquanto não finalizar os Emprestimos em aberto do Aluno.");
         }
 
-        private bool LivroPossuiQuantidadePositiva(int LivroId)
+        private bool LivroPossuiQuantidadePositiva(int LivroId, decimal quantidadeSolicitada)
         {
             bool possui = false;
             decimal quantidadeTotalLivro = 0;
@@ -119,10 +121,13 @@ namespace Biblioteca.Servicos.Validacoes.EmprestimoAlunos
             }
 
 
-           
-            
-
             possui = quantidadeTotalLivro > quantidadeJaEmprestada;
+
+            if (possui) 
+            {
+                var saldo = quantidadeTotalLivro - quantidadeJaEmprestada;
+                possui = saldo - quantidadeSolicitada > 0;
+            }
 
             return possui;
         }

@@ -26,10 +26,12 @@ namespace Biblioteca.Infraestrutura.Dados.Mapeadores
             m.Property(u => u.DataEntregaEmprestimo).HasColumnName("DataVencimentoEmprestimo");
             m.Property(u => u.DataCriacao).HasColumnName("DataCriacao");
             m.Property(u => u.DataAtualizacao).HasColumnName("DataAtualizacao");
+            m.HasIndex(u => u.AlunoId).IsClustered(false).IsUnique(false);
+            m.HasIndex(u => u.UsuarioId).IsClustered(false).IsUnique(false);
 
-            m.HasOne(x => x.Aluno).WithOne().HasForeignKey<FichaEmprestimoAluno>(x => x.AlunoId);
+            m.HasOne(x => x.Aluno).WithOne().HasForeignKey<FichaEmprestimoAluno>(x => x.AlunoId).OnDelete(DeleteBehavior.NoAction);
 
-            m.HasOne(x => x.Usuario).WithOne().HasForeignKey<FichaEmprestimoAluno>(x => x.UsuarioId);
+            m.HasOne(x => x.Usuario).WithOne().HasForeignKey<FichaEmprestimoAluno>(x => x.UsuarioId).OnDelete(DeleteBehavior.NoAction);
 
             m.HasMany(x => x.FichaEmprestimoItens).WithOne(x => x.FichaEmprestimoAluno).HasForeignKey(x => x.FichaEmprestimoAlunoId);
         }

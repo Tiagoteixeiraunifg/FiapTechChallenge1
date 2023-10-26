@@ -1,5 +1,6 @@
 ﻿using Biblioteca.Infraestrutura.Ferramentas.Criptografia;
 using Biblioteca.Infraestrutura.Ferramentas.Extensoes;
+using Biblioteca.Negocio.Atributos;
 using Biblioteca.Negocio.Dtos.Usuarios;
 using Biblioteca.Negocio.Entidades.Usuarios;
 using Biblioteca.Negocio.Enumeradores.Usuarios;
@@ -23,6 +24,7 @@ namespace Biblioteca.API.Controllers
         }
 
         [Authorize]
+        [VersaoApi(VersaoDaApi = "V1.0")]
         [Authorize(Roles = Permissoes.ADMINISTRADOR)]
         [HttpPut("Atualizar")]
         public IActionResult Atualizar(Usuario dto)
@@ -66,6 +68,7 @@ namespace Biblioteca.API.Controllers
         }
 
         [Authorize]
+        [VersaoApi(VersaoDaApi = "V1.0")]
         [Authorize(Roles = Permissoes.ADMINISTRADOR)]
         [HttpDelete("Deletar/{Id}")]
         public IActionResult Deletar(int Id) 
@@ -103,6 +106,7 @@ namespace Biblioteca.API.Controllers
         }
 
         [Authorize]
+        [VersaoApi(VersaoDaApi = "V1.0")]
         [HttpGet("ObtenhaTodos")]
         public IActionResult ObtenhaTodos() 
         {
@@ -133,6 +137,7 @@ namespace Biblioteca.API.Controllers
         }
 
         [Authorize]
+        [VersaoApi(VersaoDaApi = "V1.0")]
         [HttpGet("ObtenhaUsuario/{Id}")]
         public IActionResult ObtenhaUsuario(int Id)
         {

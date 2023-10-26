@@ -59,7 +59,7 @@ namespace Biblioteca.Servicos.Contratos.ContratosDeServicosImplementados
             try
             {
                 base.Cadastre(fichaNova);
-                var cadastroAtualizado = _DbSet.AsNoTracking().Where(x => x.Codigo == fichaNova.Codigo).FirstOrDefault();
+                var cadastroAtualizado = _DbSet.AsNoTracking().Where(x => x.Codigo == fichaNova.Codigo).Include(X => X.FichaEmprestimoItens).FirstOrDefault();
                 _logger.LogInformation("Serviço 'Serviço de Ficha Emprestimo': Fim da persistência dos dados.");
                 return new InconsistenciaDeValidacaoTipado<FichaEmprestimoAluno>() { _RetornoServico = cadastroAtualizado, Mensagem = "Cadastrado com Sucesso" };
 
@@ -105,13 +105,18 @@ namespace Biblioteca.Servicos.Contratos.ContratosDeServicosImplementados
                     _logger.LogInformation("Serviço 'Serviço de Ficha Emprestimo': Ficha removida.");
                     retorno = new InconsistenciaDeValidacaoTipado<FichaEmprestimoAluno>() { Mensagem = $"Livro de código {FichaId.ToString("0000000")} foi deletado com sucesso" };
                 }
+                else 
+                {
+                    retorno = new InconsistenciaDeValidacaoTipado<FichaEmprestimoAluno>() { _RetornoServico = null, Mensagem = "Ficha não pode ser excluída." };
+                    return retorno;
+                }
 
                 return retorno;
             }
             catch (Exception ex)
             {
                 _logger.LogError("Serviço 'Serviço de Ficha Emprestimo': Erro nos dados para cadastro.", ex);
-                return new InconsistenciaDeValidacaoTipado<FichaEmprestimoAluno>() { _RetornoServico = ex, Mensagem = "Erro na exclusão da Ficha" };
+                return new InconsistenciaDeValidacaoTipado<FichaEmprestimoAluno>() { Mensagem = $"Erro na exclusão da Ficha: Erro -> {ex.Message}" };
             }
             
         }
@@ -140,14 +145,14 @@ namespace Biblioteca.Servicos.Contratos.ContratosDeServicosImplementados
                     servico.Altere(livro);
 
                     _logger.LogInformation("Serviço 'Serviço de Ficha Emprestimo':Livro entregue.");
-                    return new InconsistenciaDeValidacaoTipado<FichaEmprestimoAluno>() { _RetornoServico = livro, Mensagem = $"Livro de código {livro.LivroId.ToString("0000000")} foi entregue com sucesso" };
+                    return new InconsistenciaDeValidacaoTipado<FichaEmprestimoAluno>() {TipoValidacao = Negocio.Enumeradores.Validacoes.TipoValidacaoEnum.AVISO, Mensagem = $"Livro de código {livro.LivroId.ToString("0000000")} foi entregue com sucesso" };
                 }
 
             }
             catch (Exception ex)
             {
                 _logger.LogError("Serviço 'Serviço de Ficha Emprestimo': Erro nos dados para Finalização da Ficha.", ex);
-                return new InconsistenciaDeValidacaoTipado<FichaEmprestimoAluno>() { _RetornoServico = ex, Mensagem = "Erro na entrega do livro" };
+                return new InconsistenciaDeValidacaoTipado<FichaEmprestimoAluno>() { Mensagem = $"Erro na entrega do livro: Erro -> {ex.Message}" };
             }
   
         }
@@ -157,16 +162,25 @@ namespace Biblioteca.Servicos.Contratos.ContratosDeServicosImplementados
         /// </summary>
         /// <param name="dados">Os Dados Para Finalização da Ficha De Emprestimo</param>
         /// <returns>InconsistenciaDeValidacaoTipado<FichaEmprestimoAluno></returns>
-        public InconsistenciaDeValidacaoTipado<FichaEmprestimoAluno> FinalizeFicha(FichaEmprestimoAlunoDto dados)
+        public InconsistenciaDeValidacaoTipado<FichaEmprestimoAluno> FinalizeFicha(FichaEmprestimoAluno dados)
         {
             _logger.LogInformation("Serviço 'Serviço de Ficha Emprestimo': Inicio da Finalização da Ficha");
             var fichaNova = new FichaEmprestimoAluno();
             try
             {
-                fichaNova = dados.ObtenhaEntidade();
+                fichaNova = dados;
                 fichaNova.StatusEmprestimo = FichaEmprestimoAlunoStatusEnum.ENTREGUE;
                 fichaNova.DataEntregaEmprestimo = DateTime.Now;
                 fichaNova.DataAtualizacao = DateTime.Now;
+
+                foreach (var item in fichaNova.FichaEmprestimoItens)
+                {
+                    if(item.DataStatusItem == DateTime.MinValue || item.StatusItem == FichaEmprestimoAlunoItensStatusEnum.A_ENTREGAR) 
+                    {
+                        item.DataStatusItem = DateTime.Now;
+                        item.StatusItem = FichaEmprestimoAlunoItensStatusEnum.ENTREGUE;
+                    }
+                }
 
                 _logger.LogInformation("Serviço 'Serviço de Ficha Emprestimo': Validandação da Finalização da Ficha");
                 var inconsistencias = new ServicoValidacaoFichaEmprestimoAluno().ValideFinalizacaoFicha(fichaNova);
@@ -189,7 +203,7 @@ namespace Biblioteca.Servicos.Contratos.ContratosDeServicosImplementados
             catch (Exception ex)
             {
                 _logger.LogError("Serviço 'Serviço de Ficha Emprestimo': Erro nos dados para Finalização da Ficha.", ex);
-                return new InconsistenciaDeValidacaoTipado<FichaEmprestimoAluno>() { _RetornoServico = ex, Mensagem = "Erro na Finalização da Ficha" };
+                return new InconsistenciaDeValidacaoTipado<FichaEmprestimoAluno>() {Mensagem = $"Erro na Finalização da Ficha: Erro -> {ex.Message}" };
             }
 
         }

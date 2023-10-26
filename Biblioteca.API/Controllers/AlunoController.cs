@@ -1,4 +1,5 @@
 ﻿using Biblioteca.Infraestrutura.Ferramentas.Extensoes;
+using Biblioteca.Negocio.Atributos;
 using Biblioteca.Negocio.Dtos.Alunos;
 using Biblioteca.Negocio.Enumeradores.Usuarios;
 using Biblioteca.Negocio.Validacoes.Alunos;
@@ -24,6 +25,7 @@ namespace Biblioteca.API.Controllers
         }
 
         [Authorize]
+        [VersaoApi(VersaoDaApi = "V1.0")]
         [HttpPost("Cadastrar")]
         public IActionResult Cadastrar(AlunoDto dto) 
         {
@@ -58,6 +60,7 @@ namespace Biblioteca.API.Controllers
         }
 
         [Authorize]
+        [VersaoApi(VersaoDaApi = "V1.0")]
         [HttpPut("Atualizar")]
         public IActionResult Atualizar(AlunoDto dto)
         {
@@ -92,6 +95,7 @@ namespace Biblioteca.API.Controllers
         }
 
         [Authorize]
+        [VersaoApi(VersaoDaApi = "V1.0")]
         [Authorize(Roles = Permissoes.ADMINISTRADOR)]
         [HttpDelete("Deletar/{Id}")]
         public IActionResult Deletar(int Id)
@@ -127,6 +131,7 @@ namespace Biblioteca.API.Controllers
         }
 
         [Authorize]
+        [VersaoApi(VersaoDaApi = "V1.0")]
         [HttpGet("ObtenhaTodosAlunos")]
         public IActionResult ObtenhaTodosAlunos() 
         {
@@ -160,6 +165,7 @@ namespace Biblioteca.API.Controllers
         }
 
         [Authorize]
+        [VersaoApi(VersaoDaApi = "V1.0")]
         [HttpGet("ObtenhaAluno/{Id}")]
         public IActionResult ObtenhaAluno(int Id) 
         {

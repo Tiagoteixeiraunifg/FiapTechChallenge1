@@ -1,4 +1,7 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Biblioteca.Negocio.Atributos;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Filters;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 
 namespace Biblioteca.API.Controllers
 {
@@ -7,7 +10,34 @@ namespace Biblioteca.API.Controllers
     {
         protected ILogger<T> _logger;
 
+
+        public override void OnActionExecuting(ActionExecutingContext context)
+        {
+            var objetos = context.ActionDescriptor.EndpointMetadata;
+
+            foreach (var objeto in objetos) 
+            {
+                if (objeto.GetType() == (typeof(VersaoApi))) 
+                {
+                    var Atributo = (VersaoApi)objeto;                
+                    base.HttpContext.Response.Headers.Add("VersaoAPI",$"{Atributo.VersaoDaApi}");
+                }
+            }
+
+
+
+            base.OnActionExecuting(context);    
+        }
+
+
+
+
+
+
+
+
+
+
+
     }
-
-
 }

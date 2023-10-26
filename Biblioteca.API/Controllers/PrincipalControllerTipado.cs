@@ -5,8 +5,8 @@ namespace Biblioteca.API.Controllers
 {
     public class PrincipalControllerTipado<T> : ControladorAbstratoComContexto<PrincipalControllerTipado<T>>
     {
-        protected ICollection<string> Erros = new List<string>();
-
+        protected ICollection<KeyValuePair<string,string>> Erros = new List<KeyValuePair<string, string>>();
+ 
         protected IActionResult RespostaResponalizada(InconsistenciaDeValidacaoTipado<T> inconsistenciaDeValidacao)
         {
             AdicionarErroProcessamento(inconsistenciaDeValidacao);
@@ -27,7 +27,7 @@ namespace Biblioteca.API.Controllers
         {
             foreach (var error in inconsistenciaDeValidacao.listaDeInconsistencias)
             {
-                Erros.Add(error.Mensagem.ToString());
+                Erros.Add(new KeyValuePair<string, string>(error.TipoValidacao.ToString(), error.Mensagem.ToString()));
             }
         }
 

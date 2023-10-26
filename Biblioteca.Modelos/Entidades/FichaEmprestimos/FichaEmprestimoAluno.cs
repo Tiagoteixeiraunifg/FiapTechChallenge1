@@ -1,17 +1,21 @@
-﻿using Biblioteca.Negocio.Entidades.Alunos;
+﻿using Biblioteca.Negocio.Dtos.FichaEmprestimoAlunos;
+using Biblioteca.Negocio.Entidades.Alunos;
 using Biblioteca.Negocio.Entidades.Livros;
 using Biblioteca.Negocio.Entidades.Usuarios;
 using Biblioteca.Negocio.Enumeradores.FichaEmprestimoAlunos;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Biblioteca.Negocio.Utilidades.Conversores;
+using Microsoft.EntityFrameworkCore;
+
 
 namespace Biblioteca.Negocio.Entidades.FichaEmprestimos
 {
     public class FichaEmprestimoAluno : EntidadeBase
     {
+        private Conversor<FichaEmprestimoAluno, FichaEmprestimoAlunoDto> _Conversor;
+        public FichaEmprestimoAluno()
+        {
+            _Conversor = new Conversor<FichaEmprestimoAluno, FichaEmprestimoAlunoDto>();
+        }
         public Guid Codigo { get; set; }
 
         public int UsuarioId { get; set; }
@@ -35,5 +39,7 @@ namespace Biblioteca.Negocio.Entidades.FichaEmprestimos
         public DateTime DataCriacao { get; set; }
 
         public DateTime DataAtualizacao { get; set; }
+
+        public FichaEmprestimoAlunoDto ObtenhaDto() => _Conversor.ConvertaPara(this);
     }
 }
