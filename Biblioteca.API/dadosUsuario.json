@@ -1,0 +1,14 @@
+[
+  {
+    "Nome": "Usuario1",
+    "Email": "dasafa1577@undewp.com",
+    "Senha": "teste@123",
+    "Permissao": 1
+  },
+  {
+    "Nome": "Usuario2",
+    "Email": "dasafa1577@undewp.com",
+    "Senha": "teste@123",
+    "Permissao": 2
+  }
+]
