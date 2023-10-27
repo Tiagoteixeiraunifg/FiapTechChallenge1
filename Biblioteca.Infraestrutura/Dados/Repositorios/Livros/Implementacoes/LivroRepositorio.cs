@@ -12,7 +12,7 @@ namespace Biblioteca.Infraestrutura.Dados.Repositorios.Livros.Implementacoes
 
         }
 
-        public void CadastrarLivros(List<Livro> livros)
+        public void CadastrarLivros(IList<Livro> livros)
         {
             foreach (var livro in livros)
             {

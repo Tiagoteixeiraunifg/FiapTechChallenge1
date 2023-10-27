@@ -4,11 +4,7 @@ using Biblioteca.Infraestrutura.Dados.Repositorios.Usuarios.Interfaces;
 using Biblioteca.Infraestrutura.Ferramentas.Criptografia;
 using Biblioteca.Negocio.Entidades.Usuarios;
 using Biblioteca.Servicos.Contratos.Servicos;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
 
 namespace Biblioteca.Servicos.Contratos.ContratosDeServicosImplementados
 {
@@ -32,6 +28,11 @@ namespace Biblioteca.Servicos.Contratos.ContratosDeServicosImplementados
         public Usuario Cadastrar(Usuario obj)
         {
             return base.Cadastre(obj);
+        }
+
+        public void CadastrarUsuarios(IList<Usuario> usuarios)
+        {
+            throw new NotImplementedException();
         }
 
         public bool DeleteUsuario(int Id)
