@@ -11,8 +11,10 @@
   </PropertyGroup>
   <ItemGroup>
     <Content Remove="dados.json" />
+    <Content Remove="dadosUsuario.json" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="dadosUsuario.json" />
     <None Include="dados.json" />
   </ItemGroup>
   <ItemGroup>

@@ -107,7 +107,7 @@ namespace Biblioteca.Servicos.Contratos.ContratosDeServicosImplementados
            
         }
 
-        public void CadastrarLivros(List<Livro> livros)
+        public void CadastrarLivros(IList<Livro> livros)
         {
             CadastrarLivros(livros);
         }
