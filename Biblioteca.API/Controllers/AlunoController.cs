@@ -7,7 +7,7 @@ using Biblioteca.Servicos.Contratos.Servicos;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Org.BouncyCastle.Ocsp;
+
 
 namespace Biblioteca.API.Controllers
 {
@@ -24,6 +24,12 @@ namespace Biblioteca.API.Controllers
             _servicoAluno = servicoAluno;
         }
 
+        /// <summary>
+        /// Cadastro do Aluno
+        /// </summary>
+        /// <param name="dto">Dados para Cadastro</param>
+        /// <returns>Dados do Aluno Cadastrado</returns>
+        /// <remarks>DtoAluno</remarks>
         [Authorize]
         [VersaoApi(VersaoDaApi = "V1.0")]
         [HttpPost("Cadastrar")]
@@ -59,6 +65,12 @@ namespace Biblioteca.API.Controllers
             }
         }
 
+        /// <summary>
+        /// Atualiza um Cadastro de Aluno
+        /// </summary>
+        /// <param name="dto">Dados para Atualização</param>
+        /// <returns>Dados do Aluno Atualizado</returns>
+        /// <remarks>DtoAluno</remarks>
         [Authorize]
         [VersaoApi(VersaoDaApi = "V1.0")]
         [HttpPut("Atualizar")]
@@ -94,6 +106,12 @@ namespace Biblioteca.API.Controllers
             }
         }
 
+        /// <summary>
+        /// Remove um Aluno Cadastrado
+        /// </summary>
+        /// <param name="Id">AlunoId numérico</param>
+        /// <returns>Resultado da Operação</returns>
+        /// <remarks>AlunoId -> numérico</remarks>
         [Authorize]
         [VersaoApi(VersaoDaApi = "V1.0")]
         [Authorize(Roles = Permissoes.ADMINISTRADOR)]
@@ -130,6 +148,11 @@ namespace Biblioteca.API.Controllers
             }
         }
 
+        /// <summary>
+        /// Obtem uma Coleção com Todos os Alunos Cadastrados
+        /// </summary>
+        /// <returns>Coleção com Todos Alunos</returns>
+        /// <remarks>Sem parâmtros</remarks>
         [Authorize]
         [VersaoApi(VersaoDaApi = "V1.0")]
         [HttpGet("ObtenhaTodosAlunos")]
@@ -164,6 +187,12 @@ namespace Biblioteca.API.Controllers
             }
         }
 
+        /// <summary>
+        /// Obtem um Aluno pelo Id
+        /// </summary>
+        /// <param name="Id">AlunoId numérico</param>
+        /// <returns>Aluno Cadastrado</returns>
+        /// <remarks>AlunoId -> numérico</remarks>
         [Authorize]
         [VersaoApi(VersaoDaApi = "V1.0")]
         [HttpGet("ObtenhaAluno/{Id}")]

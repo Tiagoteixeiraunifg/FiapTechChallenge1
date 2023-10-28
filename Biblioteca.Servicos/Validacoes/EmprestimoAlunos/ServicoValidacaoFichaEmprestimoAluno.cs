@@ -97,9 +97,10 @@ namespace Biblioteca.Servicos.Validacoes.EmprestimoAlunos
 
             using (IRepositorioGenerico<Livro> repLivro = new EFRepositorioGenerico<Livro>(Contexto))
             {
-                var livro = repLivro.ObtenhaDbSet().AsNoTracking().ToList();
+                var livros = repLivro.ObtenhaDbSet().AsNoTracking().ToList();
 
-                quantidadeTotalLivro = livro.PossuiValor() && livro.Any(x => x.Id == LivroId) ? livro.Where(x => x.Id == LivroId).First().QuantidadeEstoque : 0; 
+                quantidadeTotalLivro = (livros.PossuiValor() && livros.Any(x => x.Id == LivroId) )
+                    ? livros.Where(x => x.Id == LivroId).First().QuantidadeEstoque : 0; 
             }
 
 

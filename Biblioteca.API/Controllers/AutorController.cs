@@ -9,7 +9,7 @@ namespace Biblioteca.API.Controllers
 {
     //[Authorize]
     [ApiController]
-    [Route("[controller]/v1")]
+    [Route("Autores/v1")]
     public class AutorController : PrincipalController
     {
         private readonly IServicoAutor _servicoAutor;
@@ -20,6 +20,11 @@ namespace Biblioteca.API.Controllers
             _servicoAutor = servicoAutor;
         }
 
+        /// <summary>
+        /// Cadastra um Autor
+        /// </summary>
+        /// <param name="dto">DtoAutor</param>
+        /// <returns>Autor Cadastrado</returns>
         [Authorize]
         [VersaoApi(VersaoDaApi = "V1.0")]
         [HttpPost("Cadastrar")]
@@ -29,6 +34,11 @@ namespace Biblioteca.API.Controllers
             return RespostaResponalizada(retorno);
         }
 
+        /// <summary>
+        /// Atualiza um Autor
+        /// </summary>
+        /// <param name="dto">DtoAutor</param>
+        /// <returns>Autor Atualizado</returns>
         [Authorize]
         [VersaoApi(VersaoDaApi = "V1.0")]
         [HttpPut("Atualizar")]
@@ -38,16 +48,26 @@ namespace Biblioteca.API.Controllers
             return RespostaResponalizada(retorno);
         }
 
+        /// <summary>
+        /// Remove um Autor
+        /// </summary>
+        /// <param name="id">AutorId -> Numérico</param>
+        /// <returns>Retorno da Requisição</returns>
         [Authorize]
         [VersaoApi(VersaoDaApi = "V1.0")]
         [Authorize(Roles = Permissoes.ADMINISTRADOR)]
         [HttpDelete("Deletar{id}")]
-        public IActionResult Atualizar(int id)
+        public IActionResult Deletar(int id)
         {
             var retorno = _servicoAutor.Deletar(id);
             return RespostaResponalizada(retorno);
         }
 
+        /// <summary>
+        /// Obtenha um Autor por Id
+        /// </summary>
+        /// <param name="id">AutorId -> numérico</param>
+        /// <returns>Dados do Autor</returns>
         [Authorize]
         [VersaoApi(VersaoDaApi = "V1.0")]
         [HttpGet("ObterPorId/{id}")]
@@ -57,6 +77,10 @@ namespace Biblioteca.API.Controllers
             return RespostaResponalizada(retorno);
         }
 
+        /// <summary>
+        /// Obtem uma coleção com Todos Autores
+        /// </summary>
+        /// <returns>Coleção de Autores</returns>
         [Authorize]
         [VersaoApi(VersaoDaApi = "V1.0")]
         [HttpGet("ObterTodos")]

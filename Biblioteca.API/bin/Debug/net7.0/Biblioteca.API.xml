@@ -4,10 +4,292 @@
         <name>Biblioteca.API</name>
     </assembly>
     <members>
+        <member name="M:Biblioteca.API.Controllers.AlunoController.Cadastrar(Biblioteca.Negocio.Dtos.Alunos.AlunoDto)">
+            <summary>
+            Cadastro do Aluno
+            </summary>
+            <param name="dto">Dados para Cadastro</param>
+            <returns>Dados do Aluno Cadastrado</returns>
+            <remarks>DtoAluno</remarks>
+        </member>
+        <member name="M:Biblioteca.API.Controllers.AlunoController.Atualizar(Biblioteca.Negocio.Dtos.Alunos.AlunoDto)">
+            <summary>
+            Atualiza um Cadastro de Aluno
+            </summary>
+            <param name="dto">Dados para Atualização</param>
+            <returns>Dados do Aluno Atualizado</returns>
+            <remarks>DtoAluno</remarks>
+        </member>
+        <member name="M:Biblioteca.API.Controllers.AlunoController.Deletar(System.Int32)">
+            <summary>
+            Remove um Aluno Cadastrado
+            </summary>
+            <param name="Id">AlunoId numérico</param>
+            <returns>Resultado da Operação</returns>
+            <remarks>AlunoId -> numérico</remarks>
+        </member>
+        <member name="M:Biblioteca.API.Controllers.AlunoController.ObtenhaTodosAlunos">
+            <summary>
+            Obtem uma Coleção com Todos os Alunos Cadastrados
+            </summary>
+            <returns>Coleção com Todos Alunos</returns>
+            <remarks>Sem parâmtros</remarks>
+        </member>
+        <member name="M:Biblioteca.API.Controllers.AlunoController.ObtenhaAluno(System.Int32)">
+            <summary>
+            Obtem um Aluno pelo Id
+            </summary>
+            <param name="Id">AlunoId numérico</param>
+            <returns>Aluno Cadastrado</returns>
+            <remarks>AlunoId -> numérico</remarks>
+        </member>
         <member name="T:Biblioteca.API.Controllers.AutenticacaoController">
             <summary>
             Porta de entrada para autenticação.
             </summary>
+        </member>
+        <member name="M:Biblioteca.API.Controllers.AutenticacaoController.Autentique(Biblioteca.Negocio.Entidades.Usuarios.Usuario)">
+            <summary>
+            Autêntica um Usuário
+            </summary>
+            <param name="dto">Dados do Usuário</param>
+            <returns>Token de Autenticação JWT</returns>
+            <remarks>
+            Observação: Deve informar apenas Nome e Senha.
+            {    
+                "nome": "string",  
+                "senha": "string", 
+            }
+            </remarks>
+        </member>
+        <member name="M:Biblioteca.API.Controllers.AutenticacaoController.Cadastre(Biblioteca.Negocio.Entidades.Usuarios.Usuario)">
+            <summary>
+            Cadastra um usuário para Acesso do Sistema
+            </summary>
+            <param name="dto">Dados do Cadastro</param>
+            <returns>Dados cadastrados</returns>
+            <remarks>
+            Observação: Permissões = (2 - OPERADOR, 1- ADMINISTRADOR )
+            
+            {   
+                "nome": "string",  
+                "email": "string",  
+                "senha": "string",  
+                "permissao": 1
+            }
+            </remarks>
+        </member>
+        <member name="M:Biblioteca.API.Controllers.AutenticacaoController.RenovarToken(System.String)">
+            <summary>
+            Renova o tokem passado como paramêtro
+            </summary>
+            <param name="token">Token para renovação</param>
+            <returns>String Token Renovado</returns>
+        </member>
+        <member name="M:Biblioteca.API.Controllers.AutorController.Cadastrar(Biblioteca.Negocio.Dtos.Autores.CadastrarAutorDto)">
+            <summary>
+            Cadastra um Autor
+            </summary>
+            <param name="dto">DtoAutor</param>
+            <returns>Autor Cadastrado</returns>
+        </member>
+        <member name="M:Biblioteca.API.Controllers.AutorController.Atualizar(Biblioteca.Negocio.Dtos.Autores.AlterarAutorDto)">
+            <summary>
+            Atualiza um Autor
+            </summary>
+            <param name="dto">DtoAutor</param>
+            <returns>Autor Atualizado</returns>
+        </member>
+        <member name="M:Biblioteca.API.Controllers.AutorController.Deletar(System.Int32)">
+            <summary>
+            Remove um Autor
+            </summary>
+            <param name="id">AutorId -> Numérico</param>
+            <returns>Retorno da Requisição</returns>
+        </member>
+        <member name="M:Biblioteca.API.Controllers.AutorController.ObterPorId(System.Int32)">
+            <summary>
+            Obtenha um Autor por Id
+            </summary>
+            <param name="id">AutorId -> numérico</param>
+            <returns>Dados do Autor</returns>
+        </member>
+        <member name="M:Biblioteca.API.Controllers.AutorController.ObterTodos">
+            <summary>
+            Obtem uma coleção com Todos Autores
+            </summary>
+            <returns>Coleção de Autores</returns>
+        </member>
+        <member name="M:Biblioteca.API.Controllers.EditoraController.Cadastrar(Biblioteca.Negocio.Dtos.Editoras.CadastroEditoraDto)">
+            <summary>
+            Cadastra uma Editora
+            </summary>
+            <param name="dto">DtoEditora</param>
+            <returns>Dados Cadastrados</returns>
+        </member>
+        <member name="M:Biblioteca.API.Controllers.EditoraController.Atualizar(Biblioteca.Negocio.Dtos.Editoras.AlterarEditoraDto)">
+            <summary>
+            Atualiza uma Editora 
+            </summary>
+            <param name="dto">DtoEditora</param>
+            <returns>Dados Atualizados</returns>
+        </member>
+        <member name="M:Biblioteca.API.Controllers.EditoraController.Deletar(System.Int32)">
+            <summary>
+            Remove um Editora
+            </summary>
+            <param name="id">EditoraId -> numérico</param>
+            <returns>Resposta da Requisição</returns>
+        </member>
+        <member name="M:Biblioteca.API.Controllers.EditoraController.ObterPorId(System.Int32)">
+            <summary>
+            Obtem uma Editora por Id
+            </summary>
+            <param name="id">EditoraId -> numérico</param>
+            <returns>Dados da Editora</returns>
+        </member>
+        <member name="M:Biblioteca.API.Controllers.EditoraController.ObterTodos">
+            <summary>
+            Obtem uma coleção de Editoras
+            </summary>
+            <returns>Coleção de Editoras</returns>
+        </member>
+        <member name="M:Biblioteca.API.Controllers.FichaEmprestimoController.Cadastrar(Biblioteca.Negocio.Dtos.FichaEmprestimoAlunos.FichaEmprestimoAlunoDto)">
+             <summary>
+             Cadastra a Ficha de Emprestimo do Aluno
+             </summary>
+             <param name="dto"></param>
+             <returns>Ficha cadastrada do Aluno</returns>
+            <remarks>
+            JSON - Objeto para cadastro padrão.
+            ENUMERADORES: StatusItem => (1-ENTREGUE, 2-A_ENTREGAR), statusEmprestimoDescricao: texto (NORMAL, ATRASADA, ENTREGUE)
+             </remarks>
+        </member>
+        <member name="M:Biblioteca.API.Controllers.FichaEmprestimoController.Finalizar(System.Int32)">
+            <summary>
+            Finalizar a Ficha de Emprestimo do Aluno
+            </summary>
+            <param name="FichaId"></param>
+            <returns>Objeto da Ficha de Emprestimo</returns>
+            <remarks>
+            Parametro: Id tipo numérico
+            </remarks>
+        </member>
+        <member name="M:Biblioteca.API.Controllers.FichaEmprestimoController.EntregarLivro(System.Int32,System.Int32)">
+            <summary>
+            Executa a entrega de um livro contida em uma Ficha de Emprestimo
+            </summary>
+            <param name="LivroId"></param>
+            <param name="FichaId"></param>
+            <returns>Resultado da operação</returns>
+        </member>
+        <member name="M:Biblioteca.API.Controllers.FichaEmprestimoController.ExcluirFicha(System.Int32)">
+            <summary>
+            Exclui a Ficha de Emprestimo
+            </summary>
+            <param name="FichaId"></param>
+            <returns>Resultado da operação</returns>
+        </member>
+        <member name="M:Biblioteca.API.Controllers.FichaEmprestimoController.ObtenhaTodasFichas">
+            <summary>
+            Obtem todas as fichas
+            </summary>
+            <returns>Coleção com todas as fichas</returns>
+        </member>
+        <member name="M:Biblioteca.API.Controllers.FichaEmprestimoController.ObtenhaTodosFichasDoAlunoNoIntervalo(System.String,System.String,System.Int32,System.Int32)">
+            <summary>
+            
+            </summary>
+            <param name="DataInicio"></param>
+            <param name="DataFim"></param>
+            <param name="AlunoId"></param>
+            <param name="Situacao"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Biblioteca.API.Controllers.FichaEmprestimoController.ObtenhaFichasNoIntervaloEmAtraso(System.String,System.String)">
+            <summary>
+            Obtem as fichas no intervalo em atraso de entrega a 8 dias
+            </summary>
+            <param name="DataInicio"></param>
+            <param name="DataFim"></param>
+            <returns>Coleção com Fichas em atraso</returns>
+        </member>
+        <member name="M:Biblioteca.API.Controllers.FichaEmprestimoController.ObtenhaAsFichasDoAluno(System.Int32)">
+            <summary>
+            Obtem as fichas do aluno
+            </summary>
+            <param name="AlunoId"></param>
+            <returns>Fichas do aluno</returns>
+            <remarks>Parametro: Id tipo numérico</remarks>
+        </member>
+        <member name="M:Biblioteca.API.Controllers.FichaEmprestimoController.ObtenhaFicha(System.Int32)">
+            <summary>
+            Obtem a ficha
+            </summary>
+            <param name="FichaId"></param>
+            <returns>Ficha Emprestimo</returns>
+            <remarks>Parametro: Id tipo numérico</remarks>
+        </member>
+        <member name="M:Biblioteca.API.Controllers.LivroController.Cadastre(Biblioteca.Negocio.Dtos.Livros.LivroDto)">
+            <summary>
+            Cadastra um Livro
+            </summary>
+            <param name="dto">DtoLivro</param>
+            <returns>Dados Cadastrados</returns>
+        </member>
+        <member name="M:Biblioteca.API.Controllers.LivroController.Atualize(Biblioteca.Negocio.Dtos.Livros.LivroDto)">
+            <summary>
+            Atualiza um Livro
+            </summary>
+            <param name="dto">DtoLivro</param>
+            <returns>Dados Atualizados</returns>
+        </member>
+        <member name="M:Biblioteca.API.Controllers.LivroController.Delete(System.Int32)">
+            <summary>
+            Remove um Livro por Id
+            </summary>
+            <param name="id">LivroId -> numérico</param>
+            <returns>Resposta da Reqquisição</returns>
+        </member>
+        <member name="M:Biblioteca.API.Controllers.LivroController.ObtenhaLivro(System.Int32)">
+            <summary>
+            Obtem um Livro pelo Id
+            </summary>
+            <param name="Id">LivroId -> numérico</param>
+            <returns></returns>
+        </member>
+        <member name="M:Biblioteca.API.Controllers.LivroController.ObtenhaTodosLivros">
+            <summary>
+            Obtem uma Coleção de Livros
+            </summary>
+            <returns>Coleção de Livros</returns>
+        </member>
+        <member name="M:Biblioteca.API.Controllers.UsuarioController.Atualizar(Biblioteca.Negocio.Entidades.Usuarios.Usuario)">
+            <summary>
+            Atualiza um usuário
+            </summary>
+            <param name="dto">DtoUsuario</param>
+            <returns>Dados Atualizados</returns>
+        </member>
+        <member name="M:Biblioteca.API.Controllers.UsuarioController.Deletar(System.Int32)">
+            <summary>
+            Remove um Usuário Pelo Id
+            </summary>
+            <param name="Id">UsuarioId</param>
+            <returns>Resposta da Requisição</returns>
+        </member>
+        <member name="M:Biblioteca.API.Controllers.UsuarioController.ObtenhaTodos">
+            <summary>
+            Obtem uma Coleção de Usuarios
+            </summary>
+            <returns>Coleção de Usuários</returns>
+        </member>
+        <member name="M:Biblioteca.API.Controllers.UsuarioController.ObtenhaUsuario(System.Int32)">
+            <summary>
+            Obtem um Usuario Pelo Id
+            </summary>
+            <param name="Id">UsuarioId -> numérico</param>
+            <returns>Dados do Usuario</returns>
         </member>
     </members>
 </doc>

@@ -12,7 +12,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace Biblioteca.API.Controllers
 {
     [ApiController]
-    [Route("Usuario/v1")]
+    [Route("Usuarios/v1")]
     public class UsuarioController : ControladorAbstratoComContexto<UsuarioController>
     {
         private readonly IServicoUsuario _servicoUsuario;
@@ -23,6 +23,11 @@ namespace Biblioteca.API.Controllers
             _servicoUsuario = servicoUsuario;
         }
 
+        /// <summary>
+        /// Atualiza um usuário
+        /// </summary>
+        /// <param name="dto">DtoUsuario</param>
+        /// <returns>Dados Atualizados</returns>
         [Authorize]
         [VersaoApi(VersaoDaApi = "V1.0")]
         [Authorize(Roles = Permissoes.ADMINISTRADOR)]
@@ -67,6 +72,11 @@ namespace Biblioteca.API.Controllers
             }
         }
 
+        /// <summary>
+        /// Remove um Usuário Pelo Id
+        /// </summary>
+        /// <param name="Id">UsuarioId</param>
+        /// <returns>Resposta da Requisição</returns>
         [Authorize]
         [VersaoApi(VersaoDaApi = "V1.0")]
         [Authorize(Roles = Permissoes.ADMINISTRADOR)]
@@ -105,6 +115,10 @@ namespace Biblioteca.API.Controllers
             }
         }
 
+        /// <summary>
+        /// Obtem uma Coleção de Usuarios
+        /// </summary>
+        /// <returns>Coleção de Usuários</returns>
         [Authorize]
         [VersaoApi(VersaoDaApi = "V1.0")]
         [HttpGet("ObtenhaTodos")]
@@ -136,6 +150,11 @@ namespace Biblioteca.API.Controllers
             }
         }
 
+        /// <summary>
+        /// Obtem um Usuario Pelo Id
+        /// </summary>
+        /// <param name="Id">UsuarioId -> numérico</param>
+        /// <returns>Dados do Usuario</returns>
         [Authorize]
         [VersaoApi(VersaoDaApi = "V1.0")]
         [HttpGet("ObtenhaUsuario/{Id}")]

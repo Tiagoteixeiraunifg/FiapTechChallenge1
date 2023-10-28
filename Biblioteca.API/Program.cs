@@ -1,11 +1,12 @@
 using Biblioteca.Infraestrutura.Dados.Configuracao;
-using Biblioteca.Infraestrutura.Dados.Contextos;
+using Biblioteca.Infraestrutura.Dados.ServicoDados.Interfaces;
 using Biblioteca.Infraestrutura.Logs.Fabricas;
 using Biblioteca.Infraestrutura.Logs.Provedor;
 using Biblioteca.Infraestrutura.Seguranca.JWT.Interfaces;
 using Biblioteca.Infraestrutura.Seguranca.JWT.Servico;
 using Biblioteca.Servicos.Contratos.ContratosDeServicosImplementados;
 using Biblioteca.Servicos.Contratos.Servicos;
+using Biblioteca.Servicos.Notificacoes.Emails;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
@@ -33,6 +34,8 @@ builder.Services.AddScoped<IServicoAutor, ServicoAutor>();
 builder.Services.AddScoped<IServicoEditora, ServicoEditora>();
 builder.Services.AddScoped<IServicoFichaEmprestimoAluno, ServicoFichaEmprestimoAlunoImpl>();
 
+//Adicionando Servico de Notificações
+builder.Services.InicieServicoNotificacao(configuracao);
 
 
 

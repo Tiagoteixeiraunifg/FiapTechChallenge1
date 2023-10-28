@@ -9,6 +9,7 @@ using Biblioteca.Negocio.Entidades.Livros;
 using Biblioteca.Negocio.Enumeradores.FichaEmprestimoAlunos;
 using Biblioteca.Negocio.Validacoes.FabricaDeValidacoes;
 using Biblioteca.Servicos.Contratos.Servicos;
+using Biblioteca.Servicos.Notificacoes.Emails.Servico;
 using Biblioteca.Servicos.Validacoes.EmprestimoAlunos;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
@@ -24,9 +25,12 @@ namespace Biblioteca.Servicos.Contratos.ContratosDeServicosImplementados
 
         
         private readonly ILogger _logger;
+        private readonly INotificacaoEmail _NotificacaoEmail;
 
-        public ServicoFichaEmprestimoAlunoImpl(ApplicationDbContext contexto, ILogger<ServicoFichaEmprestimoAlunoImpl> logger) : base(contexto)
+
+        public ServicoFichaEmprestimoAlunoImpl(ApplicationDbContext contexto, ILogger<ServicoFichaEmprestimoAlunoImpl> logger, INotificacaoEmail Notificacao) : base(contexto)
         {
+            this._NotificacaoEmail = Notificacao;
             this._logger = logger;
             this._contexto = contexto;
         }
@@ -59,7 +63,24 @@ namespace Biblioteca.Servicos.Contratos.ContratosDeServicosImplementados
             try
             {
                 base.Cadastre(fichaNova);
-                var cadastroAtualizado = _DbSet.AsNoTracking().Where(x => x.Codigo == fichaNova.Codigo).Include(X => X.FichaEmprestimoItens).FirstOrDefault();
+                var cadastroAtualizado = _DbSet.AsNoTracking().Where(x => x.Codigo == fichaNova.Codigo)
+                    .Include(X => X.FichaEmprestimoItens)
+                    .ThenInclude(x => x.Livro)
+                    .ThenInclude(x => x.Editora)
+                    .Include(x => x.Aluno)
+                    .FirstOrDefault();
+
+                try
+                {
+                    _NotificacaoEmail.NotifiqueGravacaoFicha(cadastroAtualizado);
+                }
+                catch (Exception ex)
+                {
+                    _logger.LogError("Serviço 'Serviço de Ficha Emprestimo': Erro no envio da Notificação.", ex);
+                    return new InconsistenciaDeValidacaoTipado<FichaEmprestimoAluno>() {Mensagem = "Erro no envio da Notificação da Ficha" };
+                }
+                
+                
                 _logger.LogInformation("Serviço 'Serviço de Ficha Emprestimo': Fim da persistência dos dados.");
                 return new InconsistenciaDeValidacaoTipado<FichaEmprestimoAluno>() { _RetornoServico = cadastroAtualizado, Mensagem = "Cadastrado com Sucesso" };
 
@@ -67,7 +88,7 @@ namespace Biblioteca.Servicos.Contratos.ContratosDeServicosImplementados
             catch (Exception ex)
             {
                 _logger.LogError("Serviço 'Serviço de Ficha Emprestimo': Erro nos dados para cadastro.", ex);
-                return new InconsistenciaDeValidacaoTipado<FichaEmprestimoAluno>() { _RetornoServico = ex, Mensagem = "Erro no cadastro da Ficha" };
+                return new InconsistenciaDeValidacaoTipado<FichaEmprestimoAluno>() { Mensagem = "Erro no cadastro da Ficha" };
             }
 
         }
@@ -194,7 +215,23 @@ namespace Biblioteca.Servicos.Contratos.ContratosDeServicosImplementados
                 _logger.LogInformation("Serviço 'Serviço de Ficha Emprestimo': Inicio da persistência da Finalização da Ficha");
                 base.Altere(fichaNova);
 
-                var fichaFinalizada = _DbSet.AsNoTracking().Where(x => x.Codigo == fichaNova.Codigo).FirstOrDefault();
+                var fichaFinalizada = _DbSet.AsNoTracking().Where(x => x.Codigo == fichaNova.Codigo)
+                    .Include(X => X.FichaEmprestimoItens)
+                    .ThenInclude(x => x.Livro)
+                    .ThenInclude(x => x.Editora)
+                    .Include(x => x.Aluno)
+                    .FirstOrDefault();
+
+                try
+                {
+                    _NotificacaoEmail.NotifiqueFinalizacaoFicha(fichaFinalizada);
+                }
+                catch (Exception ex)
+                {
+                    _logger.LogError("Serviço 'Serviço de Ficha Emprestimo': Erro no envio da Notificação.", ex);
+                    return new InconsistenciaDeValidacaoTipado<FichaEmprestimoAluno>() {Mensagem = "Erro no envio da Notificação da Ficha" };
+                }
+
                 _logger.LogInformation("Serviço 'Serviço de Ficha Emprestimo': Fim da persistência dos dados.");
                 return new InconsistenciaDeValidacaoTipado<FichaEmprestimoAluno>() { _RetornoServico = fichaFinalizada, Mensagem = "Finalizada com Sucesso" };
 
@@ -222,7 +259,12 @@ namespace Biblioteca.Servicos.Contratos.ContratosDeServicosImplementados
             try
             {
                 _logger.LogInformation("Serviço 'Serviço de Ficha Emprestimo': Buscando a Ficha");
-                return base.ObtenhaDbSet().Where(x => x.Id == FichaId).Include(x => x.FichaEmprestimoItens).FirstOrDefault();
+                return base.ObtenhaDbSet().Where(x => x.Id == FichaId)
+                    .Include(X => X.FichaEmprestimoItens)
+                    .ThenInclude(x => x.Livro)
+                    .ThenInclude(x => x.Editora)
+                    .Include(x => x.Aluno)
+                    .FirstOrDefault();
             }
             catch (Exception ex)
             {
@@ -249,7 +291,10 @@ namespace Biblioteca.Servicos.Contratos.ContratosDeServicosImplementados
                 _logger.LogInformation("Serviço 'Serviço de Ficha Emprestimo': Buscando as Fichas");
                 return base.ObtenhaDbSet().AsNoTracking().Where(x => x.AlunoId == AlunoId)
                     .Take(limiteRegistros)
-                    .Include(x => x.FichaEmprestimoItens)
+                    .Include(X => X.FichaEmprestimoItens)
+                    .ThenInclude(x => x.Livro)
+                    .ThenInclude(x => x.Editora)
+                    .Include(x => x.Aluno)
                     .ToList();
             }
             catch (Exception ex)
@@ -287,7 +332,10 @@ namespace Biblioteca.Servicos.Contratos.ContratosDeServicosImplementados
                                                                     && x.DataCriacao.Date >= DataInicial.Date 
                                                                     && x.DataCriacao.Date <= DataFinal.Date)
                                                                         .Take(limiteRegistros)
-                                                                        .Include(x => x.FichaEmprestimoItens)
+                                                                        .Include(X => X.FichaEmprestimoItens)
+                                                                        .ThenInclude(x => x.Livro)
+                                                                        .ThenInclude(x => x.Editora)
+                                                                        .Include(x => x.Aluno)
                                                                         .ToList();
             }
             catch (Exception ex)
@@ -316,7 +364,10 @@ namespace Biblioteca.Servicos.Contratos.ContratosDeServicosImplementados
                 var fichasEncontradas = base.ObtenhaDbSet().AsNoTracking().Where(x => x.DataCriacao.Date >= DataInicial.Date
                                                                     && x.DataCriacao.Date <= DataFinal.Date)
                                                                         .Take(limiteRegistros)
-                                                                        .Include(x => x.FichaEmprestimoItens)
+                                                                        .Include(X => X.FichaEmprestimoItens)
+                                                                        .ThenInclude(x => x.Livro)
+                                                                        .ThenInclude(x => x.Editora)
+                                                                        .Include(x => x.Aluno)
                                                                         .ToList();
                 
                 var FichasAtrasadasNoIntervalo = new List<FichaEmprestimoAluno>();
@@ -341,7 +392,7 @@ namespace Biblioteca.Servicos.Contratos.ContratosDeServicosImplementados
         /// <summary>
         /// Obtem uma coleção total das Fichas de Cadastro
         /// </summary>
-        /// <returns></returns>
+        /// <returns>Lista com todas as fichas</returns>
         public IList<FichaEmprestimoAluno> ObtenhaTodasFichas()
         {
             _logger.LogInformation("Serviço 'Serviço de Ficha Emprestimo': Inicio da busca das Fichas");
@@ -349,7 +400,10 @@ namespace Biblioteca.Servicos.Contratos.ContratosDeServicosImplementados
             {
                 _logger.LogInformation("Serviço 'Serviço de Ficha Emprestimo': Buscando as Fichas");
                 return base.ObtenhaDbSet().AsNoTracking()
-                    .Include(x => x.FichaEmprestimoItens)
+                    .Include(X => X.FichaEmprestimoItens)
+                    .ThenInclude(x => x.Livro)
+                    .ThenInclude(x => x.Editora)
+                    .Include(x => x.Aluno)
                     .ToList();
 
             }

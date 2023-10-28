@@ -11,7 +11,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace Biblioteca.API.Controllers
 {
     [ApiController]
-    [Route("FichaEmprestimo")]
+    [Route("FichaEmprestimos/v1")]
     public class FichaEmprestimoController : PrincipalControllerTipado<FichaEmprestimoAluno>
     {
         private readonly IServicoFichaEmprestimoAluno _ServicoFicha;
@@ -23,6 +23,15 @@ namespace Biblioteca.API.Controllers
             _ServicoFicha = servicoFicha;
         }
 
+        /// <summary>
+        /// Cadastra a Ficha de Emprestimo do Aluno
+        /// </summary>
+        /// <param name="dto"></param>
+        /// <returns>Ficha cadastrada do Aluno</returns>
+        ///<remarks>
+        ///JSON - Objeto para cadastro padrão.
+        ///ENUMERADORES: StatusItem => (1-ENTREGUE, 2-A_ENTREGAR), statusEmprestimoDescricao: texto (NORMAL, ATRASADA, ENTREGUE)
+        /// </remarks>
         [HttpPost("Cadastrar")]
         [Authorize]
         [VersaoApi(VersaoDaApi = "V1.0")]
@@ -32,6 +41,14 @@ namespace Biblioteca.API.Controllers
             return RespostaResponalizada(resposta);
         }
 
+        /// <summary>
+        /// Finalizar a Ficha de Emprestimo do Aluno
+        /// </summary>
+        /// <param name="FichaId"></param>
+        /// <returns>Objeto da Ficha de Emprestimo</returns>
+        /// <remarks>
+        /// Parametro: Id tipo numérico
+        /// </remarks>
         [HttpPost("Finalizar/{FichaId:int}")]
         [Authorize]
         [VersaoApi(VersaoDaApi = "V1.0")]
@@ -45,6 +62,12 @@ namespace Biblioteca.API.Controllers
             return RespostaResponalizada(resposta);
         }
 
+        /// <summary>
+        /// Executa a entrega de um livro contida em uma Ficha de Emprestimo
+        /// </summary>
+        /// <param name="LivroId"></param>
+        /// <param name="FichaId"></param>
+        /// <returns>Resultado da operação</returns>
         [HttpPost("EntregarLivro")]
         [Authorize]
         [VersaoApi(VersaoDaApi = "V1.0")]
@@ -54,6 +77,11 @@ namespace Biblioteca.API.Controllers
             return RespostaResponalizada(resposta);
         }
 
+        /// <summary>
+        /// Exclui a Ficha de Emprestimo
+        /// </summary>
+        /// <param name="FichaId"></param>
+        /// <returns>Resultado da operação</returns>
         [HttpDelete("ExcluirFicha/{FichaId:int}")]
         [Authorize]
         public IActionResult ExcluirFicha(int FichaId) 
@@ -62,6 +90,10 @@ namespace Biblioteca.API.Controllers
             return RespostaResponalizada( resposta);
         }
 
+        /// <summary>
+        /// Obtem todas as fichas
+        /// </summary>
+        /// <returns>Coleção com todas as fichas</returns>
         [HttpGet("ObtenhaTodasFichas")]
         [Authorize]
         [VersaoApi(VersaoDaApi = "V1.0")]
@@ -71,7 +103,14 @@ namespace Biblioteca.API.Controllers
             return RespostaResponalizada(resposta);
         }
 
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="DataInicio"></param>
+        /// <param name="DataFim"></param>
+        /// <param name="AlunoId"></param>
+        /// <param name="Situacao"></param>
+        /// <returns></returns>
         [HttpGet("ObtenhaFichasDoAlunoNoIntervalo")]
         [Authorize]
         [VersaoApi(VersaoDaApi = "V1.0")]
@@ -94,19 +133,38 @@ namespace Biblioteca.API.Controllers
         }
 
 
-
+        /// <summary>
+        /// Obtem as fichas no intervalo em atraso de entrega a 8 dias
+        /// </summary>
+        /// <param name="DataInicio"></param>
+        /// <param name="DataFim"></param>
+        /// <returns>Coleção com Fichas em atraso</returns>
         [HttpGet("ObtenhaFichasNoIntervaloEmAtraso")]
         [Authorize]
         [VersaoApi(VersaoDaApi = "V1.0")]
-        public IActionResult ObtenhaFichasNoIntervaloEmAtraso([FromQuery] DateTime DataInicio,
-                                                                 [FromQuery] DateTime DataFim)
+        public IActionResult ObtenhaFichasNoIntervaloEmAtraso([FromQuery] string DataInicio,
+                                                                 [FromQuery] string DataFim)
         {
-            var resposta = _ServicoFicha.ObtenhaFichasEmAtrasoDeEntregaPorIntervalo(DataInicio, DataFim, LIMITE_DE_REGISTRO_PADRAO);
+
+            DateTime dateIni;
+            DateTime dateFim;
+
+            if (!DateTime.TryParse(DataInicio, out dateIni) || !DateTime.TryParse(DataFim, out dateFim))
+            {
+                return RespostaResponalizada(null);
+            }
+
+            var resposta = _ServicoFicha.ObtenhaFichasEmAtrasoDeEntregaPorIntervalo(dateIni, dateFim, LIMITE_DE_REGISTRO_PADRAO);
             return RespostaResponalizada(resposta);
         }
 
 
-
+        /// <summary>
+        /// Obtem as fichas do aluno
+        /// </summary>
+        /// <param name="AlunoId"></param>
+        /// <returns>Fichas do aluno</returns>
+        /// <remarks>Parametro: Id tipo numérico</remarks>
         [HttpGet("ObtenhaAsFichasDoAluno/{AlunoId:int}")]
         [Authorize]
         [VersaoApi(VersaoDaApi = "V1.0")]
@@ -117,6 +175,12 @@ namespace Biblioteca.API.Controllers
 
         }
 
+        /// <summary>
+        /// Obtem a ficha
+        /// </summary>
+        /// <param name="FichaId"></param>
+        /// <returns>Ficha Emprestimo</returns>
+        /// <remarks>Parametro: Id tipo numérico</remarks>
         [HttpGet("ObtenhaFicha/{FichaId:int}")]
         [Authorize]
         [VersaoApi(VersaoDaApi = "V1.0")]

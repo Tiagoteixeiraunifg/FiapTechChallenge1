@@ -19,6 +19,7 @@ namespace Biblioteca.Servicos.Contratos.ContratosDeServicosImplementados
     {
 
         private ILogger<ServicoLivroImpl> _logger;
+
         public ServicoLivroImpl(ApplicationDbContext contexto, ILogger<ServicoLivroImpl> logger) : base(contexto)
         {
             _logger = logger;

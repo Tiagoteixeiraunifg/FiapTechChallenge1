@@ -86,6 +86,7 @@ namespace Biblioteca.Negocio.Validacoes.FichaEmprestimoAlunos
 
 
         }
+
         private void AssineRegrasDeCadastroDaFicha()
         {
 
@@ -95,6 +96,13 @@ namespace Biblioteca.Negocio.Validacoes.FichaEmprestimoAlunos
                 .TipoValidacao(Enumeradores.Validacoes.TipoValidacaoEnum.IMPEDITIVA)
                 .SobrescrevaPropriedade("Status Ficha")
                 .WithMessage("Para cadastro de ficha o status deve ser informado como NORMAL");
+
+            RuleFor(x => x)
+                .Must(x => x.FichaEmprestimoItens.Count <= 3)
+                .When(x => x.FichaEmprestimoItens.PossuiValor() && x.FichaEmprestimoItens.PossuiLinhas())
+                .SobrescrevaPropriedade("Quantidades de Itens")
+                .TipoValidacao(Enumeradores.Validacoes.TipoValidacaoEnum.IMPEDITIVA)
+                .WithMessage("Não é permitido mais que 3 livros por ficha.");
         }
 
 

@@ -6,9 +6,9 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Biblioteca.API.Controllers
 {
-    //[Authorize]
+
     [ApiController]
-    [Route("[controller]/v1")]
+    [Route("Editoras/v1")]
     public class EditoraController : PrincipalController
     {
         private readonly IServicoEditora _servicoEditora;
@@ -19,6 +19,11 @@ namespace Biblioteca.API.Controllers
             _servicoEditora = servicoEditora;
         }
 
+        /// <summary>
+        /// Cadastra uma Editora
+        /// </summary>
+        /// <param name="dto">DtoEditora</param>
+        /// <returns>Dados Cadastrados</returns>
         [Authorize]
         [VersaoApi(VersaoDaApi = "V1.0")]
         [HttpPost("Cadastrar")]
@@ -28,6 +33,11 @@ namespace Biblioteca.API.Controllers
               return RespostaResponalizada(retorno);           
         }
 
+        /// <summary>
+        /// Atualiza uma Editora 
+        /// </summary>
+        /// <param name="dto">DtoEditora</param>
+        /// <returns>Dados Atualizados</returns>
         [Authorize]
         [VersaoApi(VersaoDaApi = "V1.0")]
         [HttpPut("Atualizar")]
@@ -37,6 +47,11 @@ namespace Biblioteca.API.Controllers
             return RespostaResponalizada(retorno);
         }
 
+        /// <summary>
+        /// Remove um Editora
+        /// </summary>
+        /// <param name="id">EditoraId -> numérico</param>
+        /// <returns>Resposta da Requisição</returns>
         [Authorize]
         [VersaoApi(VersaoDaApi = "V1.0")]
         [HttpDelete("Deletar/{id}")]
@@ -46,6 +61,11 @@ namespace Biblioteca.API.Controllers
             return RespostaResponalizada(retorno);
         }
 
+        /// <summary>
+        /// Obtem uma Editora por Id
+        /// </summary>
+        /// <param name="id">EditoraId -> numérico</param>
+        /// <returns>Dados da Editora</returns>
         [Authorize]
         [VersaoApi(VersaoDaApi = "V1.0")]
         [HttpGet("ObterPorId/{id}")]
@@ -55,6 +75,10 @@ namespace Biblioteca.API.Controllers
             return RespostaResponalizada(retorno);
         }
 
+        /// <summary>
+        /// Obtem uma coleção de Editoras
+        /// </summary>
+        /// <returns>Coleção de Editoras</returns>
         [Authorize]
         [VersaoApi(VersaoDaApi = "V1.0")]
         [HttpGet("ObterTodos")]

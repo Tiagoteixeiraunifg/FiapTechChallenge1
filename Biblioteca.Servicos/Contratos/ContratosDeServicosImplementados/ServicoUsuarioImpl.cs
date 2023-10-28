@@ -2,6 +2,7 @@
 using Biblioteca.Infraestrutura.Dados.Repositorios.Generico;
 using Biblioteca.Infraestrutura.Dados.Repositorios.Usuarios.Interfaces;
 using Biblioteca.Infraestrutura.Ferramentas.Criptografia;
+using Biblioteca.Infraestrutura.Ferramentas.Extensoes;
 using Biblioteca.Negocio.Entidades.Usuarios;
 using Biblioteca.Servicos.Contratos.Servicos;
 
@@ -32,8 +33,22 @@ namespace Biblioteca.Servicos.Contratos.ContratosDeServicosImplementados
 
         public void CadastrarUsuarios(IList<Usuario> usuarios)
         {
-            throw new NotImplementedException();
+            if(!usuarios.PossuiValor() || !usuarios.PossuiLinhas()) 
+            {
+                return;
+            }
+
+            var usuarioscadastrados = base.ObtenhaTodos();
+
+            if (usuarioscadastrados.PossuiValor() && usuarioscadastrados.PossuiLinhas()) return;
+
+            foreach (var usuario in usuarios) 
+            {
+                base.Cadastre(usuario);
+            }
+
         }
+
 
         public bool DeleteUsuario(int Id)
         {
