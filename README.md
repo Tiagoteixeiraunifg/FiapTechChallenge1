@@ -9,17 +9,74 @@
 <img loading="lazy" src="http://img.shields.io/static/v1?label=STATUS&message=EM%20DESENVOLVIMENTO&color=GREEN&style=for-the-badge"/>
 </p>
 
+# :hammer: O Problema.
+<p align="start">
+  “A Biblioteca da Universidade enfrentava um problema recorrente em seu sistema de empréstimo de livros. Os alunos e clientes podiam pegar o mesmo livro repetidamente em um curto espaço de tempo, causando escassez de exemplares e frustrações. O sistema anterior não conseguia identificar quando um livro havia sido emprestado recentemente.
+Para solucionar esse problema, a biblioteca decidiu criar uma aplicação personalizada. Essa aplicação permitiria o registro do histórico de empréstimos de cada aluno ou cliente, acompanhando a data de devolução de cada livro. Quando um usuário tentava alugar um livro, o sistema consultava o histórico e notificava se o livro já tinha sido retirado recentemente.
+Com a nova aplicação, a biblioteca ganhou controle sobre o empréstimo de livros, evitando empréstimos excessivos. Além disso, os usuários também podiam receber lembretes automáticos sobre a data de devolução, melhorando o processo de gerenciamento de empréstimos e proporcionando uma experiência mais eficiente e satisfatória para todos os envolvidos.”
+</p>
+
+
+# :hammer: DDD.
+
+- Link do documento: https://miro.com/app/board/uXjVNbgQAYE=/
+
+# :hammer: Passos para iniciar APi
+ - `1 - Clonar` esse repositório.
+ - `2 - Instalar` SQL Server.
+ - `3 - Configurar` o appsettings.json.
+
+Exemplo:
+ ```json
+  {
+  "Logging": {
+    "LogLevel": {
+      "Default": "Information",
+      "Microsoft.AspNetCore": "Warning"
+    }
+  },
+  "Secret": "y2/LkrZoI8R0cH6qvLqBTg==",
+  "HabilitaNotificacoes":"SIM" ,
+  "Remetente": "EMAIL_DO_REMETENTE",
+  "Ssl": "SIM",
+  "Porta": "587",
+  "PwdEmail": "PASSWORD_REMETENTE",
+  "Host": "smtp.office365.com",
+  "AllowedHosts": "*",
+  "ConnectionStrings": {
+    "ConnectionString": "Data Source=SQL\INTANCIA;Initial Catalog=BibliotecaFiap;Integrated Security=False;Persist Security Info=False;User ID=sa;Password=SENHA; TrustServerCertificate=True"
+  }
+}
+  ```
+ - `4 - Executar` o projeto modo debugger com HTTP ativado.
+ - `4 - Explorar` o Swagger e fazer seus testes.
+   
+Observação:
+
+<p align="start">
+   O projeto conta com um DataService, no qual ao iniciar a API o mesmo cria o banco e aplica todas as migrations, logo depois ele adiciona alguns dados fake para testes. Os arquivos estão no projeto Biblioteca.API, dados.json e dadosUsuario.json
+</p>
+
+
 # :hammer: Funcionalidades do projeto
 
-- `Funcionalidade Autenticacao`: descrição da funcionalidade 2
-- `Funcionalidade Aluno`: descrição da funcionalidade 1
-- `Funcionalidade Autor`: descrição da funcionalidade 2
-- `Funcionalidade Livro`: descrição da funcionalidade 2
-- `Funcionalidade Usuario`: descrição da funcionalidade 2
-- `Funcionalidade Editora`: descrição da funcionalidade 2a relacionada à funcionalidade 2
-- `Funcionalidade Ficha de Emprestimo`: descrição da funcionalidade 3
+- `Funcionalidade Autenticacao`: Autenticar Usuário, Cadastrar Usuário, Renovar Token
+- `Funcionalidade Aluno`: Cadastrar, Atualizar, Excluir, Obter por Id e Obter Todos os Alunos
+- `Funcionalidade Autor`: Cadastrar, Atualizar, Excluir, Obter por Id e Obter Todos os Autores
+- `Funcionalidade Livro`: Cadastrar, Atualizar, Excluir, Obter por Id e Obter Todos os Livros
+- `Funcionalidade Usuario`: Atualizar, Excluir, Obter por Id e Obter Todos os Usuários
+- `Funcionalidade Editora`: Cadastrar, Atualizar, Excluir, Obter por Id e Obter Todos as Editoras
+- `Funcionalidade Ficha de Emprestimo`: Cadastrar, Finalizar Total, Excluir, Entregar Livro Inidividual,  Obter por Id, Obter Todas, Obter Todas Vencidas Por Intervalo e Obter Todas Por Aluno e Situação da Ficha de Emprestimo
 
-# Autores
+# Rotas abertas
+- `Autenticacao`: Autenticar Usuário, Cadastrar Usuário, Renovar Token
+
+Observação:
+
+<p align="start">
+  As demais rotas só serão acessadas por meio autorização, sendo assim deve ser usado a rota de Autenticar Usuário, para obter o Token para ser usado nas requisições para os demais endpoints.
+</p>
+
 # Autores
 
 | [<img loading="lazy" src="https://avatars.githubusercontent.com/u/69610582?v=4" width=115><br><sub>Tiago Teixeira</sub>](https://github.com/Tiagoteixeiraunifg) |  [<img loading="lazy" src="https://avatars.githubusercontent.com/u/29716938?v=4" width=115><br><sub>Pedro Cruz</sub>](https://github.com/PedroLucasCruz) |  [<img loading="lazy" src="https://avatars.githubusercontent.com/u/62703419?v=4" width=115><br><sub>Ulysses Foglia</sub>](https://github.com/Ulysses-Foglia) |
