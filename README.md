@@ -20,8 +20,7 @@
 - `Funcionalidade Ficha de Emprestimo`: descrição da funcionalidade 3
 
 # Autores
-# Autores
 
-| [<img loading="lazy" src="https://avatars.githubusercontent.com/u/69610582?v=4" width=115><br><sub>Tiago Teixeira</sub>](https://github.com/Tiagoteixeiraunifg) |  [<img loading="lazy" src="https://avatars.githubusercontent.com/u/29716938?v=4" width=115><br><sub>Pedro Cruz</sub>](https://github.com/PedroLucasCruz) |  [<img loading="lazy" src="https://avatars.githubusercontent.com/u/62703419?v=4" width=115><br><sub>Ulysses Foglia</sub>](https://github.com/Ulysses-Foglia) |
-| :---: | :---: | :---: |
+| [<img loading="lazy" src="https://avatars.githubusercontent.com/u/69610582?v=4" width=115><br><sub>Tiago Teixeira</sub>](https://github.com/Tiagoteixeiraunifg) |  [<img loading="lazy" src="https://avatars.githubusercontent.com/u/29716938?v=4" width=115><br><sub>Pedro Cruz</sub>](https://github.com/PedroLucasCruz) |  [<img loading="lazy" src="https://avatars.githubusercontent.com/u/62703419?v=4" width=115><br><sub>Ulysses Foglia</sub>](https://github.com/Ulysses-Foglia) |  [<img loading="lazy" src="https://avatars.githubusercontent.com/u/26756955?v=4" width=115><br><sub> RobertoSRMJunior </sub>](https://github.com/RobertoSRMJunior) |  [<img loading="lazy" src="https://avatars.githubusercontent.com/u/133892208?v=4" width=115><br><sub> HeltonSiqueira </sub>](https://github.com/HeltonSiqueira) | 
+| :---: | :---: | :---: | :---: | :---: | 
 
