@@ -97,6 +97,10 @@ Observação:
   As demais rotas só serão acessadas por meio autorização, sendo assim deve ser usado a rota de Autenticar Usuário, para obter o Token para ser usado nas requisições para os demais endpoints.
 </p>
 
+<p align="start">
+  Caso você não queira habilitar ou desabilitar as notificações via e-mail pode alterar o parametro no appsettings 'HabilitaNotificacoes' para 'Não' ou para 'Sim'. 
+</p>
+
 
 # Autores
 
