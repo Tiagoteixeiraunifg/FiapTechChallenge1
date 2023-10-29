@@ -30,6 +30,8 @@ Com a nova aplicação, a biblioteca ganhou controle sobre o empréstimo de livr
 
 ![imagem1](https://github.com/Tiagoteixeiraunifg/FiapTechChallenge1/assets/29716938/512c78bc-b5f3-4366-b3a8-25edba42ac17)
 
+
+
 <h1 align="left">Tecnologias</h1>
 
 - .Net 7 
@@ -38,6 +40,21 @@ Com a nova aplicação, a biblioteca ganhou controle sobre o empréstimo de livr
 - FluentValidation 11
 - AutoMapper 12
 - Sql server 
+
+
+
+# :hammer: Funcionalidades do projeto
+
+- `Funcionalidade Autenticacao`: Autenticar Usuário, Cadastrar Usuário, Renovar Token
+- `Funcionalidade Aluno`: Cadastrar, Atualizar, Excluir, Obter por Id e Obter Todos os Alunos
+- `Funcionalidade Autor`: Cadastrar, Atualizar, Excluir, Obter por Id e Obter Todos os Autores
+- `Funcionalidade Livro`: Cadastrar, Atualizar, Excluir, Obter por Id e Obter Todos os Livros
+- `Funcionalidade Usuario`: Atualizar, Excluir, Obter por Id e Obter Todos os Usuários
+- `Funcionalidade Editora`: Cadastrar, Atualizar, Excluir, Obter por Id e Obter Todos as Editoras
+- `Funcionalidade Ficha de Emprestimo`: Cadastrar, Finalizar Total, Excluir, Entregar Livro Inidividual,  Obter por Id, Obter Todas, Obter Todas Vencidas Por Intervalo e Obter Todas Por Aluno e Situação da Ficha de Emprestimo
+
+# Rotas abertas
+- `Autenticacao`: Autenticar Usuário, Cadastrar Usuário, Renovar Token
 
 
 <h1 align="left"> Passos para iniciar APi</h1>
@@ -69,29 +86,13 @@ Exemplo:
 }
   ```
  - `4 - Executar` o projeto modo debugger com HTTP ativado.
- - `4 - Explorar` o Swagger e fazer seus testes.
+ - `5 - Explorar` o Swagger e fazer seus testes.
    
 Observação:
 
 <p align="start">
    O projeto conta com um DataService, no qual ao iniciar a API o mesmo cria o banco e aplica todas as migrations, logo depois ele adiciona alguns dados fake para testes. Os arquivos estão no projeto Biblioteca.API, dados.json e dadosUsuario.json
 </p>
-
-
-# :hammer: Funcionalidades do projeto
-
-- `Funcionalidade Autenticacao`: Autenticar Usuário, Cadastrar Usuário, Renovar Token
-- `Funcionalidade Aluno`: Cadastrar, Atualizar, Excluir, Obter por Id e Obter Todos os Alunos
-- `Funcionalidade Autor`: Cadastrar, Atualizar, Excluir, Obter por Id e Obter Todos os Autores
-- `Funcionalidade Livro`: Cadastrar, Atualizar, Excluir, Obter por Id e Obter Todos os Livros
-- `Funcionalidade Usuario`: Atualizar, Excluir, Obter por Id e Obter Todos os Usuários
-- `Funcionalidade Editora`: Cadastrar, Atualizar, Excluir, Obter por Id e Obter Todos as Editoras
-- `Funcionalidade Ficha de Emprestimo`: Cadastrar, Finalizar Total, Excluir, Entregar Livro Inidividual,  Obter por Id, Obter Todas, Obter Todas Vencidas Por Intervalo e Obter Todas Por Aluno e Situação da Ficha de Emprestimo
-
-# Rotas abertas
-- `Autenticacao`: Autenticar Usuário, Cadastrar Usuário, Renovar Token
-
-Observação:
 
 <p align="start">
   As demais rotas só serão acessadas por meio autorização, sendo assim deve ser usado a rota de Autenticar Usuário, para obter o Token para ser usado nas requisições para os demais endpoints.
