@@ -20,17 +20,19 @@ Com a nova aplicação, a biblioteca ganhou controle sobre o empréstimo de livr
 <h1 align="left">DDD</h1>
 - Link do documento: https://miro.com/app/board/uXjVNbgQAYE=/
 
-![imagem5](https://github.com/Tiagoteixeiraunifg/FiapTechChallenge1/assets/29716938/0ed28eb7-5c7f-459f-930f-61e05594e7ba)
+![01_EventStorming_Legenda](https://github.com/Tiagoteixeiraunifg/FiapTechChallenge1/assets/62703419/52f11da6-b354-4119-ae03-ae3c1ce51079)
 
-![imagem4](https://github.com/Tiagoteixeiraunifg/FiapTechChallenge1/assets/29716938/91c3146f-deed-4ac5-b3e3-654bfe85ff6a)
+Brain Storming:
+![02_EventStorming_BrainStorming](https://github.com/Tiagoteixeiraunifg/FiapTechChallenge1/assets/62703419/cb65c706-51a8-460b-93f1-07e3241097f3)
 
-![imagem3](https://github.com/Tiagoteixeiraunifg/FiapTechChallenge1/assets/29716938/7a70c0c0-21b5-4c23-b03d-13a469366044)
+Eventos Ordenados + Evento Pivotal:
+![03_EventStorming_OrdenacaoEventos](https://github.com/Tiagoteixeiraunifg/FiapTechChallenge1/assets/62703419/374ae416-8019-4d1d-b455-9ca818be90b1)
 
-![imagem2](https://github.com/Tiagoteixeiraunifg/FiapTechChallenge1/assets/29716938/8de69459-9280-4a5f-8c29-5c33c783e065)
+Inclusão de Comandos, Atores, Políticas, Modulos de Leitura:
+![04_EventStorming_ComandosAtoresPoliticas](https://github.com/Tiagoteixeiraunifg/FiapTechChallenge1/assets/62703419/2e684cfd-96a3-4084-9b28-3fd6025a49ff)
 
-![imagem1](https://github.com/Tiagoteixeiraunifg/FiapTechChallenge1/assets/29716938/512c78bc-b5f3-4366-b3a8-25edba42ac17)
-
-
+Agregado + Contexto Delimitado:
+![05_EventStorming_ContextoDelimitado](https://github.com/Tiagoteixeiraunifg/FiapTechChallenge1/assets/62703419/5edd9430-1bd6-4440-863e-5a357cc615df)
 
 <h1 align="left">Tecnologias</h1>
 
