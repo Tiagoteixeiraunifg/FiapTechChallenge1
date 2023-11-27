@@ -48,7 +48,7 @@
             Porta de entrada para autenticação.
             </summary>
         </member>
-        <member name="M:Biblioteca.API.Controllers.AutenticacaoController.Autentique(Biblioteca.Negocio.Entidades.Usuarios.Usuario)">
+        <member name="M:Biblioteca.API.Controllers.AutenticacaoController.Autentique(Biblioteca.Negocio.Dtos.Usuarios.UsuarioAutDto)">
             <summary>
             Autêntica um Usuário
             </summary>

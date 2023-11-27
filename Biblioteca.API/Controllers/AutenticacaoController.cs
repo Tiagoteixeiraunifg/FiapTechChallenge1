@@ -7,6 +7,7 @@ using Biblioteca.Negocio.Dtos.Usuarios;
 using Biblioteca.Negocio.Entidades.Usuarios;
 using Biblioteca.Negocio.Validacoes.Usuarios;
 using Biblioteca.Servicos.Contratos.Servicos;
+using Biblioteca.Servicos.Validacoes.Usuarios;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
@@ -48,7 +49,7 @@ namespace Biblioteca.API.Controllers
         [AllowAnonymous]
         [VersaoApi(VersaoDaApi = "V1.0")]
         [HttpPost("AutenticarUsuario")]
-        public IActionResult Autentique(Usuario dto)
+        public IActionResult Autentique(UsuarioAutDto dto)
         {
             try
             {
@@ -59,14 +60,14 @@ namespace Biblioteca.API.Controllers
 
                 _logger.LogInformation("Iniciando Validação do Usuário");
                 AutenticacaoValidador validador = new AutenticacaoValidador();
-                var validacoes = validador.ValideAutenticacao(dto);
+                var validacoes = validador.ValideAutenticacao(dto.ObtenhaEntidade());
 
                 _logger.LogInformation("Iniciando Autenticação do Usuário");
 
 
                 if (!validacoes.EhValido()) return RespostaResponalizada(validacoes);
 
-                if (_servicoUsuario.AutentiqueUsuario(dto))
+                if (_servicoUsuario.AutentiqueUsuario(dto.ObtenhaEntidade()))
                 {
                     usuarioLogado = _servicoUsuario.ObtenhaTodosUsuarios().Where(x => x.Nome.ToLowerInvariant() == dto.Nome.ToLowerInvariant()).FirstOrDefault();
 
@@ -128,7 +129,12 @@ namespace Biblioteca.API.Controllers
                 var validador = new AutenticacaoValidador();
                 var validacoes = validador.ValideCadastro(dto);
 
-                if (validacoes.EhValido())
+                _logger.LogInformation("Iniciando Validação do Usuário Impeditivas");
+                var validadorImpeditivas = new ServicoUsuarioValidador();
+                var validacoesImpeditivas = validadorImpeditivas.ValideCadastroImpeditivo(dto);
+
+
+                if (validacoes.EhValido() && validacoesImpeditivas.EhValido())
                 {
                     _logger.LogInformation("Iniciando Cadastro do Usuário");
 
@@ -149,7 +155,7 @@ namespace Biblioteca.API.Controllers
                 else
                 {
                     _logger.LogInformation("Existe Inconsistências");
-                    return RespostaResponalizada(validacoes);
+                    return RespostaResponalizada(validacoes.MergeValidacoes(validacoesImpeditivas));
                 }
 
                 _logger.LogInformation("Retornando Cadastro do Usuário");
@@ -159,7 +165,7 @@ namespace Biblioteca.API.Controllers
             catch (Exception ex)
             {
                 _logger.LogError("Iniciando Validação do Usuário");
-                return RespostaResponalizada(new Negocio.Validacoes.FabricaDeValidacoes.InconsistenciaDeValidacaoTipado<AutenticacaoController>() { Mensagem = "Erro ao Cadastrar Usuario" });
+                return RespostaResponalizada(new Negocio.Validacoes.FabricaDeValidacoes.InconsistenciaDeValidacaoTipado<AutenticacaoController>() { Mensagem = $"Erro ao Cadastrar Usuario: {ex.StackTrace}" });
 
 
             }

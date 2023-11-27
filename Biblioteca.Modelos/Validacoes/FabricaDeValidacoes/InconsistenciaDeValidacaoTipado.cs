@@ -1,9 +1,5 @@
 ﻿using Biblioteca.Negocio.Enumeradores.Validacoes;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
 
 namespace Biblioteca.Negocio.Validacoes.FabricaDeValidacoes
 {
@@ -26,6 +22,27 @@ namespace Biblioteca.Negocio.Validacoes.FabricaDeValidacoes
         public bool EhValido()
         {
             return listaDeInconsistencias.Count == 0;
+        }
+
+        /// <summary>
+        /// Merge as validacoes com outra lista de validações
+        /// </summary>
+        /// <param name="validacoes"></param>
+        /// <returns>LIsta de Validações Tipadas</returns>
+        public InconsistenciaDeValidacaoTipado<T> MergeValidacoes(InconsistenciaDeValidacaoTipado<T> validacoes) 
+        {
+
+            if (this.listaDeInconsistencias.Count <= 0) 
+            {
+                return validacoes;
+            }
+
+            foreach (var inconsistencia in this.listaDeInconsistencias) 
+            {
+                validacoes.listaDeInconsistencias.Add(inconsistencia);            
+            }
+
+            return validacoes;
         }
     }
 }
