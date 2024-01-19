@@ -14,8 +14,12 @@
     <Content Remove="dadosUsuario.json" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="dadosUsuario.json" />
-    <None Include="dados.json" />
+    <None Include="dadosUsuario.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="dados.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="FluentValidation" Version="11.7.1" />
