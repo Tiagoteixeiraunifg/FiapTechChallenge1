@@ -127,6 +127,7 @@ namespace Biblioteca.Servicos.Notificacoes.Emails.ServicoImplementado
 
         private void PreenchaAsConfiguracoes()
         {
+
             if (!_config.PossuiValor()) return;
             NOTIFICACOES_HABILITADAS = _config.GetSection("HabilitaNotificacoes").Value;
             REMETENTE = _config.GetSection("Remetente").Value;
