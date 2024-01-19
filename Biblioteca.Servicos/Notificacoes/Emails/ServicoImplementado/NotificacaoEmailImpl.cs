@@ -136,7 +136,6 @@ namespace Biblioteca.Servicos.Notificacoes.Emails.ServicoImplementado
             PASSWORD = _config.GetSection("PwdEmail").Value;
             HOST = _config.GetSection("Host").Value;
 
-
         }
 
         private bool CrieEhEnvieEmail(MensagemEmail mensagemEmail)
