@@ -81,6 +81,13 @@ namespace Biblioteca.Servicos.Contratos.Servicos
         IList<FichaEmprestimoAluno> ObtenhaFichasEmAtrasoDeEntregaPorIntervalo(DateTime DataInicial, DateTime DataFinal, int limiteRegistros);
 
         /// <summary>
+        /// Obtem as fichas atrasadas de entrega em 8 dias corridos
+        /// </summary>
+        /// <param name="limiteRegistros"></param>
+        /// <returns>Lista com as Fichas em Atrasos de 8 dias</returns>
+        IList<FichaEmprestimoAluno> ObtenhaFichasEmAtrasoDeEntrega(int limiteRegistros);
+
+        /// <summary>
         /// Obtem uma coleção total das Fichas de Cadastro
         /// </summary>
         /// <returns>Lista com todas as fichas</returns>

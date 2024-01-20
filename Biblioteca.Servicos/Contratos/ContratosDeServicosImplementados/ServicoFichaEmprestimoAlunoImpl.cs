@@ -348,6 +348,44 @@ namespace Biblioteca.Servicos.Contratos.ContratosDeServicosImplementados
         /// <summary>
         /// Obtem as fichas atrasadas de entrega em 8 dias corridos
         /// </summary>
+        /// <param name="limiteRegistros">O Limite para os registros</param>
+        /// <returns>Lista com as fichas em atraso de 8 dias</returns>
+        public IList<FichaEmprestimoAluno> ObtenhaFichasEmAtrasoDeEntrega(int limiteRegistros)
+        {
+            //considerando que 8 dias seja um atraso na entrega do livro.
+            _logger.LogInformation("Serviço 'Serviço de Ficha Emprestimo': Inicio da busca das Fichas");
+            try
+            {
+                _logger.LogInformation("Serviço 'Serviço de Ficha Emprestimo': Buscando as Fichas");
+                var fichasEncontradas = base.ObtenhaDbSet().AsNoTracking().Where(x => x.StatusEmprestimo == FichaEmprestimoAlunoStatusEnum.NORMAL)
+                                                                        .Take(limiteRegistros)
+                                                                        .Include(X => X.FichaEmprestimoItens)
+                                                                        .ThenInclude(x => x.Livro)
+                                                                        .ThenInclude(x => x.Editora)
+                                                                        .Include(x => x.Aluno)
+                                                                        .ToList();
+
+                var FichasAtrasadasNoIntervalo = new List<FichaEmprestimoAluno>();
+
+                foreach (var Ficha in fichasEncontradas)
+                {
+                    var atrasada = ((Ficha.DataCriacao.Date - DateTime.Now.Date).Days > 8) && Ficha.StatusEmprestimo == FichaEmprestimoAlunoStatusEnum.NORMAL;
+                    FichasAtrasadasNoIntervalo.Add(Ficha);
+                }
+
+                return FichasAtrasadasNoIntervalo;
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError("Serviço 'Serviço de Ficha Emprestimo': Erro na busca dos dados das Fichas.", ex);
+                return null;
+
+            }
+        }
+
+        /// <summary>
+        /// Obtem as fichas atrasadas de entrega em 8 dias corridos
+        /// </summary>
         /// <param name="DataInicial">Data Inicial de Cadastro</param>
         /// <param name="DataFinal">Data final de cadastro</param>
         /// <param name="limiteRegistros">LImite de registros retornados</param>
@@ -362,7 +400,8 @@ namespace Biblioteca.Servicos.Contratos.ContratosDeServicosImplementados
             {
                 _logger.LogInformation("Serviço 'Serviço de Ficha Emprestimo': Buscando as Fichas");
                 var fichasEncontradas = base.ObtenhaDbSet().AsNoTracking().Where(x => x.DataCriacao.Date >= DataInicial.Date
-                                                                    && x.DataCriacao.Date <= DataFinal.Date)
+                                                                    && x.DataCriacao.Date <= DataFinal.Date 
+                                                                    && x.StatusEmprestimo == FichaEmprestimoAlunoStatusEnum.NORMAL)
                                                                         .Take(limiteRegistros)
                                                                         .Include(X => X.FichaEmprestimoItens)
                                                                         .ThenInclude(x => x.Livro)
@@ -374,7 +413,7 @@ namespace Biblioteca.Servicos.Contratos.ContratosDeServicosImplementados
                 
                 foreach (var Ficha in fichasEncontradas)
                 {
-                    var atrasada = (Ficha.DataCriacao.Date - DateTime.Now.Date).Days > 8;
+                    var atrasada = ((Ficha.DataCriacao.Date - DateTime.Now.Date).Days > 8) && Ficha.StatusEmprestimo == FichaEmprestimoAlunoStatusEnum.NORMAL;
                     FichasAtrasadasNoIntervalo.Add(Ficha);
                 }
 
