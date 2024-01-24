@@ -47,7 +47,7 @@ builder.Services.AddSwaggerGen(c =>
     var caminhoArquivo = Path.Combine(AppContext.BaseDirectory, nomeXml);
 
 
-    c.SwaggerDoc("v1", new OpenApiInfo { Title = "Biblioteca API", Version = "v1.0" });
+    c.SwaggerDoc("v1", new OpenApiInfo { Title = "Biblioteca API CI/CD", Version = "v1.1" });
 
     c.IncludeXmlComments(caminhoArquivo);
 

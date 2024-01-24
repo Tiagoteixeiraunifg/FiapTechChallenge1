@@ -7,8 +7,9 @@ using Biblioteca.Servicos.Contratos.Servicos;
 using Biblioteca.Servicos.Notificacoes.Emails.Servico;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using Newtonsoft.Json;
+using System.Net.Http.Headers;
+
 
 namespace Biblioteca.API.Controllers
 {
@@ -17,10 +18,15 @@ namespace Biblioteca.API.Controllers
     public class ApiServicoController : PrincipalControllerTipado<ApiServicos>
     {
 
-        private readonly IServicoFichaEmprestimoAluno _ServicoFicha;
-        private readonly INotificacaoEmail _Notificacao;
+        private const string URL_API_FUNCTION = "https://bibliotecafcatrasados.azurewebsites.net/api/";
+
+        private const string URI_HTTP_START = "FunctionNotificacao_HttpStart";
 
         private const int LIMITE_DE_REGISTRO_PADRAO = 100;
+
+        private readonly IServicoFichaEmprestimoAluno _ServicoFicha;
+
+        private readonly INotificacaoEmail _Notificacao;
 
         public ApiServicoController(ILogger<ApiServicoController> logger, IServicoFichaEmprestimoAluno servicoFicha, INotificacaoEmail notificacao)
         {
@@ -130,6 +136,56 @@ namespace Biblioteca.API.Controllers
         }
 
 
+        [AllowAnonymous]
+        [VersaoApi(VersaoDaApi = "V1.0")]
+        [HttpGet("InicieManutencaoAlunos")]
+        public IActionResult InicieManutencaoAlunos() 
+        {
+            try
+            {
+                _logger.LogInformation("Iniciando a manutenção de fichas em atraso.");
+                using (var cliente = new HttpClient())
+                {
+
+                    System.Net.ServicePointManager.SecurityProtocol = System.Net.SecurityProtocolType.Tls12;
+
+                    cliente.BaseAddress = new Uri(URL_API_FUNCTION);
+                    cliente.DefaultRequestHeaders.Accept.Clear();
+                    cliente.DefaultRequestHeaders.UserAgent.Add(new ProductInfoHeaderValue("Mozilla", "5.0"));
+                    cliente.DefaultRequestHeaders.Accept.Add(
+                        new MediaTypeWithQualityHeaderValue("application/json")
+                    );
+
+
+                    var resposta = cliente.GetAsync(URI_HTTP_START).Result;
+                    _logger.LogInformation("Fim da manutenção das fichas em atraso.");
+
+                    if (!resposta.IsSuccessStatusCode)
+                    {
+                        _logger.LogError("Erro ao iniciar a manutenção das fichas em atraso.");
+                        throw new Exception(string.Format("Codigo: {0} | Content: {1}", resposta.StatusCode, resposta.Content.ToString()));
+                    }
+
+                    var textoResposta = resposta.Content.ReadAsStringAsync().Result;
+                    var statusQuery = JsonConvert.DeserializeObject<StatusQuery>(textoResposta);
+
+                    _logger.LogInformation("Obtendo resultado das functions Azure");
+
+                    var StatusDaExecucao = JsonConvert.DeserializeObject<ApiServicos>(ObtenhaStatusQueryPelaUrl(statusQuery));
+
+
+
+                    return Json(StatusDaExecucao);
+                }
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError("Erro ao acessar API", ex);
+                return Json("");
+            }
+
+        }
+
         private bool NotifiqueListaDeAlunosComAtraso(List<FichaEmprestimoAluno> fichas) 
         {
             bool executado = false;
@@ -148,6 +204,63 @@ namespace Biblioteca.API.Controllers
             }
 
             return executado;
+        }
+
+        private class StatusQuery 
+        {
+            public Guid Id { get; set; }
+
+            public string statusQueryGetUri { get; set; }
+        }
+
+        private string ObtenhaStatusQueryPelaUrl(StatusQuery urlCompleta) 
+        {
+            string URI = urlCompleta.statusQueryGetUri.Replace(URL_API_FUNCTION, "");
+            
+            try
+            {
+                _logger.LogInformation("Iniciando a consulta de function em funcionamento.");
+                using (var cliente = new HttpClient())
+                {
+
+                    System.Net.ServicePointManager.SecurityProtocol = System.Net.SecurityProtocolType.Tls12;
+
+                    cliente.BaseAddress = new Uri(URL_API_FUNCTION);
+                    cliente.DefaultRequestHeaders.Accept.Clear();
+                    cliente.DefaultRequestHeaders.UserAgent.Add(new ProductInfoHeaderValue("Mozilla", "5.0"));
+                    cliente.DefaultRequestHeaders.Accept.Add(
+                        new MediaTypeWithQualityHeaderValue("application/json")
+                    );
+
+
+                    var resposta = cliente.GetAsync(URI).Result;
+                    _logger.LogInformation("Fim da consulta de function em funcionamento.");
+
+                    if (!resposta.IsSuccessStatusCode)
+                    {
+                        _logger.LogError("Erro ao obter as consulta de function em funcionamento.");
+                        throw new Exception(string.Format("Codigo: {0} | Content: {1}", resposta.StatusCode, resposta.Content.ToString()));
+                    }
+
+                    var textoResposta = resposta.Content.ReadAsStringAsync().Result;
+                    var anonymous = new { runtimeStatus = "", output = new ApiServicos() };
+
+                    var apiServicos = JsonConvert.DeserializeAnonymousType(textoResposta, anonymous);
+
+                    if (!apiServicos.runtimeStatus.Equals("Completed"))
+                    {
+                        return ObtenhaStatusQueryPelaUrl(urlCompleta);
+                    }
+
+                    return JsonConvert.SerializeObject(apiServicos.output);
+                }
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError("Erro ao acessar API", ex);
+                return "";
+            }
+
         }
     }
 }

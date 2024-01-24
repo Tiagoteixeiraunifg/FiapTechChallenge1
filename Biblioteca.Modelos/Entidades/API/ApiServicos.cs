@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace Biblioteca.Negocio.Entidades.API
 {
+    [Serializable]
     public class ApiServicos
     {
         public Guid Identificador { get; set; }
