@@ -14,6 +14,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Biblioteca.Negocio", "..\Bi
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Biblioteca.Servicos", "..\Biblioteca.Servicos\Biblioteca.Servicos.csproj", "{D3A8040B-5C4F-4CFE-9356-1F9AF9AD0C5B}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FuncaoFluxoNotificacao", "..\FuncaoFluxoNotificacao\FuncaoFluxoNotificacao.csproj", "{61E287F6-B18C-44D8-9EA7-093D7BF727CF}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -36,6 +38,10 @@ Global
 		{D3A8040B-5C4F-4CFE-9356-1F9AF9AD0C5B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D3A8040B-5C4F-4CFE-9356-1F9AF9AD0C5B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D3A8040B-5C4F-4CFE-9356-1F9AF9AD0C5B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{61E287F6-B18C-44D8-9EA7-093D7BF727CF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{61E287F6-B18C-44D8-9EA7-093D7BF727CF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{61E287F6-B18C-44D8-9EA7-093D7BF727CF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{61E287F6-B18C-44D8-9EA7-093D7BF727CF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
