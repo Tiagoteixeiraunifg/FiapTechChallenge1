@@ -34,6 +34,7 @@ builder.Services.AddScoped<IServicoAutor, ServicoAutor>();
 builder.Services.AddScoped<IServicoEditora, ServicoEditora>();
 builder.Services.AddScoped<IServicoFichaEmprestimoAluno, ServicoFichaEmprestimoAlunoImpl>();
 
+
 //Adicionando Servico de Notificações
 builder.Services.InicieServicoNotificacao(configuracao);
 
