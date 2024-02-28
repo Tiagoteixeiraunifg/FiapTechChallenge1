@@ -10,8 +10,17 @@ using System.Threading.Tasks;
 
 namespace Biblioteca.Servicos.Contratos.Servicos
 {
-    public interface IServicoFichaEmprestimoAluno
+    public interface IServicoFichaEmprestimoAluno : IDisposable
     {
+
+
+        /// <summary>
+        /// Valida o Cadastro de Nova Ficha de Emprestimo
+        /// </summary>
+        /// <param name="dados">Os Dados para Validação e Cadastro da Ficha</param>
+        /// <returns>InconsistenciaDeValidacaoTipado<FichaEmprestimoAluno></returns>
+        InconsistenciaDeValidacaoTipado<FichaEmprestimoAluno> ValideCadastroFicha(FichaEmprestimoAlunoDto dados);
+
         /// <summary>
         /// Cadastro de Nova Ficha de Emprestimo
         /// </summary>
@@ -25,6 +34,13 @@ namespace Biblioteca.Servicos.Contratos.Servicos
         /// <param name="FichaId">Os Dados para Validação e Exclusão da Ficha</param>
         /// <returns>InconsistenciaDeValidacaoTipado<FichaEmprestimoAluno></returns>
         InconsistenciaDeValidacaoTipado<FichaEmprestimoAluno> FinalizeFicha(FichaEmprestimoAluno dados);
+
+        /// <summary>
+        /// Valida a finalização da Ficha de Emprestimo
+        /// </summary>
+        /// <param name="FichaId">Os Dados para Validação e Exclusão da Ficha</param>
+        /// <returns>InconsistenciaDeValidacaoTipado<FichaEmprestimoAluno></returns>
+        InconsistenciaDeValidacaoTipado<FichaEmprestimoAluno> ValideFinalizeFicha(FichaEmprestimoAluno dados);
 
         /// <summary>
         /// Executa a Entrega do Livro Individual da Ficha

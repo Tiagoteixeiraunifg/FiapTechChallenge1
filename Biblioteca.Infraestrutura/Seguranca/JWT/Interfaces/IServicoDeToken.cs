@@ -9,10 +9,12 @@ namespace Biblioteca.Infraestrutura.Seguranca.JWT.Interfaces
 {
     public interface IServicoDeToken
     {
-        string GerarToken(Usuario usuario);
+        public string GerarToken(Usuario usuario);
 
-        bool ValidarToken(string token);
+        public Usuario ObtenhaUsuarioDoToken(string token);
 
-        string RenoveToken(string token);
+        public bool ValidarToken(string token);
+
+        public string RenoveToken(string token);
     }
 }

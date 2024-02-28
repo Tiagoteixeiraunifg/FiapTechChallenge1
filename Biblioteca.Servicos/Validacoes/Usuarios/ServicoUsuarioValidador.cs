@@ -41,12 +41,12 @@ namespace Biblioteca.Servicos.Validacoes.Usuarios
         {
 
             RuleFor(x => x.Nome)
-                .Must(x => ExisteNomeCadastrado(dados.Nome))
+                .Must(x => !ExisteNomeCadastrado(dados.Nome))
                 .TipoValidacao(Negocio.Enumeradores.Validacoes.TipoValidacaoEnum.IMPEDITIVA)
                 .WithMessage("Nome Já Cadastrado no Sistema");
 
             RuleFor(x => x.Email)
-                .Must(x => ExisteEmailJaCadastrado(dados.Email))
+                .Must(x => !ExisteEmailJaCadastrado(dados.Email))
                 .TipoValidacao(Negocio.Enumeradores.Validacoes.TipoValidacaoEnum.IMPEDITIVA)
                 .WithMessage("Já existe um cadastro com esse E-Mail");
         }

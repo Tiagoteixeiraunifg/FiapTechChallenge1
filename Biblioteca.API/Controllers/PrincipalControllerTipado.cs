@@ -1,5 +1,6 @@
 ﻿using Biblioteca.Negocio.Validacoes.FabricaDeValidacoes;
 using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
 
 namespace Biblioteca.API.Controllers
 {
@@ -18,7 +19,9 @@ namespace Biblioteca.API.Controllers
 
         protected IActionResult RespostaResponalizada(object objeto = null)
         {
-            if (OperacaoValida()) return Ok(objeto);
+
+
+            if (OperacaoValida()) return Ok( objeto);
 
             return StatusCode(200, new { Erros });
         }

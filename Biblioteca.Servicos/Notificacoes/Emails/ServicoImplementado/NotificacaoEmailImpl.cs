@@ -37,7 +37,7 @@ namespace Biblioteca.Servicos.Notificacoes.Emails.ServicoImplementado
         #region CONSTRUTORES
         public NotificacaoEmailImpl()
         {
-
+            NOTIFICACOES_HABILITADAS = "NAO";
         }
 
         public NotificacaoEmailImpl(IConfiguration config)
@@ -128,7 +128,7 @@ namespace Biblioteca.Servicos.Notificacoes.Emails.ServicoImplementado
         private void PreenchaAsConfiguracoes()
         {
 
-            if (!_config.PossuiValor()) return;
+            if (!_config.PossuiValor()) { NOTIFICACOES_HABILITADAS = "NAO"; return; };
             NOTIFICACOES_HABILITADAS = _config.GetSection("HabilitaNotificacoes").Value;
             REMETENTE = _config.GetSection("Remetente").Value;
             SSL = _config.GetSection("Ssl").Value;
@@ -321,6 +321,11 @@ namespace Biblioteca.Servicos.Notificacoes.Emails.ServicoImplementado
         {
             this._config = configuracao;
             PreenchaAsConfiguracoes();
+        }
+
+        public void Dispose()
+        {
+            
         }
 
 

@@ -43,13 +43,36 @@ namespace Biblioteca.Infraestrutura.Dados.Configuracao
             services.AddTransient<IDataService, DataService>();
 
             services.AddDbContext<ApplicationDbContext>(options =>
-                options.UseSqlServer(configuration.GetConnectionString("ConnectionString")) , ServiceLifetime.Scoped); 
-                
+                options.UseSqlServer(configuration.GetConnectionString("ConnectionString")) , ServiceLifetime.Scoped);
 
-         
+
+
 
             services.BuildServiceProvider().GetService<IDataService>().InicializarBd();
       
+            return services;
+        }
+
+        public static IServiceCollection AdicioneInfraestruturav2(this IServiceCollection services, string connectionString)
+        {
+
+            services.AddScoped<IUsuarioRepositorio, UsuarioRepositorioImpl>();
+            services.AddScoped<IAlunoRepositorio, AlunoRepositorioImpl>();
+            services.AddScoped<IEditoraRepositorio, EditoraRepositorio>();
+            services.AddScoped<IAutorRepositorio, AutorRepositorio>();
+            services.AddScoped<ILivroRepositorio, LivroRepositorio>();
+            services.AddScoped<ILivroAutoresRepositorio, LivroAutoresRepositorio>();
+            services.AddScoped<IFichaEmprestimoAlunoRepositorio, FichaEmprestimoAlunoRepositorioImpl>();
+            services.AddTransient<IDataService, DataService>();
+
+            services.AddDbContext<ApplicationDbContext>(options =>
+                options.UseSqlServer(connectionString), ServiceLifetime.Scoped);
+
+
+
+
+            //services.BuildServiceProvider().GetService<IDataService>().InicializarBd();
+
             return services;
         }
     }

@@ -7,6 +7,7 @@ using Biblioteca.Infraestrutura.Seguranca.JWT.Servico;
 using Biblioteca.Servicos.Contratos.ContratosDeServicosImplementados;
 using Biblioteca.Servicos.Contratos.Servicos;
 using Biblioteca.Servicos.Notificacoes.Emails;
+using MassTransit;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
@@ -18,15 +19,28 @@ var builder = WebApplication.CreateBuilder(args);
 
 var configuracao = new ConfigurationBuilder().AddJsonFile("appsettings.json").Build();
 var secretKey = Encoding.ASCII.GetBytes(configuracao.GetValue<string>("Secret"));
-
+var conexaoServiceBus = configuracao.GetSection("MassTransitAzure")["Conexao"] ?? Environment.GetEnvironmentVariable("SERVICE_BUS_CONEXAO");
 
 // Add services to the container.
 builder.Services.AddControllers();
 builder.Services.AddControllers().AddJsonOptions(x =>
    x.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.Preserve);
 
+
 //Adicionando Contexto de Conexão e Banco de Dados
 builder.Services.AdicioneInfraestrutura(configuracao);
+builder.Services.AddScoped<IServicoMensageria, ServicoMensageria>();
+
+
+builder.Services.AddMassTransit(x => 
+{
+    x.UsingAzureServiceBus((contexto, config) =>
+    {
+        config.Host(conexaoServiceBus);
+    });
+});
+
+
 builder.Services.AddScoped<IServicoUsuario, ServicoUsuarioImpl>();
 builder.Services.AddScoped<IServicoAluno, ServicoAlunoImpl>();
 builder.Services.AddScoped<IServicoLivro, ServicoLivroImpl>();

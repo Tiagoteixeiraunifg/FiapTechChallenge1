@@ -165,9 +165,30 @@
             ENUMERADORES: StatusItem => (1-ENTREGUE, 2-A_ENTREGAR), statusEmprestimoDescricao: texto (NORMAL, ATRASADA, ENTREGUE)
              </remarks>
         </member>
+        <member name="M:Biblioteca.API.Controllers.FichaEmprestimoController.CadastrarV2(Biblioteca.Negocio.Dtos.FichaEmprestimoAlunos.FichaEmprestimoAlunoDto)">
+             <summary>
+             Cadastra a Ficha de Emprestimo do Aluno
+             </summary>
+             <param name="dto"></param>
+             <returns>Ficha cadastrada do Aluno</returns>
+            <remarks>
+            JSON - Objeto para cadastro padrão.
+            ENUMERADORES: StatusItem => (1-ENTREGUE, 2-A_ENTREGAR), statusEmprestimoDescricao: texto (NORMAL, ATRASADA, ENTREGUE)
+             </remarks>
+        </member>
         <member name="M:Biblioteca.API.Controllers.FichaEmprestimoController.Finalizar(System.Int32)">
             <summary>
             Finalizar a Ficha de Emprestimo do Aluno
+            </summary>
+            <param name="FichaId"></param>
+            <returns>Objeto da Ficha de Emprestimo</returns>
+            <remarks>
+            Parametro: Id tipo numérico
+            </remarks>
+        </member>
+        <member name="M:Biblioteca.API.Controllers.FichaEmprestimoController.FinalizarV2(System.Int32)">
+            <summary>
+            Finalizar a Ficha de Emprestimo do Aluno Alta Demanda
             </summary>
             <param name="FichaId"></param>
             <returns>Objeto da Ficha de Emprestimo</returns>

@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Biblioteca.Servicos.Notificacoes.Emails.Servico
 {
-    public interface INotificacaoEmail
+    public interface INotificacaoEmail : IDisposable
     {
         bool NotifiqueGravacaoFicha(FichaEmprestimoAluno ficha);
 

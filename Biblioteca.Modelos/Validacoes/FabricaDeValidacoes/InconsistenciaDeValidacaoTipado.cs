@@ -8,6 +8,8 @@ namespace Biblioteca.Negocio.Validacoes.FabricaDeValidacoes
         public TipoValidacaoEnum TipoValidacao { get; set; }
         public string? PropriedadeValidada { get; set; }
         public string? Mensagem { get; set; }
+        public bool ExisteInconsistencias { get; set; }
+
         public IList<InconsistenciaDeValidacao> listaDeInconsistencias { get; set; } = new List<InconsistenciaDeValidacao>();
         public IList<string> Mensagens { get; set; } = new List<string>();
 

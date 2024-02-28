@@ -1,0 +1,19 @@
+<Project Sdk="Microsoft.NET.Sdk.Worker">
+
+  <PropertyGroup>
+    <TargetFramework>net7.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <UserSecretsId>dotnet-Biblioteca.WorkerService.FluxoFicha-d6ee0128-e89a-4345-b62d-8e2f271b9868</UserSecretsId>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="MassTransit.Azure.ServiceBus.Core" Version="8.1.3" />
+    <PackageReference Include="Microsoft.Extensions.Hosting" Version="7.0.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Biblioteca.Infraestrutura\Biblioteca.Infraestrutura.csproj" />
+    <ProjectReference Include="..\Biblioteca.Modelos\Biblioteca.Negocio.csproj" />
+    <ProjectReference Include="..\Biblioteca.Servicos\Biblioteca.Servicos.csproj" />
+  </ItemGroup>
+</Project>

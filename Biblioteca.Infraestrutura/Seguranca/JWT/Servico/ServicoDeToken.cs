@@ -61,6 +61,49 @@ namespace Biblioteca.Infraestrutura.Seguranca.JWT.Servico
 
         }
 
+        public Usuario ObtenhaUsuarioDoToken(string token)
+        {
+            token = token.Substring(7);
+
+            var TokenHandler = new JwtSecurityTokenHandler();
+            var Secretkey = Encoding.ASCII.GetBytes(_configuracao.GetSection("Secret").Value);
+
+            SecurityToken tokenInformado = TokenHandler.ReadToken(token);
+
+
+            //var tokenvalidationparameters = new TokenValidationParameters()
+            //{
+            //    IssuerSigningKey = new SigningCredentials(
+            //        new SymmetricSecurityKey(Secretkey),
+            //        SecurityAlgorithms.HmacSha256Signature).Key,
+            //};
+
+
+            //var ret = TokenHandler.ValidateToken(token, tokenvalidationparameters, out var tokenValidado);
+            var user = new Usuario();
+
+            if (tokenInformado.PossuiValor()) 
+            {
+               
+
+                foreach (var item in ((JwtSecurityToken)tokenInformado).Claims)
+                {
+                    if (item.Type.Equals("Nome")) 
+                    {
+                        user.Nome = item.Value.ToString();
+                    }
+                    if (item.Type.Equals("Id")) 
+                    {
+                        user.Id = int.Parse(item.Value.ToString());
+                    }
+                }
+
+                return user;
+            }
+
+            return user;
+        }
+
         public string RenoveToken(string token)
         {
 

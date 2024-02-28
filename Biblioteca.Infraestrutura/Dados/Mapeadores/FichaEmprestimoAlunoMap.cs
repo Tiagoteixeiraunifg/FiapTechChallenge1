@@ -33,7 +33,7 @@ namespace Biblioteca.Infraestrutura.Dados.Mapeadores
 
             m.HasOne(x => x.Usuario).WithOne().HasForeignKey<FichaEmprestimoAluno>(x => x.UsuarioId).OnDelete(DeleteBehavior.NoAction);
 
-            m.HasMany(x => x.FichaEmprestimoItens).WithOne(x => x.FichaEmprestimoAluno).HasForeignKey(x => x.FichaEmprestimoAlunoId);
+            m.HasMany(x => x.FichaEmprestimoItens).WithOne(x => x.FichaEmprestimoAluno).HasForeignKey(x => x.FichaEmprestimoAlunoId).OnDelete(DeleteBehavior.Cascade);
         }
     }
 }

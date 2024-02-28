@@ -35,6 +35,7 @@ namespace Biblioteca.Servicos.Contratos.ContratosDeServicosImplementados
             this._contexto = contexto;
         }
 
+
         /// <summary>
         /// Cadastro de Nova Ficha de Emprestimo
         /// </summary>
@@ -259,7 +260,7 @@ namespace Biblioteca.Servicos.Contratos.ContratosDeServicosImplementados
             try
             {
                 _logger.LogInformation("Serviço 'Serviço de Ficha Emprestimo': Buscando a Ficha");
-                return base.ObtenhaDbSet().Where(x => x.Id == FichaId)
+                return base.ObtenhaDbSet().AsNoTracking().Where(x => x.Id == FichaId)
                     .Include(X => X.FichaEmprestimoItens)
                     .ThenInclude(x => x.Livro)
                     .ThenInclude(x => x.Editora)
@@ -452,6 +453,92 @@ namespace Biblioteca.Servicos.Contratos.ContratosDeServicosImplementados
                 return null;
 
             }
+        }
+
+        /// <summary>
+        /// Executa a validacao do cadastro da ficha
+        /// </summary>
+        /// <param name="dados"></param>
+        /// <returns></returns>
+        /// <exception cref="NotImplementedException"></exception>
+        public InconsistenciaDeValidacaoTipado<FichaEmprestimoAluno> ValideCadastroFicha(FichaEmprestimoAlunoDto dados)
+        {
+
+
+            try
+            {
+                var fichaNova = new FichaEmprestimoAluno();
+                _logger.LogInformation("Serviço 'Serviço de Ficha Emprestimo': Executando ajuste nos dados para validacao.");
+                fichaNova = dados.ObtenhaEntidade();
+                fichaNova.DataCriacao = DateTime.Now;
+                fichaNova.DataAtualizacao = DateTime.Now;
+                fichaNova.DataEmprestimo = DateTime.Now;
+                fichaNova.StatusEmprestimo = FichaEmprestimoAlunoStatusEnum.NORMAL;
+                fichaNova.Codigo = Guid.NewGuid();
+
+                _logger.LogInformation("Serviço 'Serviço de Ficha Emprestimo': Executando pré validação nos dados para cadastro.");
+
+                var inconsistencias = new ServicoValidacaoFichaEmprestimoAluno().ValideFichaCadastro(fichaNova);
+                
+
+                _logger.LogInformation("Serviço 'Serviço de Ficha Emprestimo': Fim da pré validação nos dados para cadastro.");
+
+                return inconsistencias;
+                
+
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError("Serviço 'Serviço de Ficha Emprestimo': Erro nos dados para validação.", ex);
+                return new InconsistenciaDeValidacaoTipado<FichaEmprestimoAluno>() { Mensagem = "Erro na validação da Ficha" };
+            }
+        }
+
+        /// <summary>
+        /// Valida a finalização da ficha de emprestimo do aluno
+        /// </summary>
+        /// <param name="dados"></param>
+        /// <returns></returns>
+        /// <exception cref="NotImplementedException"></exception>
+        public InconsistenciaDeValidacaoTipado<FichaEmprestimoAluno> ValideFinalizeFicha(FichaEmprestimoAluno dados)
+        {
+            _logger.LogInformation("Serviço 'Serviço de Ficha Emprestimo': Inicio da Validação da Finalização da Ficha");
+            var fichaNova = new FichaEmprestimoAluno();
+            try
+            {
+                fichaNova = dados;
+                fichaNova.StatusEmprestimo = FichaEmprestimoAlunoStatusEnum.ENTREGUE;
+                fichaNova.DataEntregaEmprestimo = DateTime.Now;
+                fichaNova.DataAtualizacao = DateTime.Now;
+
+                foreach (var item in fichaNova.FichaEmprestimoItens)
+                {
+                    if (item.DataStatusItem == DateTime.MinValue || item.StatusItem == FichaEmprestimoAlunoItensStatusEnum.A_ENTREGAR)
+                    {
+                        item.DataStatusItem = DateTime.Now;
+                        item.StatusItem = FichaEmprestimoAlunoItensStatusEnum.ENTREGUE;
+                    }
+                }
+
+                _logger.LogInformation("Serviço 'Serviço de Ficha Emprestimo': Validandação da Finalização da Ficha");
+                var inconsistencias = new ServicoValidacaoFichaEmprestimoAluno().ValideFinalizacaoFicha(fichaNova);
+
+                if (!inconsistencias.EhValido())
+                {
+                    _logger.LogInformation("Serviço 'Serviço de Ficha Emprestimo': Encontrado Inconsistencias na Finalização da Ficha");
+                    return inconsistencias;
+                }
+
+                inconsistencias = new InconsistenciaDeValidacaoTipado<FichaEmprestimoAluno>() { ExisteInconsistencias = false };
+
+                return inconsistencias;
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError("Serviço 'Serviço de Ficha Emprestimo': Erro nos dados para Validação de Finalização da Ficha.", ex);
+                return new InconsistenciaDeValidacaoTipado<FichaEmprestimoAluno>() { Mensagem = $"Erro na Validação de Finalização da Ficha: Erro -> {ex.Message}" };
+            }
+
         }
     }
 }

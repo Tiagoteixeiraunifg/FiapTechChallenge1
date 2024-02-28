@@ -2,6 +2,7 @@
 using Biblioteca.Negocio.Entidades.Usuarios;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -43,6 +44,15 @@ namespace Biblioteca.Infraestrutura.Dados.Contextos
             return new ApplicationDbContext(_opcoes);
         }
 
+        public static ApplicationDbContext Instancia()
+        {
+            var DbContextOpt = new DbContextOptionsBuilder<ApplicationDbContext>();
+            var stringconexao = Environment.GetEnvironmentVariable("CONNECTIONSTRING");
+            DbContextOpt.UseSqlServer(stringconexao);
+            var opcoesnovas = DbContextOpt.Options;
+            _opcoes = opcoesnovas;
 
+            return  new ApplicationDbContext(_opcoes);
+        }
     }
 }
