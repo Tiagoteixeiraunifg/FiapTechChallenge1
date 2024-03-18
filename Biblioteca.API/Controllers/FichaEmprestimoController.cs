@@ -109,9 +109,6 @@ namespace Biblioteca.API.Controllers
                 _logger.LogError(ex, $"Erro ao enviar a mensagem para o serviço: {ex.Message}" + $" Pilha: {ex.StackTrace ?? ""}");
                 return BadRequest(ex);
             }
-
-
-
         }
 
 

@@ -21,9 +21,9 @@ namespace Biblioteca.WorkerService.FluxoFicha.Eventos
 {
     public class EventoFichaEmprestimoConsumidor :  IConsumer<ModeloEnvioFichaEmprestimoOperacores>
     {
+        #region PROPRIEDADES
 
-        private  ILogger<EventoFichaEmprestimoConsumidor> _logger;
-
+        private ILogger<EventoFichaEmprestimoConsumidor> _logger;
 
         private ApplicationDbContext Contexto
         {
@@ -33,15 +33,21 @@ namespace Biblioteca.WorkerService.FluxoFicha.Eventos
             }
         }
 
-        private string NomeFilaError 
+        private const string UrlServiceBus = "sb://bibliotecaservicebus.servicebus.windows.net/";
+
+        private string NomeFilaError
         {
-            get 
+            get
             {
                 return Environment.GetEnvironmentVariable("SERVICE_BUS_NOME_FILA_ERROS") ?? "FILA_ERROR_FICHA";
             }
         }
 
         private ConsumeContext<ModeloEnvioFichaEmprestimoOperacores> _context;
+
+        #endregion
+
+
         public EventoFichaEmprestimoConsumidor()
         {
             _logger = new LogCustomizadoGenerico<EventoFichaEmprestimoConsumidor>("LogConsumidor", new FabricaDeLogs());
@@ -53,35 +59,37 @@ namespace Biblioteca.WorkerService.FluxoFicha.Eventos
             try
             {
                 _context = context;
+                Console.WriteLine($"Info: Worker Capturou a Mensagem. Código: " + context.MessageId);
                 var ficha = context.Message;
                 ExecuteAhOperacao(ficha);
-
+                
             }
             catch (Exception ex)
             {
                 _logger.LogError(ex, $"Erro ao executar o comando. StackTrace: {ex.StackTrace ?? ""}");
-                
+                Console.WriteLine($"Info: Worker Capturou a Mensagem com ERRO." + context.MessageId);
             }
            
             return context.ConsumeCompleted;
         }
 
-
         private void ExecuteAhOperacao(ModeloEnvioFichaEmprestimoOperacores ficha) 
         {
-            _logger.LogInformation("Descobrindo o tipo da operação de FichaEmperstimo");
+            _logger.LogInformation("Worker: Descobrindo o tipo da operação de FichaEmperstimo");
 
             switch (ficha.Operacao) 
             {
                 case Negocio.Enumeradores.FichaEmprestimoAlunos.FichaEmprestimoAlunoTipoOperacaoAsyncEnum.CADASTRAR:
-                    _logger.LogInformation("Descoberto o tipo da operação de FichaEmperstimo -> 'CADASTRAR' ");
+                    _logger.LogInformation("Worker: Descoberto o tipo da operação de FichaEmperstimo -> 'CADASTRAR' ");
                     ExecuteCadastroFicha(ficha.Ficha);
+                    _context.NotifyConsumed(new TimeSpan(1000), $"{_context.Message.Operacao.ToString()}");
                     break;
                 case Negocio.Enumeradores.FichaEmprestimoAlunos.FichaEmprestimoAlunoTipoOperacaoAsyncEnum.EXCLUIR:
                     break;
                 case Negocio.Enumeradores.FichaEmprestimoAlunos.FichaEmprestimoAlunoTipoOperacaoAsyncEnum.FINALIZAR:
-                    _logger.LogInformation("Descoberto o tipo da operação de FichaEmperstimo -> 'FINALIZAR' ");
+                    _logger.LogInformation("Worker: Descoberto o tipo da operação de FichaEmperstimo -> 'FINALIZAR' ");
                     ExecuteFinalizacaoFicha(ficha.Ficha);
+                    _context.NotifyConsumed(new TimeSpan(1000), $"{_context.Message.Operacao.ToString()}");
                     break;
                 case Negocio.Enumeradores.FichaEmprestimoAlunos.FichaEmprestimoAlunoTipoOperacaoAsyncEnum.CANCELAR:
                     break;
@@ -90,16 +98,15 @@ namespace Biblioteca.WorkerService.FluxoFicha.Eventos
             }
         }
 
-
         private void ExecuteFinalizacaoFicha(string ficha) 
         {
-            _logger.LogInformation("Iniciando a Finalização da Ficha");
+            _logger.LogInformation("Worker: Iniciando a Finalização da Ficha");
 
             try
             {
                 var _fichaAhFinalizar = JsonConvert.DeserializeObject<FichaEmprestimoAluno>(ficha);
-                _logger.LogInformation("Objeto deserializado com sucesso");
-                _logger.LogInformation("Iniciando o a chamada do serviço de finalização da ficha.");
+                _logger.LogInformation("Worker: Objeto deserializado com sucesso");
+                _logger.LogInformation("Worker: Iniciando o a chamada do serviço de finalização da ficha.");
 
                 var log = new LogCustomizadoGenerico<ServicoFichaEmprestimoAlunoImpl>("Servico de Ficha", new FabricaDeLogs());
                 using (INotificacaoEmail _notificacao = new NotificacaoEmailImpl())
@@ -109,22 +116,26 @@ namespace Biblioteca.WorkerService.FluxoFicha.Eventos
 
                     if (resposta.EhValido())
                     {
-                        _logger.LogInformation("Notificando o aluno da Finalização da Ficha");
+                        _logger.LogInformation("Serviço Notificação: Notificando o aluno da Finalização da Ficha");
                         _notificacao.NotifiqueFinalizacaoFicha(resposta.ObtenhaRetornoServico());
+                        _logger.LogInformation("Serviço Notificação: Aluno Notificado sobre Finalização da Ficha");
                     }
                 }
 
-                _logger.LogInformation("Finalizado o Serviço de Finalização da Ficha");
+                _logger.LogInformation("Servico de Ficha: Finalizado o Serviço de Finalização da Ficha");
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex,"Iniciando a Finalização da Ficha");
+                _logger.LogError(ex,"Erro ao tentar executar a Finalização da Ficha");
+
+                
+
                 try
                 {
-                    _context.Send<ModeloEnvioFichaEmprestimoOperacores>(new Uri(NomeFilaError),
+                    _context.Send<ModeloEnvioFichaEmprestimoOperacores>(new Uri(UrlServiceBus+NomeFilaError),
                     new ModeloEnvioFichaEmprestimoOperacores()
                     {
-                        Operacao = FichaEmprestimoAlunoTipoOperacaoAsyncEnum.CANCELAR,
+                        Operacao = FichaEmprestimoAlunoTipoOperacaoAsyncEnum.ERROR,
                         Data = DateTime.Now,
                         Operador = _context.Message.Operador,
                         Ficha = _context.Message.Ficha
@@ -133,6 +144,8 @@ namespace Biblioteca.WorkerService.FluxoFicha.Eventos
                     {
                         a.Durable = true;
                     });
+
+                    _context.NotifyFaulted(TimeSpan.FromMinutes(1), "Erro apresentado nessa mensagem", ex);
                 }
                 catch (Exception)
                 {
@@ -145,13 +158,13 @@ namespace Biblioteca.WorkerService.FluxoFicha.Eventos
 
         private void ExecuteCadastroFicha(string ficha)
         {
-            _logger.LogInformation("Iniciando o Cadastro da Ficha");
+            _logger.LogInformation("Worker: Iniciando o Cadastro da Ficha");
 
             try
             {
                 var _fichaAhCadastrar = JsonConvert.DeserializeObject<FichaEmprestimoAluno>(ficha);
-                _logger.LogInformation("Objeto deserializado com sucesso");
-                _logger.LogInformation("Iniciando o a chamada do serviço de Cadastro da ficha.");
+                _logger.LogInformation("Worker: Objeto deserializado com sucesso");
+                _logger.LogInformation("Worker: Iniciando o a chamada do serviço de Cadastro da ficha.");
 
                 var log = new LogCustomizadoGenerico<ServicoFichaEmprestimoAlunoImpl>("Servico de Ficha", new FabricaDeLogs());
                 using (INotificacaoEmail _notificacao = new NotificacaoEmailImpl())
@@ -161,23 +174,26 @@ namespace Biblioteca.WorkerService.FluxoFicha.Eventos
 
                     if (resposta.EhValido())
                     {
-                        _logger.LogInformation("Notificando o aluno da Finalização da Ficha");
+                        _logger.LogInformation("Serviço Notificação: Notificando o aluno do cadastro da Ficha");
                         _notificacao.NotifiqueFinalizacaoFicha(resposta.ObtenhaRetornoServico());
+                        _logger.LogInformation($"Serviço Notificação: Aluno notificado sobre cadastro da Ficha: {resposta.ObtenhaRetornoServico().Codigo}");
                     }
                 }
 
-                _logger.LogInformation("Finalizado o Serviço de Cadastro da Ficha");
+                _logger.LogInformation("Worker: Finalizado o Serviço de Cadastro da Ficha");
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex, "Erro ao cadastrar a Ficha");
+                _logger.LogError(ex, "Worker: Erro ao cadastrar a Ficha");
 
                 try
                 {
-                        _context.Send<ModeloEnvioFichaEmprestimoOperacores>(new Uri(NomeFilaError), 
+                    
+
+                        _context.Send<ModeloEnvioFichaEmprestimoOperacores>(new Uri(UrlServiceBus + NomeFilaError), 
                         new ModeloEnvioFichaEmprestimoOperacores() 
                         {
-                            Operacao = FichaEmprestimoAlunoTipoOperacaoAsyncEnum.CANCELAR,
+                            Operacao = FichaEmprestimoAlunoTipoOperacaoAsyncEnum.ERROR,
                             Data = DateTime.Now,
                             Operador = _context.Message.Operador,
                             Ficha = _context.Message.Ficha
@@ -186,6 +202,8 @@ namespace Biblioteca.WorkerService.FluxoFicha.Eventos
                         {
                             a.Durable = true;
                         });
+
+                    _context.NotifyFaulted(TimeSpan.FromMinutes(1), "Erro apresentado nessa mensagem", ex);
                 }
                 catch (Exception )
                 {

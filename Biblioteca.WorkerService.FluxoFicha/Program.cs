@@ -29,6 +29,7 @@ IHost host = Host.CreateDefaultBuilder(args)
                 config.ReceiveEndpoint(fila, e =>
 
                 e.Consumer<EventoFichaEmprestimoConsumidor>()
+
                
                 );
             });

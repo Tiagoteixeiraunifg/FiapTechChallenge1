@@ -9,6 +9,7 @@ using Biblioteca.Negocio.Enumeradores.FichaEmprestimoAlunos;
 using FluentValidation;
 using Microsoft.EntityFrameworkCore;
 using Biblioteca.Negocio.Validacoes.FichaEmprestimoAlunos;
+using Biblioteca.Negocio.Entidades.Alunos;
 
 namespace Biblioteca.Servicos.Validacoes.EmprestimoAlunos
 {
@@ -37,6 +38,7 @@ namespace Biblioteca.Servicos.Validacoes.EmprestimoAlunos
         public InconsistenciaDeValidacaoTipado<FichaEmprestimoAluno> ValideFichaCadastro(FichaEmprestimoAluno dados)
         {
             AssineRegrasIniciaisCadastro(dados);
+            //AssineRegrasImpeditivasAluno();
             AssineRegraDeQuantidadeDeLivrosDisponiveis(dados);
             AssineRegraDeEmprestimoEmAndamento(dados);
 
@@ -48,11 +50,20 @@ namespace Biblioteca.Servicos.Validacoes.EmprestimoAlunos
             AssineRegrasIniciaisFinalizacao(dados);
 
             return base.ValideTipado(dados);
-        } 
+        }
 
 
 
         #region CADASTRO DA FICHA
+
+        private void AssineRegrasImpeditivasAluno() 
+        {
+            RuleFor(x => x.AlunoId)
+                .Must(x => VerifiqueSeIdDoAlunoEhValido(x))
+                .TipoValidacao(Negocio.Enumeradores.Validacoes.TipoValidacaoEnum.IMPEDITIVA)
+                .SobrescrevaPropriedade("IdentificaçãoAluno")
+                .WithMessage("O aluno informado não existe cadastrado.");
+        }
 
         private void AssineRegraDeQuantidadeDeLivrosDisponiveis(FichaEmprestimoAluno dados)
         {
@@ -146,6 +157,15 @@ namespace Biblioteca.Servicos.Validacoes.EmprestimoAlunos
             }
 
             
+        }
+
+
+        private bool VerifiqueSeIdDoAlunoEhValido(int Id) 
+        {
+            using (IRepositorioGenerico<Aluno> repAluno = new EFRepositorioGenerico<Aluno>(Contexto))
+            {
+                return repAluno.ObtenhaDbSet().AsNoTracking().Any(x => x.Id == Id);
+            }
         }
 
 

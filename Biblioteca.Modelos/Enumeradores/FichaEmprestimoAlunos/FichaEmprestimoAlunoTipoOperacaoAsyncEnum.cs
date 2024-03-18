@@ -14,6 +14,8 @@ namespace Biblioteca.Negocio.Enumeradores.FichaEmprestimoAlunos
 
         FINALIZAR,
 
-        CANCELAR
+        CANCELAR,
+
+        ERROR
     }
 }
